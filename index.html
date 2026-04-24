@@ -437,7 +437,7 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
       </div>
       <div class="callout-body">
         <div class="callout-desc">The chrome arrives first, snapping into position from above. Fast — users have seen this before, so it should be nearly instant.</div>
-        <div class="callout-code">translateY(-8px) → 0, opacity 0→1<br>duration: 280ms<br>easing: bezier(0, 0, 0.06, 1)</div>
+        <div class="callout-code">translateY.value = withTiming(0, {<br>  duration: 280,<br>  easing: Easing.bezier(0, 0, 0.06, 1)<br>})<br>opacity.value = withTiming(1, { duration: 280 })</div>
       </div>
     </div>
     <div class="callout-item" onclick="toggleCallout(this)">
@@ -447,7 +447,7 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
       </div>
       <div class="callout-body">
         <div class="callout-desc">Slides up from slightly below. The 60ms delay after chrome means the structure lands before the content — users orient before reading.</div>
-        <div class="callout-code">translateY(8px) → 0, opacity 0→1<br>duration: 340ms, delay: 60ms<br>easing: bezier(0, 0, 0.06, 1)</div>
+        <div class="callout-code">translateY.value = withDelay(60,<br>  withTiming(0, { duration: 340,<br>    easing: Easing.bezier(0, 0, 0.06, 1) })<br>)<br>opacity.value = withDelay(60,<br>  withTiming(1, { duration: 340 })<br>)</div>
       </div>
     </div>
     <div class="callout-item" onclick="toggleCallout(this)">
@@ -457,7 +457,7 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
       </div>
       <div class="callout-body">
         <div class="callout-desc">Odds pills are the most important data — they bounce in last, with a slight overshoot. The bounce draws the eye exactly where we want it. Stagger left-to-right signals reading order.</div>
-        <div class="callout-code">scale(0.8) → 1, opacity 0→1<br>duration: 380ms, delay: 120ms / 160ms<br>easing: bezier(0.34, 1.45, 0.64, 1)</div>
+        <div class="callout-code">// Per pill, staggered by index<br>scale.value = withDelay(120 + index * 40,<br>  withTiming(1, { duration: 380,<br>    easing: Easing.bezier(0.34, 1.45, 0.64, 1) })<br>)<br>opacity.value = withDelay(120 + index * 40,<br>  withTiming(1, { duration: 380 })<br>)</div>
       </div>
     </div>
     <div class="callout-item" onclick="toggleCallout(this)">
@@ -467,7 +467,7 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
       </div>
       <div class="callout-body">
         <div class="callout-desc">Rows stagger up from below — like players walking onto the field one at a time. Shorter duration than the card (they're smaller, less weight). No bounce — these are functional list items.</div>
-        <div class="callout-code">translateY(6px) → 0, opacity 0→1<br>duration: 240ms, delays: 160/210/260ms<br>easing: bezier(0, 0, 0.06, 1)</div>
+        <div class="callout-code">// index = row position (0, 1, 2…)<br>translateY.value = withDelay(160 + index * 50,<br>  withTiming(0, { duration: 240,<br>    easing: Easing.bezier(0, 0, 0.06, 1) })<br>)<br>opacity.value = withDelay(160 + index * 50,<br>  withTiming(1, { duration: 240 })<br>)</div>
       </div>
     </div>
     <div class="callout-item" onclick="toggleCallout(this)">
@@ -477,7 +477,7 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
       </div>
       <div class="callout-body">
         <div class="callout-desc">When a user taps an odds pill, it snaps to selected state instantly. Spring physics — no duration, just settles. The colour fill is instant; the scale snap is the spring. Try tapping a pill above.</div>
-        <div class="callout-code">scale: 1 → 0.94 (pressIn, spring)<br>scale: 0.94 → 1.04 → 1 (pressOut, spring)<br>bg: transparent → blue (50ms timing)</div>
+        <div class="callout-code">// pressIn<br>scale.value = withSpring(0.94, {<br>  stiffness: 500, damping: 38<br>})<br>// pressOut<br>scale.value = withSpring(1, {<br>  stiffness: 300, damping: 20<br>})<br>// bg: interpolate on shared value<br>bg.value = withTiming(1, { duration: 50 })</div>
       </div>
     </div>
   </div>
@@ -562,7 +562,7 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
       </div>
       <div class="callout-body">
         <div class="callout-desc">Both screens travel together on the same axis — current slides left, detail enters from right. fd.drive is asymmetric: brief build then hard commit to destination. Creates a sense of intentional direction.</div>
-        <div class="callout-code">currentX: 0 → -100%, nextX: 100% → 0<br>duration: 320ms (both)<br>easing: bezier(0.4, 0, 0.1, 1)</div>
+        <div class="callout-code">currentX.value = withTiming(-width, {<br>  duration: 320,<br>  easing: Easing.bezier(0.4, 0, 0.1, 1)<br>})<br>nextX.value = withTiming(0, {<br>  duration: 320,<br>  easing: Easing.bezier(0.4, 0, 0.1, 1)<br>})</div>
       </div>
     </div>
     <div class="callout-item" onclick="toggleCallout(this)">
@@ -572,7 +572,7 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
       </div>
       <div class="callout-body">
         <div class="callout-desc">After the screen transition settles (~300ms delay), markets stagger in top-to-bottom. Guides the eye through the hierarchy: Moneyline is most important, so it lands first.</div>
-        <div class="callout-code">translateY(6px) → 0, opacity 0→1<br>duration: 240ms<br>delays: 300 / 350 / 400 / 450ms</div>
+        <div class="callout-code">// Fires after screen transition settles<br>translateY.value = withDelay(300 + index * 50,<br>  withTiming(0, { duration: 240,<br>    easing: Easing.bezier(0, 0, 0.06, 1) })<br>)<br>opacity.value = withDelay(300 + index * 50,<br>  withTiming(1, { duration: 240 })<br>)</div>
       </div>
     </div>
     <div class="callout-item" onclick="toggleCallout(this)">
@@ -592,7 +592,7 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
       </div>
       <div class="callout-body">
         <div class="callout-desc">Going back reverses the direction — detail exits right, lobby returns from left. Slightly shorter (300ms vs 320ms) because return journeys should feel fast. Swipe-back gesture continues momentum.</div>
-        <div class="callout-code">currentX: 0 → 100%, prevX: -100% → 0<br>duration: 300ms (shorter = faster return)<br>swipe: velocity continuation via spring</div>
+        <div class="callout-code">currentX.value = withTiming(width, {<br>  duration: 300,<br>  easing: Easing.bezier(0.4, 0, 0.1, 1)<br>})<br>prevX.value = withTiming(0, {<br>  duration: 300,<br>  easing: Easing.bezier(0.4, 0, 0.1, 1)<br>})<br>// On swipe gesture end:<br>// translateX.value = withSpring(0, { velocity })</div>
       </div>
     </div>
   </div>
@@ -658,7 +658,7 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
       </div>
       <div class="callout-body">
         <div class="callout-desc">The sheet rises fast from below and decelerates into place — fd.kick's long tail means it arrives with authority, not a bounce. The backdrop fades 80ms faster than the sheet so context is always visible.</div>
-        <div class="callout-code">translateY(100%) → 0<br>duration: 340ms<br>easing: bezier(0, 0, 0.06, 1)<br>backdrop: 260ms ease-out, concurrent</div>
+        <div class="callout-code">// Sheet and backdrop fire concurrently<br>translateY.value = withTiming(0, {<br>  duration: 340,<br>  easing: Easing.bezier(0, 0, 0.06, 1)<br>})<br>backdropOpacity.value = withTiming(1, {<br>  duration: 260,<br>  easing: Easing.out(Easing.quad)<br>})</div>
       </div>
     </div>
     <div class="callout-item" onclick="toggleCallout(this)">
@@ -668,7 +668,7 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
       </div>
       <div class="callout-body">
         <div class="callout-desc">Border colour transition is 80ms linear — micro-interactions should feel immediate. The keyboard appearing is the main event; the border is supporting signal. Never animate focus states with a slow ease.</div>
-        <div class="callout-code">borderColor: transparent → blue<br>duration: 80ms, linear<br>(keyboard appearance handled by OS)</div>
+        <div class="callout-code">borderProgress.value = withTiming(1, {<br>  duration: 80,<br>  easing: Easing.linear<br>})<br>// In useAnimatedStyle:<br>// borderColor: interpolateColor(<br>//   borderProgress.value,<br>//   [0, 1], ['#1E2D45', '#1493FF']<br>// )</div>
       </div>
     </div>
     <div class="callout-item" onclick="toggleCallout(this)">
@@ -780,7 +780,7 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
       </div>
       <div class="callout-body">
         <div class="callout-desc">The live dot pulses at a breathing rhythm — sine easing so it never feels mechanical. Scale 1.0 → 0.8, opacity 1.0 → 0.4. Slow enough not to distract, present enough to signal live data. This never stops while in-game.</div>
-        <div class="callout-code">scale: 1→0.8→1, opacity: 1→0.4→1<br>duration: 1200ms, easing: inOut(sine)<br>repeat: -1 (infinite)</div>
+        <div class="callout-code">opacity.value = withRepeat(<br>  withSequence(<br>    withTiming(0.4, { duration: 600,<br>      easing: Easing.inOut(Easing.sin) }),<br>    withTiming(1, { duration: 600,<br>      easing: Easing.inOut(Easing.sin) })<br>  ), -1, false<br>)</div>
       </div>
     </div>
     <div class="callout-item" onclick="toggleCallout(this)">
@@ -790,7 +790,7 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
       </div>
       <div class="callout-body">
         <div class="callout-desc">Green flash appears instantly, fades in 300ms. Value nudges 2px upward. Green = the line improved for the bettor. The nudge direction (up) reinforces the colour message — two signals, one glance. Tap any pill above to see it.</div>
-        <div class="callout-code">bg: transparent → green(0.22) → transparent<br>flash in: 0ms (instant)<br>flash out: 300ms ease-out<br>nudge: translateY(-2px)→0, 80ms + spring</div>
+        <div class="callout-code">// Flash: instant in, eased out<br>flashGreen.value = 1<br>flashGreen.value = withTiming(0, {<br>  duration: 300,<br>  easing: Easing.out(Easing.quad)<br>})<br>// Nudge up then spring settle<br>translateY.value = withSequence(<br>  withTiming(-2, { duration: 80 }),<br>  withSpring(0, { stiffness: 500, damping: 38 })<br>)</div>
       </div>
     </div>
     <div class="callout-item" onclick="toggleCallout(this)">
@@ -800,7 +800,7 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
       </div>
       <div class="callout-body">
         <div class="callout-desc">Red flash + 2px downward nudge. Same duration as the up-flash — consistency is critical so users learn the pattern. The colour is the primary signal; the nudge is a secondary haptic-like cue for peripheral vision.</div>
-        <div class="callout-code">bg: transparent → red(0.18) → transparent<br>nudge: translateY(+2px)→0<br>(identical timing to up-flash)</div>
+        <div class="callout-code">flashRed.value = 1<br>flashRed.value = withTiming(0, {<br>  duration: 300,<br>  easing: Easing.out(Easing.quad)<br>})<br>translateY.value = withSequence(<br>  withTiming(2, { duration: 80 }),<br>  withSpring(0, { stiffness: 500, damping: 38 })<br>)</div>
       </div>
     </div>
     <div class="callout-item" onclick="toggleCallout(this)">
@@ -810,7 +810,7 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
       </div>
       <div class="callout-body">
         <div class="callout-desc">When a market suspends (e.g., near a scoring play), pills fade to disabled state. 200ms ease. No bounce, no drama — suspension is a signal to wait, not to panic. Re-activation fades back in the same way.</div>
-        <div class="callout-code">opacity: 1 → 0.4, color: blue → gray<br>duration: 200ms, easing: ease<br>cursor: not-allowed (interaction blocked)</div>
+        <div class="callout-code">opacity.value = withTiming(0.4, {<br>  duration: 200,<br>  easing: Easing.out(Easing.quad)<br>})<br>// Disable interaction via:<br>// &lt;Pressable disabled={isSuspended} /&gt;</div>
       </div>
     </div>
   </div>
@@ -868,7 +868,7 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
       </div>
       <div class="callout-body">
         <div class="callout-desc">Backdrop fades first (200ms) — gives the user a moment to register something is happening. Then the card dunks in with fd.crowd: scale 0.7 → 1 with 1.8 overshoot. The extra bounce is the whole point.</div>
-        <div class="callout-code">backdrop: opacity 0→1, 200ms ease<br>card: scale(0.7)→1, bezier(0.34,1.8,0.64,1)<br>card delay: 150ms after backdrop</div>
+        <div class="callout-code">backdropOpacity.value = withTiming(1, {<br>  duration: 200<br>})<br>cardScale.value = withDelay(150,<br>  withTiming(1, { duration: 520,<br>    easing: Easing.bezier(0.34, 1.8, 0.64, 1) })<br>)<br>cardOpacity.value = withDelay(150,<br>  withTiming(1, { duration: 200 })<br>)</div>
       </div>
     </div>
     <div class="callout-item" onclick="toggleCallout(this)">
@@ -888,7 +888,7 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
       </div>
       <div class="callout-body">
         <div class="callout-desc">~40 particles, each with a random start delay (0–500ms) so it rains, not floods. Ease-in on the Y-axis simulates gravity — they accelerate as they fall. Random rotation adds life. Keep it to 1 second total duration per piece.</div>
-        <div class="callout-code">y: -10px → screenHeight<br>duration: 900–1500ms (random per piece)<br>delay: random 0–500ms (the rain feel)<br>easing: Easing.in(Easing.quad)</div>
+        <div class="callout-code">translateY.value = withDelay(<br>  Math.random() * 500,<br>  withTiming(screenHeight, {<br>    duration: 900 + Math.random() * 600,<br>    easing: Easing.in(Easing.quad)<br>  })<br>)<br>// Each piece is its own Animated.View</div>
       </div>
     </div>
     <div class="callout-item" onclick="toggleCallout(this)">
@@ -898,7 +898,7 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
       </div>
       <div class="callout-body">
         <div class="callout-desc">The CTA appears last — after the emotion has landed. If it appeared simultaneously with the win card, it would feel transactional. Waiting 650ms means the user has felt the win before being asked to do anything about it.</div>
-        <div class="callout-code">opacity 0→1, translateY(6px)→0<br>duration: 280ms<br>delay: 650ms after win card</div>
+        <div class="callout-code">opacity.value = withDelay(650,<br>  withTiming(1, { duration: 280,<br>    easing: Easing.bezier(0, 0, 0.06, 1) })<br>)<br>translateY.value = withDelay(650,<br>  withTiming(0, { duration: 280,<br>    easing: Easing.bezier(0, 0, 0.06, 1) })<br>)</div>
       </div>
     </div>
   </div>
@@ -1105,7 +1105,7 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
       </div>
       <div class="callout-body">
         <div class="callout-desc">The PENDING badge breathes subtly — oscillating between full opacity and 55%. This tells users the bet is alive and being tracked without requiring them to refresh. It's the same logic as a "typing..." indicator.</div>
-        <div class="callout-code">@keyframes pendingBreath {<br>  0%,100% { opacity:1 }<br>  50% { opacity:.55 }<br>}<br>// 2.2s feels human, not robotic</div>
+        <div class="callout-code">opacity.value = withRepeat(<br>  withSequence(<br>    withTiming(0.55, { duration: 1100,<br>      easing: Easing.inOut(Easing.sin) }),<br>    withTiming(1, { duration: 1100,<br>      easing: Easing.inOut(Easing.sin) })<br>  ), -1, false<br>)<br>// 2.2s total — feels human, not robotic</div>
       </div>
     </div>
     <div class="callout-item" onclick="toggleCallout(this)">
@@ -1261,7 +1261,7 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
       </div>
       <div class="callout-body">
         <div class="callout-desc">Chips enter from the left, one by one, like players walking out of a tunnel. Left-to-right entry matches reading direction and feels like a lineup reveal. 30ms stagger is tight — they're a group, not a procession.</div>
-        <div class="callout-code">chips.forEach((chip, i) => {<br>  chip.style.transition =<br>    `all .2s cubic-bezier(0,0,0.06,1) ${i*30}ms`;<br>  chip.style.opacity = '1';<br>  chip.style.transform = 'none';<br>})</div>
+        <div class="callout-code">// Each chip has its own shared values<br>chips.forEach((chip, i) => {<br>  chip.opacity.value = withDelay(i * 30,<br>    withTiming(1, { duration: 200,<br>      easing: Easing.bezier(0, 0, 0.06, 1) })<br>  )<br>  chip.translateX.value = withDelay(i * 30,<br>    withTiming(0, { duration: 200,<br>      easing: Easing.bezier(0, 0, 0.06, 1) })<br>  )<br>})</div>
       </div>
     </div>
     <div class="callout-item" onclick="toggleCallout(this)">
@@ -1271,7 +1271,7 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
       </div>
       <div class="callout-body">
         <div class="callout-desc">Results drop in from a slight downward offset — content falling into place. 40ms per item feels fast enough to not feel like a loading delay, but slow enough that the eye can follow each card arriving.</div>
-        <div class="callout-code">results.forEach((r, i) => {<br>  r.style.transition =<br>    `all .24s cubic-bezier(0,0,0.06,1) ${i*40}ms`;<br>  r.style.opacity = '1';<br>  r.style.transform = 'none';<br>})</div>
+        <div class="callout-code">results.forEach((result, i) => {<br>  result.opacity.value = withDelay(i * 40,<br>    withTiming(1, { duration: 240,<br>      easing: Easing.bezier(0, 0, 0.06, 1) })<br>  )<br>  result.translateY.value = withDelay(i * 40,<br>    withTiming(0, { duration: 240,<br>      easing: Easing.bezier(0, 0, 0.06, 1) })<br>  )<br>})</div>
       </div>
     </div>
     <div class="callout-item" onclick="toggleCallout(this)">
