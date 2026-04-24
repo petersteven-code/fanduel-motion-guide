@@ -253,6 +253,20 @@ main{flex:1;max-width:940px;padding:52px 52px 100px;}
 @keyframes shimmer{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
 
 /* odds pill states */
+/* ── Tab Bar demo ── */
+.tb-tab{flex:1;text-align:center;font-size:10px;font-weight:700;padding:5px 2px;border-radius:5px;color:var(--t2);cursor:pointer;position:relative;z-index:1;transition:color 120ms;user-select:none;letter-spacing:.2px;}
+.tb-tab.active{color:#fff;}
+.tab-panel{transition:opacity 180ms ease-in,transform 180ms ease-in;}
+.tab-row{background:var(--s2);border:1px solid var(--border);border-radius:9px;padding:9px 10px;flex-shrink:0;}
+.tab-pill{flex:1;background:var(--s1);border:1px solid var(--border);border-radius:5px;padding:4px 6px;font-size:10px;font-weight:800;color:var(--t1);text-align:center;}
+
+/* ── Number Ticker ── */
+.tk-display{display:inline-flex;align-items:center;line-height:1;}
+.tk-sep{display:inline-block;}
+.tk-col{display:inline-block;overflow:hidden;height:1.15em;vertical-align:bottom;}
+.tk-strip{display:flex;flex-direction:column;transition:transform 380ms cubic-bezier(0.34,1.45,0.64,1);}
+.tk-strip span{display:block;height:1.15em;line-height:1.15em;text-align:center;min-width:.6em;}
+
 .o-pill{padding:8px 12px;border-radius:8px;font-size:13px;font-weight:800;cursor:pointer;
   text-align:center;transition:all .15s;}
 .o-idle{background:var(--bs);border:1px solid var(--ba);color:var(--blue);}
@@ -318,6 +332,7 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
   <div class="ng"><div class="ngl">Components</div>
     <a class="na" href="#c-buttons">Buttons</a>
     <a class="na" href="#c-odds">Odds Pills</a>
+    <a class="na" href="#c-ticker">Number Ticker</a>
     <a class="na" href="#c-tabs">Tab Bar</a>
     <a class="na" href="#c-sheet">Bottom Sheet</a>
     <a class="na" href="#c-toast">Toast</a>
@@ -1123,11 +1138,11 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
         <div style="margin:0 12px;background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:11px 13px;">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;">
             <span style="font-size:10px;color:var(--t2);">Combined Odds</span>
-            <span id="parlay-odds" style="font-size:13px;font-weight:900;color:var(--blue);transition:color .2s;">+246</span>
+            <span class="tk-display" id="parlay-odds" style="font-size:13px;font-weight:900;color:var(--blue);"></span>
           </div>
           <div style="display:flex;justify-content:space-between;align-items:center;">
             <span style="font-size:10px;color:var(--t2);">Potential Payout</span>
-            <span id="parlay-payout" style="font-size:14px;font-weight:900;color:var(--green);">$34.60</span>
+            <span class="tk-display" id="parlay-payout" style="font-size:14px;font-weight:900;color:var(--green);"></span>
           </div>
         </div>
         <!-- boost badge slot -->
@@ -1168,21 +1183,21 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
     <div class="callout-item" onclick="toggleCallout(this)">
       <div class="callout-head">
         <div class="callout-num" style="background:var(--ps);color:var(--purple);">3</div>
-        <div class="callout-text"><div class="callout-el">Combined odds counter</div><div class="callout-curve">fd.snap · instant flash + 300ms fade</div></div>
+        <div class="callout-text"><div class="callout-el">Combined odds · digit spin</div><div class="callout-curve">fd.release · 380ms · green flash + spin</div></div>
       </div>
       <div class="callout-body">
-        <div class="callout-desc">Odds update instantly — no count-up here, because the user needs to trust the number is accurate. A brief green color flash signals "this changed" and fades over 300ms. The number itself never animates.</div>
-        <div class="callout-code">// Flash color signal<br>color = '#00C87A'<br>withTiming(color, {<br>  duration: 300,<br>  easing: Easing.out(Easing.quad)<br>}) // → return to default</div>
+        <div class="callout-desc">Odds digits spin to the new value using the same column-roller as every other number in the app. A green color flash on the element signals the direction of change (always up when adding legs). Consistent with live odds and payout — one system everywhere.</div>
+        <div class="callout-code">// Digit spin — same tkSpin() as live odds<br>tkSpin(oddsEl, '+612')<br>// Green flash on element color<br>oddsEl.color = green → withTiming(default, {<br>  duration: 300,<br>  easing: Easing.out(Easing.quad)<br>})</div>
       </div>
     </div>
     <div class="callout-item" onclick="toggleCallout(this)">
       <div class="callout-head">
         <div class="callout-num" style="background:var(--gos);color:var(--gold);">4</div>
-        <div class="callout-text"><div class="callout-el">Potential payout count-up</div><div class="callout-curve">ease-out cubic · 500ms delay:100ms</div></div>
+        <div class="callout-text"><div class="callout-el">Potential payout · cascading spin</div><div class="callout-curve">fd.release · 7 steps · 480ms · 100ms delay</div></div>
       </div>
       <div class="callout-body">
-        <div class="callout-desc">Unlike odds, the payout CAN count up — it's the emotional centrepiece. Use an ease-out so it arrives quickly and sits at the final number. A slight delay (100ms) after the odds update gives it a "reveal" beat.</div>
-        <div class="callout-code">// JS interpolate, not RN<br>const ease = 1 - Math.pow(1-t, 3);<br>current = ease * targetPayout;<br>// 500ms, 100ms delay</div>
+        <div class="callout-desc">Payout uses the same digit columns as odds — but runs 7 intermediate spin steps on an ease-out curve, creating a cascade from the previous value to the new one. The digits tumble rapidly at first then slow into the final number. Same system as win reveal, same system as live ticker.</div>
+        <div class="callout-code">// Stepped digit spin — tkCountUp()<br>// 7 intermediate values, ease-out timing<br>// Each step: tkSpin(el, formattedVal)<br>tkCountUp('parlay-payout', '$071.20',<br>  7,    // steps<br>  480,  // total duration ms<br>  100   // delay after odds spin<br>)</div>
       </div>
     </div>
     <div class="callout-item" onclick="toggleCallout(this)">
@@ -2114,25 +2129,355 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
   <div class="comp-note">Tap "Flash up ↑" or "Flash down ↓" to see the live odds animation. Select = instant fill + spring. Flash = colour background instant, fade 300ms. Suspended = opacity 0.4 + color neutral, 200ms ease. No bounce on any odds state — these are informational, not celebratory.</div>
 </div>
 
-<span id="c-tabs"></span>
+<span id="c-ticker"></span>
 <div class="sec-label" style="margin-top:40px;">Components · 03</div>
-<h2 class="sec-head">Tab Bar</h2>
+<h2 class="sec-head">Number Ticker</h2>
+<p class="sec-sub">Numbers that change deserve more than a text swap. A vertical digit roll tells the user a value moved — up or down — with zero extra UI. Two modes: fast spin for live odds, slow ease-out count-up for payouts and win reveals.</p>
 
-<div class="comp-card" style="margin-bottom:14px;">
-  <div class="comp-head"><div class="comp-name">Sport Tab Bar</div><div class="comp-curve">fd.drive · indicator 280ms · content opacity 220ms</div></div>
-  <div class="comp-stage" style="flex-direction:column;gap:16px;">
-    <div style="background:var(--s1);border-radius:9px;padding:3px;position:relative;display:flex;width:300px;" id="comp-tabs">
-      <div id="comp-tab-pill" style="position:absolute;top:3px;bottom:3px;border-radius:6px;background:var(--blue);transition:left .28s cubic-bezier(.4,0,.1,1),width .28s cubic-bezier(.4,0,.1,1);"></div>
-      <div class="p-tab-pill on" onclick="compTab(0,this)">NFL</div>
-      <div class="p-tab-pill" onclick="compTab(1,this)">NBA</div>
-      <div class="p-tab-pill" onclick="compTab(2,this)">MLB</div>
-      <div class="p-tab-pill" onclick="compTab(3,this)">NHL</div>
+<div class="screen-layout" style="margin-bottom:32px;">
+  <div>
+    <div class="phone" id="phone-ticker">
+      <div class="phone-notch"><div class="phone-dot"></div></div>
+      <div class="phone-screen" style="height:440px;overflow:hidden;position:relative;">
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;background:var(--bg);">
+          <div class="p-topbar" style="height:44px;flex-shrink:0;">
+            <div style="width:22px;height:14px;border-radius:3px;background:var(--s3);"></div>
+            <div style="flex:1;height:9px;border-radius:5px;background:var(--s2);margin:0 10px;"></div>
+          </div>
+
+          <!-- LIVE ODDS TICKER DEMO -->
+          <div style="padding:12px;display:flex;flex-direction:column;gap:10px;">
+            <div style="font-size:9px;font-weight:700;color:var(--t3);letter-spacing:.8px;text-transform:uppercase;margin-bottom:2px;">Live Odds · Spin</div>
+
+            <!-- Game row 1 -->
+            <div style="background:var(--s2);border:1px solid var(--border);border-radius:9px;padding:10px 12px;">
+              <div style="height:7px;border-radius:3px;background:var(--s3);width:48%;margin-bottom:8px;"></div>
+              <div style="display:flex;gap:6px;">
+                <div style="flex:1;background:var(--bs);border:1px solid var(--ba);border-radius:6px;padding:6px 4px;display:flex;flex-direction:column;align-items:center;gap:2px;">
+                  <div style="font-size:8px;color:var(--t2);">Chiefs</div>
+                  <div class="tk-display" id="tk-odds1" data-val="145" data-sign="-" style="color:var(--t1);font-size:14px;font-weight:900;font-variant-numeric:tabular-nums;letter-spacing:-.5px;"></div>
+                </div>
+                <div style="flex:1;background:var(--s1);border:1px solid var(--border);border-radius:6px;padding:6px 4px;display:flex;flex-direction:column;align-items:center;gap:2px;">
+                  <div style="font-size:8px;color:var(--t2);">Eagles</div>
+                  <div class="tk-display" id="tk-odds2" data-val="125" data-sign="+" style="color:var(--t2);font-size:14px;font-weight:900;font-variant-numeric:tabular-nums;letter-spacing:-.5px;"></div>
+                </div>
+                <div style="flex:1;background:var(--s1);border:1px solid var(--border);border-radius:6px;padding:6px 4px;display:flex;flex-direction:column;align-items:center;gap:2px;">
+                  <div style="font-size:8px;color:var(--t2);">Draw</div>
+                  <div class="tk-display" id="tk-odds3" data-val="310" data-sign="+" style="color:var(--t2);font-size:14px;font-weight:900;font-variant-numeric:tabular-nums;letter-spacing:-.5px;"></div>
+                </div>
+              </div>
+            </div>
+
+            <div style="font-size:9px;font-weight:700;color:var(--t3);letter-spacing:.8px;text-transform:uppercase;margin:4px 0 2px;">Payout &amp; Win · Digit Spin</div>
+
+            <!-- Parlay payout display -->
+            <div style="background:var(--s2);border:1px solid var(--border);border-radius:9px;padding:12px 14px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+                <div style="font-size:10px;color:var(--t2);">Potential Payout</div>
+                <div class="tk-display" id="tk-payout-display" style="font-size:18px;font-weight:900;color:var(--green);font-variant-numeric:tabular-nums;letter-spacing:-.5px;"></div>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <div style="font-size:10px;color:var(--t2);">Combined Odds</div>
+                <div class="tk-display" id="tk-combined" style="font-size:13px;font-weight:800;color:var(--blue);font-variant-numeric:tabular-nums;"></div>
+              </div>
+            </div>
+
+            <!-- Win reveal -->
+            <div id="tk-win-card" style="background:rgba(0,200,122,.08);border:1px solid rgba(0,200,122,.2);border-radius:9px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;opacity:.4;transition:opacity 200ms,transform 520ms cubic-bezier(0.34,1.8,0.64,1);">
+              <div style="font-size:10px;color:var(--t2);">You won</div>
+              <div class="tk-display" id="tk-win-display" style="font-size:20px;font-weight:900;color:var(--green);font-variant-numeric:tabular-nums;"></div>
+            </div>
+          </div>
+
+          <!-- Bottom tab bar -->
+          <div style="position:absolute;bottom:0;left:0;right:0;height:50px;background:var(--s1);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-around;padding:0 6px;">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:3px;opacity:.4;"><div style="width:16px;height:12px;border-radius:3px;background:var(--t2);"></div><div style="width:20px;height:5px;border-radius:2px;background:var(--s3);"></div></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:3px;opacity:.4;"><div style="width:16px;height:12px;border-radius:3px;background:var(--t2);"></div><div style="width:14px;height:5px;border-radius:2px;background:var(--s3);"></div></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:3px;opacity:.4;"><div style="width:16px;height:12px;border-radius:3px;background:var(--t2);"></div><div style="width:24px;height:5px;border-radius:2px;background:var(--s3);"></div></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:3px;opacity:.4;"><div style="width:16px;height:12px;border-radius:3px;background:var(--t2);"></div><div style="width:20px;height:5px;border-radius:2px;background:var(--s3);"></div></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:3px;opacity:.4;"><div style="width:16px;height:12px;border-radius:3px;background:var(--t2);"></div><div style="width:22px;height:5px;border-radius:2px;background:var(--s3);"></div></div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div style="height:32px;display:flex;align-items:center;justify-content:center;">
-      <div id="comp-tab-content" style="font-size:13px;color:var(--t2);transition:opacity .22s ease;">Select a sport to filter markets</div>
+    <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;">
+      <button class="play-btn" onclick="spinOdds()">⚡ Spin odds</button>
+      <button class="play-btn" onclick="rollPayout()" style="background:rgba(0,200,122,.12);color:var(--green);border:1px solid rgba(0,200,122,.25);">$ Roll payout</button>
+      <button class="play-btn" onclick="revealWin()" style="background:rgba(0,200,122,.12);color:var(--green);border:1px solid rgba(0,200,122,.25);">🏆 Win reveal</button>
+      <button class="play-btn reset-btn" onclick="resetTicker()">↺ Reset</button>
     </div>
   </div>
-  <div class="comp-note">Indicator uses fd.drive (ease-in-out) — it accelerates away from old tab, decelerates into new one. Content cross-fades at 220ms opacity only — no slide, because the tabs share the same spatial level. Two animations, one tap.</div>
+
+  <div class="callout-panel">
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gos);color:var(--gold);">1</div>
+        <div class="callout-text"><div class="callout-el">Digit spin · live odds</div><div class="callout-curve">fd.release · 380ms · each digit independent</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">Each digit column scrolls independently on a vertical strip of 0–9. The fd.release overshoot gives it a satisfying snap — like a physical slot reel clicking into place. Digits that don't change don't animate. Only the changed ones spin.</div>
+        <div class="callout-code">// Digit column: strip of 0–9, height = digitH * 10<br>// To show digit N: translateY = -(N * digitH)<br>digitTrack.value = withTiming(<br>  -(newDigit * digitH),<br>  { duration: 380,<br>    easing: Easing.bezier(0.34, 1.45, 0.64, 1) }<br>  // fd.release — bouncy click<br>)</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gs);color:var(--green);">2</div>
+        <div class="callout-text"><div class="callout-el">Payout count-up</div><div class="callout-curve">ease-out cubic · 600ms · 100ms delay</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">The payout number rolls from its previous value to the new one using an ease-out interpolation. It arrives fast and slows at the final number — giving the user a moment to notice the result. Never spin digits here; use a full numeric interpolation so it feels like a reward, not a clock.</div>
+        <div class="callout-code">// Interpolate between prev and next value<br>const ease = 1 - Math.pow(1 - t, 3) // ease-out cubic<br>const current = prev + (next - prev) * ease<br>el.textContent = '$' + current.toFixed(2)<br>// 600ms total, 100ms delay after odds update</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gs);color:var(--green);">3</div>
+        <div class="callout-text"><div class="callout-el">Win reveal count-up</div><div class="callout-curve">fd.crowd · 800ms · from $0</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">Win state always starts from $0 — the drama comes from watching the number climb. Use fd.crowd (the most expressive curve) so it overshoots slightly and settles. Pair with the win card scaling in. The number settling = the moment of confirmation.</div>
+        <div class="callout-code">// Win amount count-up from zero<br>const t = elapsed / 800 // 800ms total<br>const ease = 1 - Math.pow(1 - t, 2.2)<br>// Slight overshoot via bezier easing<br>// Easing.bezier(0.34, 1.8, 0.64, 1) on scale<br>// Linear interpolation on the number itself<br>el.textContent = '$' + (winAmt * ease).toFixed(2)</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:rgba(100,100,200,.15);color:#a0a0ff;">4</div>
+        <div class="callout-text"><div class="callout-el">Direction signal</div><div class="callout-curve">scroll up = increase · scroll down = decrease</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">Spin direction communicates value direction. Digits scroll upward when odds increase (good for the user on a + bet), downward when they decrease. This maps to intuitive spatial logic — up = more, down = less. Pair with the green/red flash on the pill background.</div>
+        <div class="callout-code">// Up = new digit > old digit = scroll up<br>// translateY goes more negative (up)<br>const dir = newDigit > oldDigit ? 'up' : 'down'<br><br>// Scroll up: -(newDigit * digitH)<br>// Scroll down: same formula, lower Y value<br>// The direction emerges naturally from the math</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:rgba(200,80,80,.15);color:#ff7070;">5</div>
+        <div class="callout-text"><div class="callout-el">When NOT to spin</div><div class="callout-curve">Static swap for suspended / error / manual input</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">Don't spin digits during: market suspension (just fade to neutral), user-typed wager input (no animation at all — direct control), or odds flashes that are purely informational without a value change. The spin is for moments where a system-driven update has real user impact.</div>
+        <div class="callout-code">// No spinner during:<br>// — Manual wager input (user is in control)<br>// — Suspended market (opacity fade only)<br>// — Error states (number doesn't change)<br><br>// Spinner reserved for:<br>// — Live odds update from data feed<br>// — Parlay payout recalculation<br>// — Win/settlement amount reveal</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<span id="c-tabs"></span>
+<div class="sec-label" style="margin-top:40px;">Components · 04</div>
+<h2 class="sec-head">Tab Bar</h2>
+<p class="sec-sub">The tab indicator and content are two separate animations that fire simultaneously from one tap. The indicator slides with fd.drive. The content is direction-aware — switching right exits left and enters from the right, switching left does the opposite.</p>
+
+<div class="screen-layout" style="margin-bottom:32px;">
+  <div>
+    <div class="phone" id="phone-tabs">
+      <div class="phone-notch"><div class="phone-dot"></div></div>
+      <div class="phone-screen" style="height:440px;overflow:hidden;position:relative;display:flex;flex-direction:column;">
+
+        <!-- Top nav -->
+        <div class="p-topbar" style="height:44px;flex-shrink:0;">
+          <div style="width:22px;height:14px;border-radius:3px;background:var(--s3);"></div>
+          <div style="flex:1;height:9px;border-radius:5px;background:var(--s2);margin:0 10px;"></div>
+          <div style="width:28px;height:22px;border-radius:5px;background:var(--s2);"></div>
+        </div>
+
+        <!-- Sport filter tabs -->
+        <div style="height:38px;background:var(--s1);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 10px;position:relative;flex-shrink:0;">
+          <div style="display:flex;align-items:center;gap:4px;position:relative;background:var(--bg);border-radius:8px;padding:3px;width:100%;" id="tab-strip">
+            <!-- Sliding indicator -->
+            <div id="tab-indicator" style="position:absolute;top:3px;bottom:3px;border-radius:5px;background:var(--blue);transition:left 280ms cubic-bezier(0.4,0,0.1,1),width 280ms cubic-bezier(0.4,0,0.1,1);z-index:0;"></div>
+            <!-- Tab items -->
+            <div class="tb-tab active" id="tab-0" onclick="switchTab(0)">NFL</div>
+            <div class="tb-tab" id="tab-1" onclick="switchTab(1)">NBA</div>
+            <div class="tb-tab" id="tab-2" onclick="switchTab(2)">MLB</div>
+            <div class="tb-tab" id="tab-3" onclick="switchTab(3)">NHL</div>
+          </div>
+        </div>
+
+        <!-- Content area — panels stack, one visible at a time -->
+        <div style="flex:1;position:relative;overflow:hidden;">
+
+          <!-- NFL content -->
+          <div class="tab-panel" id="panel-0" style="position:absolute;inset:0;padding:10px;display:flex;flex-direction:column;gap:7px;overflow:hidden;">
+            <div class="tab-row">
+              <div style="height:8px;border-radius:4px;background:var(--s3);width:52%;margin-bottom:7px;"></div>
+              <div style="display:flex;gap:5px;">
+                <div class="tab-pill" style="background:var(--bs);border-color:var(--ba);">-145</div>
+                <div class="tab-pill">+124</div>
+                <div class="tab-pill">o47.5</div>
+              </div>
+            </div>
+            <div class="tab-row">
+              <div style="height:8px;border-radius:4px;background:var(--s3);width:44%;margin-bottom:7px;"></div>
+              <div style="display:flex;gap:5px;">
+                <div class="tab-pill">-110</div>
+                <div class="tab-pill" style="background:var(--bs);border-color:var(--ba);">-110</div>
+                <div class="tab-pill">u44</div>
+              </div>
+            </div>
+            <div class="tab-row">
+              <div style="height:8px;border-radius:4px;background:var(--s3);width:60%;margin-bottom:7px;"></div>
+              <div style="display:flex;gap:5px;">
+                <div class="tab-pill">+115</div>
+                <div class="tab-pill">-136</div>
+                <div class="tab-pill">o48.5</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- NBA content -->
+          <div class="tab-panel" id="panel-1" style="position:absolute;inset:0;padding:10px;display:flex;flex-direction:column;gap:7px;overflow:hidden;opacity:0;transform:translateX(20px);pointer-events:none;">
+            <div class="tab-row">
+              <div style="height:8px;border-radius:4px;background:var(--s3);width:58%;margin-bottom:7px;"></div>
+              <div style="display:flex;gap:5px;">
+                <div class="tab-pill" style="background:var(--bs);border-color:var(--ba);">-185</div>
+                <div class="tab-pill">+162</div>
+                <div class="tab-pill">o224.5</div>
+              </div>
+            </div>
+            <div class="tab-row">
+              <div style="height:8px;border-radius:4px;background:var(--s3);width:38%;margin-bottom:7px;"></div>
+              <div style="display:flex;gap:5px;">
+                <div class="tab-pill">-108</div>
+                <div class="tab-pill">-112</div>
+                <div class="tab-pill">u218</div>
+              </div>
+            </div>
+            <div class="tab-row">
+              <div style="height:8px;border-radius:4px;background:var(--s3);width:50%;margin-bottom:7px;"></div>
+              <div style="display:flex;gap:5px;">
+                <div class="tab-pill">-140</div>
+                <div class="tab-pill" style="background:var(--bs);border-color:var(--ba);">+120</div>
+                <div class="tab-pill">o231</div>
+              </div>
+            </div>
+            <div class="tab-row">
+              <div style="height:8px;border-radius:4px;background:var(--s3);width:46%;margin-bottom:7px;"></div>
+              <div style="display:flex;gap:5px;">
+                <div class="tab-pill">+105</div>
+                <div class="tab-pill">-125</div>
+                <div class="tab-pill">u209</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- MLB content -->
+          <div class="tab-panel" id="panel-2" style="position:absolute;inset:0;padding:10px;display:flex;flex-direction:column;gap:7px;overflow:hidden;opacity:0;transform:translateX(20px);pointer-events:none;">
+            <div class="tab-row">
+              <div style="height:8px;border-radius:4px;background:var(--s3);width:55%;margin-bottom:7px;"></div>
+              <div style="display:flex;gap:5px;">
+                <div class="tab-pill" style="background:var(--bs);border-color:var(--ba);">-175</div>
+                <div class="tab-pill">+148</div>
+                <div class="tab-pill">o8.5</div>
+              </div>
+            </div>
+            <div class="tab-row">
+              <div style="height:8px;border-radius:4px;background:var(--s3);width:42%;margin-bottom:7px;"></div>
+              <div style="display:flex;gap:5px;">
+                <div class="tab-pill">-115</div>
+                <div class="tab-pill">-106</div>
+                <div class="tab-pill">u7.5</div>
+              </div>
+            </div>
+            <!-- empty state hint -->
+            <div style="margin-top:6px;background:var(--s2);border:1px solid var(--border);border-radius:9px;padding:14px;display:flex;flex-direction:column;align-items:center;gap:6px;opacity:.6;">
+              <div style="width:24px;height:24px;border-radius:50%;background:var(--s3);"></div>
+              <div style="height:7px;width:80px;border-radius:4px;background:var(--s3);"></div>
+              <div style="height:6px;width:60px;border-radius:4px;background:var(--border);"></div>
+            </div>
+          </div>
+
+          <!-- NHL content -->
+          <div class="tab-panel" id="panel-3" style="position:absolute;inset:0;padding:10px;display:flex;flex-direction:column;gap:7px;overflow:hidden;opacity:0;transform:translateX(20px);pointer-events:none;">
+            <div class="tab-row">
+              <div style="height:8px;border-radius:4px;background:var(--s3);width:48%;margin-bottom:7px;"></div>
+              <div style="display:flex;gap:5px;">
+                <div class="tab-pill" style="background:var(--bs);border-color:var(--ba);">-128</div>
+                <div class="tab-pill">+108</div>
+              </div>
+            </div>
+            <div class="tab-row">
+              <div style="height:8px;border-radius:4px;background:var(--s3);width:62%;margin-bottom:7px;"></div>
+              <div style="display:flex;gap:5px;">
+                <div class="tab-pill">-142</div>
+                <div class="tab-pill">+122</div>
+              </div>
+            </div>
+            <div class="tab-row">
+              <div style="height:8px;border-radius:4px;background:var(--s3);width:38%;margin-bottom:7px;"></div>
+              <div style="display:flex;gap:5px;">
+                <div class="tab-pill">-105</div>
+                <div class="tab-pill" style="background:var(--bs);border-color:var(--ba);">-115</div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /content area -->
+
+        <!-- Bottom tab bar -->
+        <div style="height:50px;background:var(--s1);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-around;padding:0 6px;flex-shrink:0;">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:3px;"><div style="width:16px;height:12px;border-radius:3px;background:var(--blue);"></div><div style="width:20px;height:5px;border-radius:2px;background:var(--blue);opacity:.6;"></div></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:3px;opacity:.35;"><div style="width:16px;height:12px;border-radius:3px;background:var(--t2);"></div><div style="width:14px;height:5px;border-radius:2px;background:var(--s3);"></div></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:3px;opacity:.35;"><div style="width:16px;height:12px;border-radius:3px;background:var(--t2);"></div><div style="width:24px;height:5px;border-radius:2px;background:var(--s3);"></div></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:3px;opacity:.35;"><div style="width:16px;height:12px;border-radius:3px;background:var(--t2);"></div><div style="width:20px;height:5px;border-radius:2px;background:var(--s3);"></div></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:3px;opacity:.35;"><div style="width:16px;height:12px;border-radius:3px;background:var(--t2);"></div><div style="width:22px;height:5px;border-radius:2px;background:var(--s3);"></div></div>
+        </div>
+
+      </div><!-- /phone-screen -->
+    </div><!-- /phone -->
+  </div><!-- /left col -->
+
+  <div class="callout-panel">
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gs);color:var(--green);">1</div>
+        <div class="callout-text"><div class="callout-el">Indicator slide</div><div class="callout-curve">fd.drive · 280ms · left + width</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">The pill indicator animates both position and width simultaneously. Tabs have different label lengths so widths differ. fd.drive (ease-in-out) accelerates away from the old tab and decelerates into the new one — it feels like the indicator has momentum.</div>
+        <div class="callout-code">// Animate indicator position + width<br>indicatorX.value = withTiming(newTab.x, {<br>  duration: 280,<br>  easing: Easing.bezier(0.4, 0, 0.1, 1),<br>})<br>indicatorW.value = withTiming(newTab.width, {<br>  duration: 280,<br>  easing: Easing.bezier(0.4, 0, 0.1, 1),<br>})</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gs);color:var(--green);">2</div>
+        <div class="callout-text"><div class="callout-el">Content exit</div><div class="callout-curve">ease-in · 180ms · opacity + translateX</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">Old content exits toward the direction you came from. Tapping a tab to the right exits the current content to the left (−16px). This spatial logic reinforces the mental model that tabs live in a horizontal sequence.</div>
+        <div class="callout-code">// Exit direction: going right = slide left<br>const exitX = newIndex > prevIndex ? -16 : 16<br>opacity.value = withTiming(0, {<br>  duration: 180,<br>  easing: Easing.in(Easing.quad),<br>})<br>translateX.value = withTiming(exitX, {<br>  duration: 180,<br>  easing: Easing.in(Easing.quad),<br>})</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gs);color:var(--green);">3</div>
+        <div class="callout-text"><div class="callout-el">Content enter</div><div class="callout-curve">fd.kick · 260ms · opacity + translateX · 80ms delay</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">New content enters from the opposite side of the exit, with an 80ms delay so the previous content has started clearing before the new one arrives. fd.kick (aggressive decelerate) snaps it into position — fast arrival, confident stop.</div>
+        <div class="callout-code">// Enter from opposite side, with delay<br>const enterX = newIndex > prevIndex ? 16 : -16<br>// Start offscreen<br>translateX.value = enterX<br>// Then animate in after exit starts<br>opacity.value = withDelay(80,<br>  withTiming(1, { duration: 260,<br>    easing: Easing.bezier(0,0,0.06,1) }))<br>translateX.value = withDelay(80,<br>  withTiming(0, { duration: 260,<br>    easing: Easing.bezier(0,0,0.06,1) }))</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:rgba(100,100,200,.15);color:#a0a0ff;">4</div>
+        <div class="callout-text"><div class="callout-el">Tab label active state</div><div class="callout-curve">fd.snap · opacity 0.45 → 1 · 120ms</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">Inactive tab labels sit at 45% opacity. The active label snaps to full opacity with fd.snap (spring s:500 d:38). Don't slide or scale the label itself — the indicator already communicates the change. Label opacity is the only signal needed on the text.</div>
+        <div class="callout-code">// Active label opacity snap<br>labelOpacity.value = withSpring(1, {<br>  stiffness: 500, damping: 38,<br>})<br>// Inactive labels<br>labelOpacity.value = withTiming(0.45, {<br>  duration: 120,<br>})</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:rgba(100,100,200,.15);color:#a0a0ff;">5</div>
+        <div class="callout-text"><div class="callout-el">Skip animation on same tab</div><div class="callout-curve">Guard: if newIndex === activeIndex return</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">If the user taps the already-active tab, do nothing. Triggering the animation on a same-tab tap makes the UI feel twitchy and unconfident. The guard check is a single line but critical — without it, content flickers and re-enters from nowhere.</div>
+        <div class="callout-code">function onTabPress(newIndex) {<br>  if (newIndex === activeTabIndex) return // guard<br>  const dir = newIndex > activeTabIndex<br>    ? 'right' : 'left'<br>  animateTabChange(newIndex, dir)<br>  activeTabIndex = newIndex<br>}</div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <span id="c-sheet"></span>
@@ -2373,7 +2718,7 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
 
 <script>
 // ── NAV ─────────────────────────────────────────────
-const ids=['curves','s-lobby','s-detail','s-betslip','s-live','s-win','s-parlay','s-mybets','s-search','p-loading','p-redumo','p-shared','p-error','p-gesture','p-empty','c-buttons','c-odds','c-tabs','c-sheet','c-toast','tokens'];
+const ids=['curves','s-lobby','s-detail','s-betslip','s-live','s-win','s-parlay','s-mybets','s-search','p-loading','p-redumo','p-shared','p-error','p-gesture','p-empty','c-buttons','c-odds','c-ticker','c-tabs','c-sheet','c-toast','tokens'];
 window.addEventListener('scroll',()=>{
   let cur=ids[0];
   ids.forEach(id=>{const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<140)cur=id;});
@@ -2585,25 +2930,7 @@ function resetWin(){
 
 // ── COMP TABS ─────────────────────────────────────────
 const tabLabels=['12 NFL games · 48 markets live','8 NBA games · Finals odds live','6 MLB games · Starting lineups in','4 NHL games · Playoff bracket open'];
-function compTab(i,el){
-  const bar=document.getElementById('comp-tabs');
-  const items=bar.querySelectorAll('.p-tab-pill');
-  const pill=document.getElementById('comp-tab-pill');
-  const w=items[0].offsetWidth+6;
-  const left=3+i*(items[0].offsetWidth+6);
-  pill.style.left=left+'px';
-  pill.style.width=items[0].offsetWidth+'px';
-  items.forEach((it,idx)=>{it.classList.toggle('on',idx===i);});
-  const content=document.getElementById('comp-tab-content');
-  content.style.opacity='0';
-  setTimeout(()=>{content.textContent=tabLabels[i];content.style.opacity='1';},120);
-}
-window.addEventListener('load',()=>{
-  const bar=document.getElementById('comp-tabs');
-  const items=bar.querySelectorAll('.p-tab-pill');
-  const pill=document.getElementById('comp-tab-pill');
-  if(items.length){pill.style.left='3px';pill.style.width=items[0].offsetWidth+'px';}
-});
+// compTab legacy removed — replaced by switchTab()
 
 // ── FLASH DEMO ────────────────────────────────────────
 let fuVal=-140,fdVal=-140;
@@ -2903,8 +3230,8 @@ const parlayLegs = [
   { label:'Ohtani HR', sub:'Player Prop · MLB', odds:'+220' },
 ];
 let parlayCount = 2;
-const parlayOddsSeq = ['+246', '+612', '+1,840'];
-const parlayPayoutSeq = ['$34.60', '$71.20', '$194.00'];
+const parlayOddsSeq = ['+246', '+612', '+1840'];
+const parlayPayoutSeq = ['$034.60', '$071.20', '$194.00'];
 
 function addParlayLeg() {
   if (parlayCount >= 5) return;
@@ -2930,27 +3257,16 @@ function addParlayLeg() {
   badge.style.transition = 'transform .18s cubic-bezier(.34,1.56,.64,1)';
   badge.style.transform = 'scale(1.25)';
   setTimeout(() => { badge.style.transform = ''; }, 280);
-  // update odds with flash
+  // odds — digit spin with green flash
   const oddsEl = document.getElementById('parlay-odds');
-  oddsEl.textContent = parlayOddsSeq[parlayCount - 2] || parlayOddsSeq[2];
+  const newOddsStr = parlayOddsSeq[parlayCount - 2] || parlayOddsSeq[2];
+  oddsEl.style.transition = 'color 60ms';
   oddsEl.style.color = 'var(--green)';
-  setTimeout(() => { oddsEl.style.color = ''; }, 700);
-  // payout count-up
-  const payoutEl = document.getElementById('parlay-payout');
-  const rawStr = parlayPayoutSeq[parlayCount - 2] || parlayPayoutSeq[2];
-  const target = parseFloat(rawStr.replace(/[$,]/g,''));
-  const start = performance.now();
-  const dur = 500;
-  const prev = parseFloat((payoutEl.textContent).replace(/[$,]/g,'')) || 0;
-  const tick = now => {
-    const t = Math.min((now - start) / dur, 1);
-    const e = 1 - Math.pow(1 - t, 3);
-    const val = prev + e * (target - prev);
-    payoutEl.textContent = '$' + val.toFixed(2);
-    if (t < 1) requestAnimationFrame(tick);
-    else payoutEl.textContent = rawStr;
-  };
-  setTimeout(() => requestAnimationFrame(tick), 100);
+  setTimeout(() => { oddsEl.style.color = ''; oddsEl.style.transition = 'color 300ms'; }, 320);
+  tkSpin(oddsEl, newOddsStr);
+  // payout — cascading digit spin (same system as Number Ticker component)
+  const newPayoutStr = parlayPayoutSeq[parlayCount - 2] || parlayPayoutSeq[2];
+  tkCountUp('parlay-payout', newPayoutStr, 7, 480, 100);
   // boost badge at 3 legs
   if (parlayCount === 3) {
     const boost = document.getElementById('parlay-boost');
@@ -2965,9 +3281,10 @@ function resetParlay() {
   const all = legs.querySelectorAll('.parlay-leg');
   all.forEach((l, i) => { if (i >= 2) l.remove(); });
   document.getElementById('parlay-leg-badge').textContent = '2 Legs';
-  document.getElementById('parlay-odds').textContent = '+246';
-  document.getElementById('parlay-odds').style.color = '';
-  document.getElementById('parlay-payout').textContent = '$34.60';
+  const po = document.getElementById('parlay-odds');
+  po.style.color = ''; po.style.transition = '';
+  tkBuild(po, '+246');
+  tkBuild(document.getElementById('parlay-payout'), '$034.60');
   const boost = document.getElementById('parlay-boost');
   boost.style.transition = 'none'; boost.style.opacity = '0'; boost.style.transform = 'scale(0.7)';
 }
@@ -3095,6 +3412,241 @@ function resetSearch() {
 }
 
 // ── TOASTS ────────────────────────────────────────────
+// ── Tab Bar demo ──────────────────────────────────────────────
+let activeTab = 0;
+
+function switchTab(newIndex) {
+  if (newIndex === activeTab) return; // guard — no flicker on same tab
+  const dir = newIndex > activeTab ? 1 : -1; // 1=right, -1=left
+  const exitX  = dir * -16;   // current exits toward opposite side
+  const enterX = dir *  16;   // new arrives from direction of tap
+
+  // Deactivate old tab label
+  const oldTab = document.getElementById('tab-' + activeTab);
+  if (oldTab) oldTab.classList.remove('active');
+
+  // Slide indicator (fd.drive — handled by CSS transition on the element)
+  const indicator = document.getElementById('tab-indicator');
+  const newTabEl  = document.getElementById('tab-' + newIndex);
+  if (indicator && newTabEl) {
+    indicator.style.left  = newTabEl.offsetLeft + 'px';
+    indicator.style.width = newTabEl.offsetWidth + 'px';
+  }
+
+  // Activate new tab label
+  if (newTabEl) newTabEl.classList.add('active');
+
+  // EXIT: current panel fades + slides in exit direction
+  const oldPanel = document.getElementById('panel-' + activeTab);
+  if (oldPanel) {
+    oldPanel.style.transition = 'opacity 180ms ease-in, transform 180ms ease-in';
+    oldPanel.style.opacity = '0';
+    oldPanel.style.transform = `translateX(${exitX}px)`;
+    oldPanel.style.pointerEvents = 'none';
+  }
+
+  // ENTER: new panel starts from opposite side, enters after 80ms delay (fd.kick)
+  const newPanel = document.getElementById('panel-' + newIndex);
+  if (newPanel) {
+    // Snap to start position instantly (no transition)
+    newPanel.style.transition = 'none';
+    newPanel.style.opacity = '0';
+    newPanel.style.transform = `translateX(${enterX}px)`;
+    newPanel.style.pointerEvents = 'auto';
+    // Then animate in after short delay
+    setTimeout(() => {
+      newPanel.style.transition = 'opacity 260ms cubic-bezier(0,0,0.06,1), transform 260ms cubic-bezier(0,0,0.06,1)';
+      newPanel.style.opacity = '1';
+      newPanel.style.transform = 'translateX(0)';
+    }, 80);
+  }
+
+  activeTab = newIndex;
+}
+
+// Init indicator position on first render
+function initTabBar() {
+  const indicator = document.getElementById('tab-indicator');
+  const firstTab  = document.getElementById('tab-0');
+  if (!indicator || !firstTab) return;
+  indicator.style.left  = firstTab.offsetLeft + 'px';
+  indicator.style.width = firstTab.offsetWidth + 'px';
+  // Set panel-0 visible, rest hidden
+  for (let i = 0; i < 4; i++) {
+    const p = document.getElementById('panel-' + i);
+    if (!p) continue;
+    if (i === 0) {
+      p.style.opacity = '1';
+      p.style.transform = 'translateX(0)';
+      p.style.pointerEvents = 'auto';
+    } else {
+      p.style.opacity = '0';
+      p.style.transform = 'translateX(20px)';
+      p.style.pointerEvents = 'none';
+    }
+  }
+}
+setTimeout(initTabBar, 120);
+
+// ── Number Ticker ─────────────────────────────────────────────
+// One unified function handles all value types: "$34.60", "-145", "+246", "$128.50"
+// Static chars ($ . + -) render as separators. Digit chars get spinning columns.
+
+function tkBuild(el, formatted) {
+  el.innerHTML = '';
+  formatted.split('').forEach(ch => {
+    if (/[0-9]/.test(ch)) {
+      const col = document.createElement('span');
+      col.className = 'tk-col';
+      const strip = document.createElement('div');
+      strip.className = 'tk-strip';
+      for (let n = 0; n <= 9; n++) {
+        const s = document.createElement('span');
+        s.textContent = n;
+        strip.appendChild(s);
+      }
+      // Instant position — no transition on build
+      strip.style.transition = 'none';
+      strip.style.transform = `translateY(-${parseInt(ch) * 1.15}em)`;
+      col.appendChild(strip);
+      el.appendChild(col);
+    } else {
+      const sep = document.createElement('span');
+      sep.className = 'tk-sep';
+      sep.textContent = ch;
+      el.appendChild(sep);
+    }
+  });
+  el.dataset.fmt = formatted;
+}
+
+function tkSpin(el, newFmt, dur) {
+  if (!el) return;
+  const oldDigits = (el.dataset.fmt || '').replace(/[^0-9]/g, '');
+  const newDigits = newFmt.replace(/[^0-9]/g, '');
+  // Rebuild if digit count changed or not yet built
+  if (!el.dataset.fmt || oldDigits.length !== newDigits.length) {
+    tkBuild(el, newFmt);
+    return;
+  }
+  const strips = el.querySelectorAll('.tk-strip');
+  let di = 0;
+  newFmt.split('').forEach(ch => {
+    if (/[0-9]/.test(ch)) {
+      const strip = strips[di++];
+      if (!strip) return;
+      strip.style.transition = `transform ${dur || 380}ms cubic-bezier(0.34,1.45,0.64,1)`;
+      strip.style.transform = `translateY(-${parseInt(ch) * 1.15}em)`;
+    }
+  });
+  el.dataset.fmt = newFmt;
+}
+
+function tkSpinId(id, newFmt, dur) {
+  tkSpin(document.getElementById(id), newFmt, dur);
+}
+
+// Stepped spin-up: runs N intermediate values with eased timing
+// gives the slot-cascade feel while counting up
+function tkCountUp(id, targetFmt, steps, totalMs, delayMs) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  // Extract numeric value from format string (e.g. "$34.60" → 34.60)
+  const hasDollar = targetFmt.includes('$');
+  const hasDot = targetFmt.includes('.');
+  const decimals = hasDot ? targetFmt.split('.')[1].length : 0;
+  const targetNum = parseFloat(targetFmt.replace(/[^0-9.]/g, ''));
+  const intLen = targetFmt.replace(/[^0-9]/g, '').length - decimals;
+  // Build the zero-value formatted string to init if needed
+  const zeroFmt = (hasDollar ? '$' : '') +
+    '0'.repeat(intLen) +
+    (hasDot ? '.' + '0'.repeat(decimals) : '');
+  if (!el.dataset.fmt) tkBuild(el, zeroFmt);
+
+  for (let i = 1; i <= steps; i++) {
+    const t = i / steps;
+    const ease = 1 - Math.pow(1 - t, 2.5); // ease-out
+    const val = targetNum * ease;
+    const formatted = (hasDollar ? '$' : '') + val.toFixed(decimals);
+    const delay = delayMs + (t * totalMs);
+    setTimeout(() => tkSpin(el, formatted, 320), delay);
+  }
+}
+
+// ── Ticker state ──
+const oddsSeq = [
+  ['-145','+125','+310'],
+  ['-162','+138','+290'],
+  ['-118','+105','+340'],
+  ['-155','+132','+315'],
+];
+const combSeq  = ['+246','+312','+198','+267'];
+const paySeq   = [34.60, 41.20, 29.80, 36.70];
+let tkStep = 0;
+
+function initTickers() {
+  // Number Ticker component
+  tkBuild(document.getElementById('tk-odds1'),   '-145');
+  tkBuild(document.getElementById('tk-odds2'),   '+125');
+  tkBuild(document.getElementById('tk-odds3'),   '+310');
+  tkBuild(document.getElementById('tk-combined'),'+246');
+  tkBuild(document.getElementById('tk-payout-display'), '$00.00');
+  tkBuild(document.getElementById('tk-win-display'),    '$000.00');
+  // Parlay Builder
+  tkBuild(document.getElementById('parlay-odds'),   '+246');
+  tkBuild(document.getElementById('parlay-payout'), '$34.60');
+}
+
+function spinOdds() {
+  tkStep = (tkStep + 1) % oddsSeq.length;
+  const step = oddsSeq[tkStep];
+  const ids = ['tk-odds1','tk-odds2','tk-odds3'];
+  ids.forEach((id, i) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const oldNum = parseInt((el.dataset.fmt || '0').replace(/[^0-9]/g,''));
+    const newNum = parseInt(step[i].replace(/[^0-9]/g,''));
+    const wentUp = newNum > oldNum;
+    // Flash pill background
+    el.parentElement.style.transition = 'background 60ms';
+    el.parentElement.style.background = wentUp ? 'rgba(0,200,122,.2)' : 'rgba(255,77,106,.2)';
+    setTimeout(() => {
+      el.parentElement.style.transition = 'background 300ms';
+      el.parentElement.style.background = '';
+    }, 280);
+    // Stagger spins
+    setTimeout(() => tkSpinId(id, step[i]), i * 55);
+  });
+  // Combined odds spin
+  setTimeout(() => tkSpinId('tk-combined', combSeq[tkStep]), 80);
+  // Payout cascades up with stepped spin
+  const target = paySeq[tkStep];
+  const prev = parseFloat((document.getElementById('tk-payout-display').dataset.fmt || '$00.00').replace(/[^0-9.]/g,'')) || 0;
+  tkCountUp('tk-payout-display', '$' + target.toFixed(2), 7, 480, 120);
+}
+
+function rollPayout() {
+  tkCountUp('tk-payout-display', '$' + paySeq[tkStep].toFixed(2), 8, 600, 0);
+}
+
+function revealWin() {
+  const card = document.getElementById('tk-win-card');
+  card.style.opacity = '1';
+  card.style.transform = 'scale(1.02)';
+  setTimeout(() => { card.style.transform = 'scale(1)'; }, 560);
+  tkCountUp('tk-win-display', '$128.50', 10, 900, 80);
+}
+
+function resetTicker() {
+  tkStep = 0;
+  initTickers();
+  const card = document.getElementById('tk-win-card');
+  card.style.opacity = '0.4';
+  card.style.transform = '';
+}
+
+setTimeout(initTickers, 80);
+
 // ── Bottom Sheet ──────────────────────────────────────────────
 let bsIsOpen = false;
 let bsIsHalf = false;
