@@ -307,6 +307,14 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
     <a class="na" href="#s-mybets">My Bets</a>
     <a class="na" href="#s-search">Search</a>
   </div>
+  <div class="ng"><div class="ngl">Patterns</div>
+    <a class="na" href="#p-loading">Loading States</a>
+    <a class="na" href="#p-redumo">Reduced Motion</a>
+    <a class="na" href="#p-shared">Shared Element</a>
+    <a class="na" href="#p-error">Error &amp; Feedback</a>
+    <a class="na" href="#p-gesture">Gesture Continuity</a>
+    <a class="na" href="#p-empty">Empty States</a>
+  </div>
   <div class="ng"><div class="ngl">Components</div>
     <a class="na" href="#c-buttons">Buttons</a>
     <a class="na" href="#c-odds">Odds Pills</a>
@@ -1464,6 +1472,570 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
 <div class="divider"></div>
 
 <!-- ══════════════════════════════════════════════════════
+  PATTERN 1: LOADING STATES
+══════════════════════════════════════════════════════ -->
+<span id="p-loading"></span>
+<div class="sec-label">Patterns · 01</div>
+<h2 class="sec-head">Loading States</h2>
+<p class="sec-sub">Three distinct patterns — never interchangeable. Skeleton for content-heavy surfaces (lobby, game detail). Shimmer signals scanning in progress. Spinner only for indeterminate actions with no predictable end. IBM Carbon and Material Design 3 both define this taxonomy. The mistake most apps make: using a spinner where a skeleton would be faster-feeling.</p>
+<div style="display:flex;gap:10px;margin-bottom:20px;">
+  <button class="play-btn" onclick="playLoading()">▶ Reveal content</button>
+  <button class="play-btn reset-btn" onclick="resetLoading()">↺ Reset</button>
+</div>
+<div class="screen-layout">
+  <div>
+    <div class="phone" id="phone-loading">
+      <div class="phone-notch"><div class="phone-dot"></div></div>
+      <div class="phone-screen" style="height:430px;overflow:hidden;position:relative;">
+        <!-- TOP NAV (always visible) -->
+        <div style="height:44px;background:var(--s1);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 14px;">
+          <div style="width:54px;height:8px;background:var(--blue);border-radius:3px;opacity:.6;"></div>
+          <div style="display:flex;gap:8px;"><div style="width:22px;height:22px;background:var(--s3);border-radius:50%;"></div></div>
+        </div>
+        <!-- FILTER TABS skeleton -->
+        <div style="height:34px;background:var(--s1);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px;padding:0 12px;">
+          <div class="skel" style="width:36px;height:18px;border-radius:20px;"></div>
+          <div class="skel" style="width:30px;height:18px;border-radius:20px;opacity:.7;"></div>
+          <div class="skel" style="width:30px;height:18px;border-radius:20px;opacity:.5;"></div>
+          <div class="skel" style="width:30px;height:18px;border-radius:20px;opacity:.4;"></div>
+        </div>
+        <!-- HERO CARD skeleton with shimmer -->
+        <div style="margin:10px 12px 0;background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:10px 12px;position:relative;overflow:hidden;" class="shimmer-wrap loading-skel">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <div style="display:flex;flex-direction:column;gap:5px;">
+              <div class="skel" style="width:50px;height:7px;border-radius:3px;"></div>
+              <div class="skel" style="width:36px;height:5px;border-radius:3px;opacity:.6;"></div>
+            </div>
+            <div style="font-size:7px;color:var(--t3);">VS</div>
+            <div style="display:flex;flex-direction:column;gap:5px;align-items:flex-end;">
+              <div class="skel" style="width:50px;height:7px;border-radius:3px;"></div>
+              <div class="skel" style="width:36px;height:5px;border-radius:3px;opacity:.6;"></div>
+            </div>
+          </div>
+          <div style="display:flex;gap:5px;">
+            <div class="skel" style="flex:1;height:28px;border-radius:6px;"></div>
+            <div class="skel" style="flex:1;height:28px;border-radius:6px;opacity:.7;"></div>
+            <div class="skel" style="flex:1;height:28px;border-radius:6px;opacity:.5;"></div>
+          </div>
+        </div>
+        <!-- REAL CONTENT (hidden, fades in) -->
+        <div class="loading-content" style="margin:10px 12px 0;background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:10px 12px;opacity:0;position:absolute;left:0;right:0;margin-left:12px;margin-right:12px;top:88px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <div style="display:flex;flex-direction:column;gap:4px;"><div style="width:50px;height:7px;background:var(--s4);border-radius:3px;"></div><div style="width:36px;height:5px;background:var(--s3);border-radius:3px;"></div></div>
+            <div style="font-size:7px;color:var(--t3);font-weight:700;">VS</div>
+            <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end;"><div style="width:50px;height:7px;background:var(--s4);border-radius:3px;"></div><div style="width:36px;height:5px;background:var(--s3);border-radius:3px;"></div></div>
+          </div>
+          <div style="display:flex;gap:5px;">
+            <div style="flex:1;height:28px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;display:flex;align-items:center;justify-content:center;"><span style="font-size:7px;color:var(--blue);font-weight:700;">SPREAD</span></div>
+            <div style="flex:1;height:28px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;display:flex;align-items:center;justify-content:center;"><span style="font-size:7px;color:var(--blue);font-weight:700;">ML</span></div>
+            <div style="flex:1;height:28px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;display:flex;align-items:center;justify-content:center;"><span style="font-size:7px;color:var(--blue);font-weight:700;">TOTAL</span></div>
+          </div>
+        </div>
+        <!-- GAME ROW skeletons -->
+        <div style="font-size:7px;text-transform:uppercase;letter-spacing:1.5px;color:var(--t3);font-weight:700;padding:76px 14px 4px 14px;">Featured Games</div>
+        <div class="loading-row" style="display:flex;align-items:center;justify-content:space-between;padding:9px 14px;border-top:1px solid var(--border);">
+          <div style="display:flex;flex-direction:column;gap:5px;"><div class="skel" style="width:68px;height:6px;border-radius:3px;"></div><div class="skel" style="width:48px;height:5px;border-radius:3px;opacity:.6;"></div></div>
+          <div style="display:flex;gap:4px;"><div class="skel" style="width:34px;height:24px;border-radius:5px;"></div><div class="skel" style="width:34px;height:24px;border-radius:5px;opacity:.7;"></div><div class="skel" style="width:34px;height:24px;border-radius:5px;opacity:.5;"></div></div>
+        </div>
+        <div class="loading-row" style="display:flex;align-items:center;justify-content:space-between;padding:9px 14px;border-top:1px solid var(--border);">
+          <div style="display:flex;flex-direction:column;gap:5px;"><div class="skel" style="width:58px;height:6px;border-radius:3px;opacity:.8;"></div><div class="skel" style="width:42px;height:5px;border-radius:3px;opacity:.5;"></div></div>
+          <div style="display:flex;gap:4px;"><div class="skel" style="width:34px;height:24px;border-radius:5px;opacity:.7;"></div><div class="skel" style="width:34px;height:24px;border-radius:5px;opacity:.5;"></div><div class="skel" style="width:34px;height:24px;border-radius:5px;opacity:.3;"></div></div>
+        </div>
+        <div class="loading-row" style="display:flex;align-items:center;justify-content:space-between;padding:9px 14px;border-top:1px solid var(--border);">
+          <div style="display:flex;flex-direction:column;gap:5px;"><div class="skel" style="width:72px;height:6px;border-radius:3px;opacity:.6;"></div><div class="skel" style="width:52px;height:5px;border-radius:3px;opacity:.4;"></div></div>
+          <div style="display:flex;gap:4px;"><div class="skel" style="width:34px;height:24px;border-radius:5px;opacity:.5;"></div><div class="skel" style="width:34px;height:24px;border-radius:5px;opacity:.3;"></div><div class="skel" style="width:34px;height:24px;border-radius:5px;opacity:.2;"></div></div>
+        </div>
+        <!-- BOTTOM TAB BAR -->
+        <div style="position:absolute;bottom:0;left:0;right:0;height:50px;background:var(--s1);border-top:1px solid var(--border);display:flex;">
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;"><div style="width:18px;height:13px;background:rgba(20,147,255,.25);border-radius:3px;border:1px solid rgba(20,147,255,.4);"></div><div style="font-size:6px;letter-spacing:.6px;color:var(--blue);font-weight:700;">HOME</div></div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;"><div style="width:18px;height:13px;background:var(--s3);border-radius:3px;"></div><div style="font-size:6px;letter-spacing:.6px;color:var(--t3);font-weight:700;">LIVE</div></div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;"><div style="width:18px;height:13px;background:var(--s3);border-radius:3px;"></div><div style="font-size:6px;letter-spacing:.6px;color:var(--t3);font-weight:700;">MY BETS</div></div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;"><div style="width:18px;height:13px;background:var(--s3);border-radius:3px;"></div><div style="font-size:6px;letter-spacing:.6px;color:var(--t3);font-weight:700;">PROMOS</div></div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;"><div style="width:18px;height:13px;background:var(--s3);border-radius:3px;"></div><div style="font-size:6px;letter-spacing:.6px;color:var(--t3);font-weight:700;">ACCOUNT</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="callout-panel">
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gs);color:var(--green);">1</div>
+        <div class="callout-text"><div class="callout-el">Skeleton structure</div><div class="callout-curve">pulse · 1.4s ease-in-out · infinite alternate</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">Skeleton blocks match the exact dimensions of real content. The pulse keeps opacity between 100% and 30% — never disappearing, so the shape stays readable. Chrome (nav, tab bar) never skeletons — only content areas do. Reference: IBM Carbon "skeleton states."</div>
+        <div class="callout-code">opacity.value = withRepeat(<br>  withSequence(<br>    withTiming(0.3, { duration: 700,<br>      easing: Easing.inOut(Easing.ease) }),<br>    withTiming(1, { duration: 700,<br>      easing: Easing.inOut(Easing.ease) })<br>  ), -1, true // reverse: true<br>)</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gs);color:var(--green);">2</div>
+        <div class="callout-text"><div class="callout-el">Shimmer scan</div><div class="callout-curve">linear · 1.2s · translateX(-100%→100%) · infinite</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">A highlight sweeps left-to-right over the skeleton, simulating active scanning. Linear easing only — any easing on shimmer looks wrong. Applied to content-heavy cards (hero, game rows). Do not apply to every skeleton — too much shimmer reads as unstable.</div>
+        <div class="callout-code">translateX.value = withRepeat(<br>  withTiming(width, {<br>    duration: 1200,<br>    easing: Easing.linear<br>  }), -1, false<br>)<br>// Start value: -width (off left)</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gs);color:var(--green);">3</div>
+        <div class="callout-text"><div class="callout-el">Skeleton → content crossfade</div><div class="callout-curve">fd.kick · 280ms · opacity + stagger 40ms</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">When data arrives, stop the shimmer immediately and crossfade skeleton → real content. Opacity only — never scale or translate. The skeleton disappears as the content appears, staggered top-to-bottom. Structural positions never shift — this prevents layout jump.</div>
+        <div class="callout-code">// Skeleton out<br>skelOpacity.value = withTiming(0, { duration: 200 })<br>// Content in, staggered<br>contentOpacity.value = withDelay(index * 40,<br>  withTiming(1, { duration: 280,<br>    easing: Easing.bezier(0, 0, 0.06, 1) })<br>)</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--ps);color:var(--purple);">4</div>
+        <div class="callout-text"><div class="callout-el">Spinner — when to use</div><div class="callout-curve">rotate · linear · 800ms · infinite</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">Spinner is reserved for actions with no predictable layout — placing a bet, processing payment, submitting a form. Never use for page loads (use skeleton). Never use alongside a skeleton. One rotation = 800ms linear. Size: 20px inline, 32px full-screen.</div>
+        <div class="callout-code">rotate.value = withRepeat(<br>  withTiming(360, {<br>    duration: 800,<br>    easing: Easing.linear<br>  }), -1, false<br>)<br>// Never ease — linear only for spinners</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════════════════
+  PATTERN 2: REDUCED MOTION
+══════════════════════════════════════════════════════ -->
+<span id="p-redumo"></span>
+<div class="sec-label">Patterns · 02</div>
+<h2 class="sec-head">Reduced Motion</h2>
+<p class="sec-sub">WCAG 2.1 AA requires it. Vestibular disorders affect 35% of adults over 40 — large-scale motion and parallax can cause genuine physical discomfort. <code style="font-family:var(--mono);font-size:12px;background:var(--s2);padding:2px 5px;border-radius:4px;">prefers-reduced-motion</code> is the OS signal, but FanDuel should also expose a manual toggle in Accessibility settings. The rule: remove translate/scale animations entirely. Preserve opacity transitions at half duration — they are safe.</p>
+<div style="display:flex;gap:10px;margin-bottom:20px;">
+  <button class="play-btn" id="redumo-btn" onclick="toggleReducedMotion()">⚡ Enable reduced motion</button>
+</div>
+<div class="screen-layout">
+  <div>
+    <div class="phone" id="phone-redumo">
+      <div class="phone-notch"><div class="phone-dot"></div></div>
+      <div class="phone-screen" style="height:430px;overflow:hidden;position:relative;">
+        <div style="height:44px;background:var(--s1);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 14px;">
+          <div style="width:54px;height:8px;background:var(--blue);border-radius:3px;opacity:.6;"></div>
+          <div style="width:22px;height:22px;background:var(--s3);border-radius:50%;"></div>
+        </div>
+        <div style="height:34px;background:var(--s1);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px;padding:0 12px;">
+          <div style="padding:3px 10px;background:var(--blue);border-radius:20px;font-size:7px;font-weight:800;color:#fff;">NFL</div>
+          <div style="padding:3px 8px;background:var(--s3);border-radius:20px;font-size:7px;color:var(--t3);">NBA</div>
+          <div style="padding:3px 8px;background:var(--s3);border-radius:20px;font-size:7px;color:var(--t3);">MLB</div>
+        </div>
+        <!-- content blocks -->
+        <div id="redumo-content" style="padding:10px 12px;display:flex;flex-direction:column;gap:7px;opacity:0;">
+          <div style="background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:10px 12px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;">
+              <div style="width:50px;height:7px;background:var(--s4);border-radius:3px;"></div>
+              <div style="font-size:7px;color:var(--t3);">VS</div>
+              <div style="width:50px;height:7px;background:var(--s4);border-radius:3px;"></div>
+            </div>
+            <div style="display:flex;gap:5px;">
+              <div style="flex:1;height:26px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;"></div>
+              <div style="flex:1;height:26px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;"></div>
+              <div style="flex:1;height:26px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;"></div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 2px;">
+            <div style="display:flex;flex-direction:column;gap:4px;"><div style="width:65px;height:6px;background:var(--s4);border-radius:3px;"></div><div style="width:48px;height:5px;background:var(--s3);border-radius:3px;"></div></div>
+            <div style="display:flex;gap:4px;"><div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:5px;"></div><div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:5px;"></div></div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 2px;border-top:1px solid var(--border);">
+            <div style="display:flex;flex-direction:column;gap:4px;"><div style="width:58px;height:6px;background:var(--s4);border-radius:3px;"></div><div style="width:40px;height:5px;background:var(--s3);border-radius:3px;"></div></div>
+            <div style="display:flex;gap:4px;"><div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:5px;"></div><div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:5px;"></div></div>
+          </div>
+        </div>
+        <!-- mode label -->
+        <div id="redumo-label" style="position:absolute;bottom:58px;left:0;right:0;text-align:center;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--t3);">Full animation mode</div>
+        <!-- BOTTOM TAB BAR -->
+        <div style="position:absolute;bottom:0;left:0;right:0;height:50px;background:var(--s1);border-top:1px solid var(--border);display:flex;">
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;"><div style="width:18px;height:13px;background:rgba(20,147,255,.25);border-radius:3px;border:1px solid rgba(20,147,255,.4);"></div><div style="font-size:6px;letter-spacing:.6px;color:var(--blue);font-weight:700;">HOME</div></div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;"><div style="width:18px;height:13px;background:var(--s3);border-radius:3px;"></div><div style="font-size:6px;letter-spacing:.6px;color:var(--t3);font-weight:700;">LIVE</div></div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;"><div style="width:18px;height:13px;background:var(--s3);border-radius:3px;"></div><div style="font-size:6px;letter-spacing:.6px;color:var(--t3);font-weight:700;">MY BETS</div></div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;"><div style="width:18px;height:13px;background:var(--s3);border-radius:3px;"></div><div style="font-size:6px;letter-spacing:.6px;color:var(--t3);font-weight:700;">PROMOS</div></div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;"><div style="width:18px;height:13px;background:var(--s3);border-radius:3px;"></div><div style="font-size:6px;letter-spacing:.6px;color:var(--t3);font-weight:700;">ACCOUNT</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="callout-panel">
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--rs);color:var(--red);">1</div>
+        <div class="callout-text"><div class="callout-el">What to remove</div><div class="callout-curve">translateX / translateY / scale / rotate</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">In reduced motion mode: eliminate all translate and scale animations. These are the motion types that trigger vestibular symptoms. Shared element transitions collapse to crossfades. Screen transitions collapse to opacity only. No exceptions.</div>
+        <div class="callout-code">const isReduced = useReducedMotion()<br>// Instead of slide:<br>opacity.value = withTiming(1, {<br>  duration: isReduced ? 150 : 340,<br>  easing: Easing.linear<br>})<br>// translateY stays at 0 always</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gs);color:var(--green);">2</div>
+        <div class="callout-text"><div class="callout-el">What to keep</div><div class="callout-curve">opacity · half duration · linear</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">Opacity transitions are safe — they don't trigger vestibular response. Keep them at half the standard duration (e.g., 340ms → 170ms) so the UI still feels responsive. Live odds flashes keep their colour signal — colour change is not motion.</div>
+        <div class="callout-code">// Odds flash: safe in reduced motion<br>// Colour change ≠ motion<br>interpolateColor(flash.value,<br>  [0, 1],<br>  ['transparent', 'rgba(0,200,122,.25)']<br>)<br>// Duration halved, not zero</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--ps);color:var(--purple);">3</div>
+        <div class="callout-text"><div class="callout-el">Implementation</div><div class="callout-curve">useReducedMotion() hook · OS + manual toggle</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">Reanimated exposes useReducedMotion() which reads the OS accessibility setting. FanDuel should also store a manual override in user preferences — some users want reduced motion only in the app, not system-wide. The manual toggle takes precedence.</div>
+        <div class="callout-code">import { useReducedMotion }<br>  from 'react-native-reanimated'<br><br>// Global hook — wrap in context<br>// so every component reads it<br>const { prefersReducedMotion } =<br>  useMotionPreference() // custom hook<br>// Reads OS + user setting</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════════════════
+  PATTERN 3: SHARED ELEMENT TRANSITION
+══════════════════════════════════════════════════════ -->
+<span id="p-shared"></span>
+<div class="sec-label">Patterns · 03</div>
+<h2 class="sec-head">Shared Element Transition</h2>
+<p class="sec-sub">When a game card expands to the full detail screen, the card should travel — not disappear and reappear. The element is continuous across two screens; the transition makes that continuity visible. Apple calls this "hero animation." Material Design 3 calls it "container transform." Either way: the geometry interpolates from origin position to destination, while content inside cross-fades. This is the highest-effort, highest-return animation in the app.</p>
+<div style="display:flex;gap:10px;margin-bottom:20px;">
+  <button class="play-btn" onclick="playShared()">▶ Expand card</button>
+  <button class="play-btn reset-btn" onclick="resetShared()">↺ Collapse</button>
+</div>
+<div class="screen-layout">
+  <div>
+    <div class="phone" id="phone-shared">
+      <div class="phone-notch"><div class="phone-dot"></div></div>
+      <div class="phone-screen" style="height:430px;overflow:hidden;position:relative;">
+        <!-- LOBBY STATE -->
+        <div id="shared-lobby" style="position:absolute;inset:0;background:var(--bg);">
+          <div style="height:44px;background:var(--s1);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 14px;"><div style="width:54px;height:8px;background:var(--blue);border-radius:3px;opacity:.6;"></div></div>
+          <div style="height:34px;background:var(--s1);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px;padding:0 12px;">
+            <div style="padding:3px 10px;background:var(--blue);border-radius:20px;font-size:7px;font-weight:800;color:#fff;">NFL</div>
+            <div style="padding:3px 8px;background:var(--s3);border-radius:20px;font-size:7px;color:var(--t3);">NBA</div>
+          </div>
+          <!-- the card that will expand -->
+          <div id="shared-card-origin" style="margin:10px 12px 0;background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:10px 12px;cursor:pointer;" onclick="playShared()">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;">
+              <div style="display:flex;flex-direction:column;gap:4px;"><div style="width:50px;height:7px;background:var(--s4);border-radius:3px;"></div><div style="width:36px;height:5px;background:var(--s3);border-radius:3px;"></div></div>
+              <div style="font-size:7px;color:var(--t3);">VS</div>
+              <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end;"><div style="width:50px;height:7px;background:var(--s4);border-radius:3px;"></div><div style="width:36px;height:5px;background:var(--s3);border-radius:3px;"></div></div>
+            </div>
+            <div style="display:flex;gap:5px;">
+              <div style="flex:1;height:26px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;"></div>
+              <div style="flex:1;height:26px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;"></div>
+              <div style="flex:1;height:26px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;"></div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:9px 14px;border-top:1px solid var(--border);margin-top:10px;"><div style="display:flex;flex-direction:column;gap:4px;"><div style="width:65px;height:6px;background:var(--s4);border-radius:3px;"></div><div style="width:46px;height:5px;background:var(--s3);border-radius:3px;"></div></div><div style="display:flex;gap:4px;"><div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:5px;"></div><div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:5px;"></div></div></div>
+        </div>
+        <!-- EXPANDING CARD (the animated container) -->
+        <div id="shared-card-expand" style="position:absolute;background:var(--s2);border:1px solid var(--b2);border-radius:10px;overflow:hidden;z-index:10;opacity:0;pointer-events:none;left:12px;right:12px;top:88px;bottom:auto;">
+          <!-- header morphs in -->
+          <div style="height:44px;background:var(--s1);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 14px;opacity:0;" id="shared-detail-nav">
+            <div style="width:28px;height:8px;background:rgba(20,147,255,.5);border-radius:3px;"></div>
+            <div style="width:70px;height:8px;background:var(--s4);border-radius:3px;"></div>
+            <div style="width:20px;height:8px;background:var(--s3);border-radius:3px;"></div>
+          </div>
+          <div style="padding:10px 12px;display:flex;flex-direction:column;gap:6px;opacity:0;" id="shared-detail-content">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <div style="width:50px;height:7px;background:var(--s4);border-radius:3px;"></div>
+              <div style="font-size:7px;color:var(--t3);">VS</div>
+              <div style="width:50px;height:7px;background:var(--s4);border-radius:3px;"></div>
+            </div>
+            <div style="display:flex;gap:5px;"><div style="flex:1;height:26px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;"></div><div style="flex:1;height:26px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;"></div><div style="flex:1;height:26px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;"></div></div>
+            <div style="height:1px;background:var(--border);"></div>
+            <div style="font-size:7px;text-transform:uppercase;letter-spacing:1px;color:var(--t3);font-weight:700;">Money Line</div>
+            <div style="display:flex;gap:5px;"><div style="flex:1;height:28px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;"></div><div style="flex:1;height:28px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;"></div></div>
+            <div style="font-size:7px;text-transform:uppercase;letter-spacing:1px;color:var(--t3);font-weight:700;">Spread</div>
+            <div style="display:flex;gap:5px;"><div style="flex:1;height:28px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;"></div><div style="flex:1;height:28px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="callout-panel">
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gs);color:var(--green);">1</div>
+        <div class="callout-text"><div class="callout-el">Container geometry</div><div class="callout-curve">fd.drive · 320ms · position + size interpolate</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">The card's frame (x, y, width, height, borderRadius) all interpolate simultaneously from the lobby card position to full-screen. In React Native, use the Shared Element library or measure the origin element's layout then animate the clone. fd.drive for the geometry — this is a navigation transition, not an expressive one.</div>
+        <div class="callout-code">// Measure origin card layout<br>const { x, y, width, height } =<br>  originRef.current.measure()<br><br>// Animate clone overlay<br>cardX.value = withTiming(0, {<br>  duration: 320,<br>  easing: Easing.bezier(0.4, 0, 0.1, 1)<br>})<br>borderRadius.value = withTiming(0, { duration: 320 })</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gs);color:var(--green);">2</div>
+        <div class="callout-text"><div class="callout-el">Content crossfade inside</div><div class="callout-curve">opacity · 150ms · delay 80ms · linear</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">While the container geometry is moving, the content inside crossfades from "card content" to "detail content." The crossfade starts 80ms after the geometry begins — so the container establishes its direction first, then the content resolves. Never animate both simultaneously at the same timing.</div>
+        <div class="callout-code">// Card content out<br>cardContent.value = withTiming(0, { duration: 150 })<br>// Detail content in, after 80ms<br>detailContent.value = withDelay(80,<br>  withTiming(1, {<br>    duration: 150,<br>    easing: Easing.linear<br>  })<br>)</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--ps);color:var(--purple);">3</div>
+        <div class="callout-text"><div class="callout-el">Collapse / back</div><div class="callout-curve">reverse geometry · 260ms · accelerate out</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">Collapse is the reverse — geometry contracts back to origin position. 260ms (faster than expand at 320ms). Use accelerate curve (ease-in) so it exits with energy rather than drifting. Swipe-back should carry gesture velocity into the spring.</div>
+        <div class="callout-code">// Reverse: detail → card position<br>cardX.value = withTiming(originX, {<br>  duration: 260,<br>  easing: Easing.bezier(0.4, 0, 1, 1)<br>})<br>// On swipe: pass gesture velocity<br>cardX.value = withSpring(originX, {<br>  velocity: gestureVelocity<br>})</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════════════════
+  PATTERN 4: ERROR & FEEDBACK STATES
+══════════════════════════════════════════════════════ -->
+<span id="p-error"></span>
+<div class="sec-label">Patterns · 04</div>
+<h2 class="sec-head">Error &amp; Feedback States</h2>
+<p class="sec-sub">Every action has three possible outcomes: success, error, and warning. Success is covered in the Bet Slip screen. Error needs its own motion language — a rejection gesture that communicates "this didn't work" without alarming the user. The shake pattern (from Apple HIG) is the most recognisable. Carbon adds a "critical" vs "warning" distinction that FanDuel needs: failed bet placement is critical; changed odds is a warning.</p>
+<div style="display:flex;gap:10px;margin-bottom:20px;">
+  <button class="play-btn" onclick="playError('fail')" style="background:var(--red);">✕ Bet rejected</button>
+  <button class="play-btn" onclick="playError('odds')" style="background:var(--gold);color:#1A0900;">⚡ Odds changed</button>
+  <button class="play-btn reset-btn" onclick="resetError()">↺ Reset</button>
+</div>
+<div class="screen-layout">
+  <div>
+    <div class="phone" id="phone-error">
+      <div class="phone-notch"><div class="phone-dot"></div></div>
+      <div class="phone-screen" style="height:430px;overflow:hidden;position:relative;">
+        <div style="height:44px;background:var(--s1);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 14px;"><div style="width:54px;height:8px;background:var(--blue);border-radius:3px;opacity:.6;"></div></div>
+        <div style="padding:12px;display:flex;flex-direction:column;gap:8px;">
+          <!-- bet slip card -->
+          <div id="err-card" style="background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:12px;">
+            <div style="font-size:7px;text-transform:uppercase;letter-spacing:1px;color:var(--t3);font-weight:700;margin-bottom:6px;">Bet Slip</div>
+            <div style="background:var(--s3);border-radius:7px;padding:8px 10px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;">
+              <div style="display:flex;flex-direction:column;gap:3px;"><div style="width:70px;height:6px;background:var(--s4);border-radius:3px;"></div><div style="width:44px;height:5px;background:var(--b2);border-radius:3px;"></div></div>
+              <div id="err-odds-val" style="width:32px;height:14px;background:var(--blue);border-radius:4px;opacity:.7;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;color:#fff;">-140</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+              <div style="width:30px;height:6px;background:var(--s3);border-radius:3px;"></div>
+              <div style="width:80px;height:28px;background:var(--bg);border:1px solid var(--b2);border-radius:6px;" id="err-input"></div>
+            </div>
+            <button id="err-cta" onclick="playError('fail')" style="width:100%;padding:10px;background:var(--green);color:#021A0E;font-size:11px;font-weight:800;border:none;border-radius:8px;cursor:pointer;font-family:var(--font);transition:transform .1s;">Place Bet →</button>
+          </div>
+          <!-- error banner (hidden) -->
+          <div id="err-banner" style="background:rgba(255,77,106,.1);border:1px solid rgba(255,77,106,.3);border-radius:9px;padding:10px 12px;display:flex;align-items:center;gap:8px;opacity:0;transform:translateY(-8px);">
+            <div style="width:16px;height:16px;background:var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;flex-shrink:0;">✕</div>
+            <div style="display:flex;flex-direction:column;gap:3px;"><div style="width:110px;height:6px;background:rgba(255,77,106,.4);border-radius:3px;"></div><div style="width:80px;height:5px;background:rgba(255,77,106,.25);border-radius:3px;"></div></div>
+          </div>
+          <!-- odds changed warning (hidden) -->
+          <div id="err-odds-banner" style="background:rgba(245,166,35,.1);border:1px solid rgba(245,166,35,.3);border-radius:9px;padding:10px 12px;display:flex;align-items:center;gap:8px;opacity:0;transform:translateY(-8px);">
+            <div style="width:16px;height:16px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;color:#1A0900;flex-shrink:0;">!</div>
+            <div style="display:flex;flex-direction:column;gap:3px;"><div style="width:100px;height:6px;background:rgba(245,166,35,.4);border-radius:3px;"></div><div style="width:70px;height:5px;background:rgba(245,166,35,.25);border-radius:3px;"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="callout-panel">
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--rs);color:var(--red);">1</div>
+        <div class="callout-text"><div class="callout-el">Bet rejected — shake</div><div class="callout-curve">withSequence · 6 steps · 50ms each · fd.snap</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">Horizontal shake: the universal rejection signal from Apple HIG. 6 steps at 50ms each — totalling 300ms. Amplitude starts at ±8px, halves each pass so it decays naturally. The CTA button turns red simultaneously. Never use vertical shake — it reads as approval in some cultures.</div>
+        <div class="callout-code">translateX.value = withSequence(<br>  withTiming(-8, { duration: 50 }),<br>  withTiming(8, { duration: 50 }),<br>  withTiming(-6, { duration: 50 }),<br>  withTiming(6, { duration: 50 }),<br>  withTiming(-4, { duration: 50 }),<br>  withSpring(0, { stiffness: 500, damping: 38 })<br>)</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--rs);color:var(--red);">2</div>
+        <div class="callout-text"><div class="callout-el">Error banner enters</div><div class="callout-curve">fd.kick · 280ms · delay 80ms after shake starts</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">The error message slides in from above as the shake plays out — 80ms delay so the shake registers first. fd.kick (aggressive ease-out) so it arrives with authority. Error messages should feel assertive, not apologetic. Auto-dismiss after 4 seconds with a gentle ease-in exit.</div>
+        <div class="callout-code">// Banner enters after shake<br>opacity.value = withDelay(80,<br>  withTiming(1, { duration: 280,<br>    easing: Easing.bezier(0, 0, 0.06, 1) })<br>)<br>translateY.value = withDelay(80,<br>  withTiming(0, { duration: 280,<br>    easing: Easing.bezier(0, 0, 0.06, 1) })<br>)<br>// Auto-dismiss after 4s</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gos);color:var(--gold);">3</div>
+        <div class="callout-text"><div class="callout-el">Odds changed — warning</div><div class="callout-curve">gold flash · fd.release on new value · no shake</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">Odds changing mid-slip is a warning, not an error — it requires a decision, not a rejection. The odds value flashes gold and bounces in with fd.release (slight overshoot), drawing attention without panic. The warning banner slides in below. The user must actively accept or decline the new odds.</div>
+        <div class="callout-code">// New odds value: gold flash + bounce<br>scale.value = withTiming(1, { duration: 440,<br>  easing: Easing.bezier(0.34, 1.45, 0.64, 1)<br>})<br>flashGold.value = 1<br>flashGold.value = withTiming(0, {<br>  duration: 500,<br>  easing: Easing.out(Easing.quad)<br>})</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════════════════
+  PATTERN 5: GESTURE CONTINUITY
+══════════════════════════════════════════════════════ -->
+<span id="p-gesture"></span>
+<div class="sec-label">Patterns · 05</div>
+<h2 class="sec-head">Gesture Continuity</h2>
+<p class="sec-sub">While a gesture is in progress, the UI follows the finger at exactly 1:1 — no easing, no lag. Physics engage only when the finger lifts. Apple HIG is unambiguous: any drag that doesn't track at 1:1 feels broken. On release, the element snaps to the nearest destination using spring with the gesture's exit velocity carried forward. This is what separates native-feeling apps from web-feeling apps.</p>
+<div style="display:flex;gap:10px;margin-bottom:20px;">
+  <button class="play-btn" onclick="playGesture('dismiss')">↓ Swipe dismiss</button>
+  <button class="play-btn" onclick="playGesture('snap')" style="background:var(--s3);color:var(--t2);border:1px solid var(--border);">↑ Snap back</button>
+  <button class="play-btn reset-btn" onclick="resetGesture()">↺ Reset</button>
+</div>
+<div class="screen-layout">
+  <div>
+    <div class="phone" id="phone-gesture">
+      <div class="phone-notch"><div class="phone-dot"></div></div>
+      <div class="phone-screen" style="height:430px;overflow:hidden;position:relative;">
+        <!-- base content -->
+        <div style="height:44px;background:var(--s1);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 14px;"><div style="width:54px;height:8px;background:var(--blue);border-radius:3px;opacity:.6;"></div></div>
+        <div style="padding:12px;display:flex;flex-direction:column;gap:7px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 2px;"><div style="display:flex;flex-direction:column;gap:4px;"><div style="width:68px;height:6px;background:var(--s4);border-radius:3px;"></div><div style="width:50px;height:5px;background:var(--s3);border-radius:3px;"></div></div><div style="display:flex;gap:4px;"><div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:5px;"></div><div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:5px;"></div></div></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 2px;border-top:1px solid var(--border);"><div style="display:flex;flex-direction:column;gap:4px;"><div style="width:58px;height:6px;background:var(--s4);border-radius:3px;"></div><div style="width:42px;height:5px;background:var(--s3);border-radius:3px;"></div></div><div style="display:flex;gap:4px;"><div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:5px;"></div><div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:5px;"></div></div></div>
+        </div>
+        <!-- BACKDROP -->
+        <div id="gest-backdrop" style="position:absolute;inset:0;background:rgba(0,0,0,.0);pointer-events:none;transition:background .28s;z-index:9;"></div>
+        <!-- DRAGGABLE SHEET -->
+        <div id="gest-sheet" style="position:absolute;bottom:0;left:0;right:0;background:var(--s2);border-radius:16px 16px 0 0;padding:12px 14px 20px;z-index:10;transform:translateY(100%);transition:transform .34s cubic-bezier(0,0,.06,1);">
+          <div style="width:28px;height:3px;background:var(--b2);border-radius:2px;margin:0 auto 12px;"></div>
+          <div style="font-size:9px;font-weight:800;margin-bottom:10px;">Bet Slip</div>
+          <div style="background:var(--s3);border-radius:7px;padding:9px 10px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;">
+            <div style="display:flex;flex-direction:column;gap:3px;"><div style="width:70px;height:6px;background:var(--s4);border-radius:3px;"></div><div style="width:44px;height:5px;background:var(--b2);border-radius:3px;"></div></div>
+            <div style="width:32px;height:14px;background:var(--blue);border-radius:4px;opacity:.7;"></div>
+          </div>
+          <div style="width:100%;height:36px;background:rgba(0,200,122,.15);border:1px solid rgba(0,200,122,.3);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:var(--green);">Place Bet →</div>
+          <div style="margin-top:10px;font-size:7px;color:var(--t3);text-align:center;">Drag handle to dismiss · velocity carries to spring</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="callout-panel">
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gs);color:var(--green);">1</div>
+        <div class="callout-text"><div class="callout-el">1:1 drag tracking</div><div class="callout-curve">no easing · direct value assignment</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">While the finger is down, translateY equals gesture translation directly — no animation function, no easing. This is the hardest rule to break correctly. Any lag or easing during active gesture makes the UI feel detached from the finger.</div>
+        <div class="callout-code">// In gesture handler (Pan Gesture)<br>onUpdate: (event) => {<br>  // Direct assignment — no withTiming<br>  translateY.value =<br>    Math.max(0, event.translationY)<br>  // Resist above snap point<br>}</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gs);color:var(--green);">2</div>
+        <div class="callout-text"><div class="callout-el">Velocity handoff to spring</div><div class="callout-curve">withSpring · velocity: event.velocityY</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">On finger lift, pass the gesture's exit velocity to withSpring. This creates physical continuity — a fast swipe snaps away instantly; a slow drag settles gently. Without velocity handoff the animation always feels the same regardless of how forcefully the user swiped.</div>
+        <div class="callout-code">onEnd: (event) => {<br>  const shouldDismiss =<br>    event.translationY > 100 ||<br>    event.velocityY > 800<br>  if (shouldDismiss) {<br>    translateY.value = withSpring(<br>      SHEET_HEIGHT,<br>      { velocity: event.velocityY }<br>    )<br>  } else {<br>    translateY.value = withSpring(0)<br>  }<br>}</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--ps);color:var(--purple);">3</div>
+        <div class="callout-text"><div class="callout-el">Rubber-band resistance</div><div class="callout-curve">Math.sqrt() decay · above snap point</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">If the user drags upward past the sheet's fully-open state, resistance kicks in — the sheet follows but decelerates, like pulling a rubber band. Square root decay is the physics formula Apple uses. Prevents the sheet from travelling off-screen while still feeling responsive.</div>
+        <div class="callout-code">// Rubber-band formula<br>const rubberBand = (x, max) => {<br>  const c = 0.55 // resistance coefficient<br>  return (1 - 1 / (x * c / max + 1)) * max<br>}<br>// Apply when dragging above snap:<br>translateY.value =<br>  -rubberBand(Math.abs(overDrag), 80)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════════════════
+  PATTERN 6: EMPTY STATES
+══════════════════════════════════════════════════════ -->
+<span id="p-empty"></span>
+<div class="sec-label">Patterns · 06</div>
+<h2 class="sec-head">Empty States</h2>
+<p class="sec-sub">Empty states have personality — but only the right kind. A first-time "My Bets" screen is an invitation: animate it in warmly. An empty search result is neutral: appear quietly. An empty state from a destructive action (bet expired, promo claimed) is loss: animate it in with even less fanfare than a loss state. Shopify Polaris and Atlassian both define these three distinct emotional tones for empty states.</p>
+<div style="display:flex;gap:10px;margin-bottom:20px;">
+  <button class="play-btn" onclick="showEmpty('first')">👋 First-time</button>
+  <button class="play-btn" onclick="showEmpty('search')" style="background:var(--s3);color:var(--t2);border:1px solid var(--border);">🔍 No results</button>
+  <button class="play-btn" onclick="showEmpty('expired')" style="background:var(--s3);color:var(--t2);border:1px solid var(--border);">💨 Expired</button>
+</div>
+<div class="screen-layout">
+  <div>
+    <div class="phone" id="phone-empty">
+      <div class="phone-notch"><div class="phone-dot"></div></div>
+      <div class="phone-screen" style="height:430px;overflow:hidden;position:relative;">
+        <div style="height:44px;background:var(--s1);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 14px;">
+          <div style="width:54px;height:8px;background:var(--blue);border-radius:3px;opacity:.6;"></div>
+          <div style="width:22px;height:22px;background:var(--s3);border-radius:50%;"></div>
+        </div>
+        <!-- tab row -->
+        <div style="display:flex;gap:0;padding:0 14px;margin-top:10px;margin-bottom:2px;">
+          <div style="font-size:9px;font-weight:700;color:var(--blue);border-bottom:2px solid var(--blue);padding-bottom:5px;margin-right:14px;">Pending</div>
+          <div style="font-size:9px;font-weight:700;color:var(--t3);padding-bottom:5px;">Settled</div>
+        </div>
+        <div style="height:1px;background:var(--border);margin-bottom:0;"></div>
+        <!-- EMPTY STATE CONTAINER -->
+        <div id="empty-stage" style="position:absolute;top:100px;left:0;right:0;bottom:50px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:20px;">
+          <div id="empty-icon" style="width:48px;height:48px;background:var(--s3);border-radius:12px;opacity:0;transform:scale(.7);"></div>
+          <div id="empty-line1" style="width:120px;height:8px;background:var(--s4);border-radius:4px;opacity:0;transform:translateY(8px);"></div>
+          <div id="empty-line2" style="width:90px;height:6px;background:var(--s3);border-radius:4px;opacity:0;transform:translateY(8px);"></div>
+          <div id="empty-cta" style="margin-top:4px;width:110px;height:32px;background:var(--bs);border:1px solid var(--ba);border-radius:8px;opacity:0;transform:translateY(8px);"></div>
+        </div>
+        <!-- BOTTOM TAB BAR -->
+        <div style="position:absolute;bottom:0;left:0;right:0;height:50px;background:var(--s1);border-top:1px solid var(--border);display:flex;">
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;"><div style="width:18px;height:13px;background:var(--s3);border-radius:3px;"></div><div style="font-size:6px;letter-spacing:.6px;color:var(--t3);font-weight:700;">HOME</div></div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;"><div style="width:18px;height:13px;background:var(--s3);border-radius:3px;"></div><div style="font-size:6px;letter-spacing:.6px;color:var(--t3);font-weight:700;">LIVE</div></div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;"><div style="width:18px;height:13px;background:rgba(20,147,255,.25);border-radius:3px;border:1px solid rgba(20,147,255,.4);"></div><div style="font-size:6px;letter-spacing:.6px;color:var(--blue);font-weight:700;">MY BETS</div></div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;"><div style="width:18px;height:13px;background:var(--s3);border-radius:3px;"></div><div style="font-size:6px;letter-spacing:.6px;color:var(--t3);font-weight:700;">PROMOS</div></div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;"><div style="width:18px;height:13px;background:var(--s3);border-radius:3px;"></div><div style="font-size:6px;letter-spacing:.6px;color:var(--t3);font-weight:700;">ACCOUNT</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="callout-panel">
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gos);color:var(--gold);">1</div>
+        <div class="callout-text"><div class="callout-el">First-time — invitation</div><div class="callout-curve">fd.release · 440ms · icon first · text stagger</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">A first-time empty My Bets screen is an opportunity to delight. The icon bounces in with fd.release (slight overshoot), then text and CTA stagger in below. The CTA block is animated last — after the context has landed. This is the highest expressiveness level appropriate for an empty state.</div>
+        <div class="callout-code">// Icon: fd.release<br>scale.value = withTiming(1, { duration: 440,<br>  easing: Easing.bezier(0.34, 1.45, 0.64, 1) })<br>// Text: staggered fd.kick<br>opacity.value = withDelay(120 + i * 60,<br>  withTiming(1, { duration: 280,<br>    easing: Easing.bezier(0,0,0.06,1) }))</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gs);color:var(--green);">2</div>
+        <div class="callout-text"><div class="callout-el">No results — neutral</div><div class="callout-curve">fd.kick · 240ms · opacity + translateY · no bounce</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">A no-results empty state appears after a search or filter action. No bounce — the user is already frustrated, don't add theatrical motion. Simple fade+slide in on fd.kick. Elements animate as a unit (not staggered) to feel quiet. Duration shorter than first-time empty.</div>
+        <div class="callout-code">// Everything as one unit<br>opacity.value = withTiming(1, {<br>  duration: 240,<br>  easing: Easing.bezier(0, 0, 0.06, 1)<br>})<br>translateY.value = withTiming(0, {<br>  duration: 240,<br>  easing: Easing.bezier(0, 0, 0.06, 1)<br>})</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--bs);color:var(--blue);">3</div>
+        <div class="callout-text"><div class="callout-el">Expired / cleared — quiet</div><div class="callout-curve">opacity only · 200ms · linear · no translate</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">When bets expire or a promo is claimed, the empty state appears after content leaves. Opacity crossfade only — no translate, no scale. This is the quietest empty state: the content has gone, now the absence is simply acknowledged. Respect the emotional context.</div>
+        <div class="callout-code">// Crossfade: content → empty<br>contentOpacity.value = withTiming(0, {<br>  duration: 180,<br>  easing: Easing.in(Easing.quad)<br>})<br>emptyOpacity.value = withDelay(100,<br>  withTiming(1, {<br>    duration: 200,<br>    easing: Easing.linear<br>  })<br>)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════════════════
   COMPONENTS
 ══════════════════════════════════════════════════════ -->
 <span id="c-buttons"></span>
@@ -1666,7 +2238,7 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
 
 <script>
 // ── NAV ─────────────────────────────────────────────
-const ids=['curves','s-lobby','s-detail','s-betslip','s-live','s-win','s-parlay','s-mybets','s-search','c-buttons','c-odds','c-tabs','c-sheet','c-toast','tokens'];
+const ids=['curves','s-lobby','s-detail','s-betslip','s-live','s-win','s-parlay','s-mybets','s-search','p-loading','p-redumo','p-shared','p-error','p-gesture','p-empty','c-buttons','c-odds','c-tabs','c-sheet','c-toast','tokens'];
 window.addEventListener('scroll',()=>{
   let cur=ids[0];
   ids.forEach(id=>{const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<140)cur=id;});
@@ -1919,6 +2491,273 @@ function flashDemo(col,dir){
     wrap.style.animation='oddsPillDn .5s ease both';
     wrap.style.color='var(--red)';
     setTimeout(()=>wrap.style.color='',900);
+  }
+}
+
+// ── LOADING STATES ────────────────────────────────────
+let loadingDone = false;
+function playLoading() {
+  if (loadingDone) { resetLoading(); setTimeout(playLoading, 60); return; }
+  loadingDone = true;
+  const skels = document.querySelectorAll('.loading-skel');
+  const rows = document.querySelectorAll('.loading-row');
+  const content = document.querySelector('.loading-content');
+  // stop shimmer, fade skels
+  skels.forEach(s => {
+    s.style.transition = 'opacity .2s ease-in';
+    s.style.opacity = '0';
+  });
+  rows.forEach((r, i) => {
+    r.style.transition = `opacity .24s cubic-bezier(0,0,0.06,1) ${i*40+160}ms`;
+    r.style.opacity = '0';
+  });
+  // content fades in
+  setTimeout(() => {
+    content.style.transition = 'opacity .28s cubic-bezier(0,0,0.06,1)';
+    content.style.opacity = '1';
+  }, 200);
+}
+function resetLoading() {
+  loadingDone = false;
+  const skels = document.querySelectorAll('.loading-skel');
+  const rows = document.querySelectorAll('.loading-row');
+  const content = document.querySelector('.loading-content');
+  skels.forEach(s => { s.style.transition = 'none'; s.style.opacity = '1'; });
+  rows.forEach(r => { r.style.transition = 'none'; r.style.opacity = '1'; });
+  content.style.transition = 'none'; content.style.opacity = '0';
+}
+
+// ── REDUCED MOTION ────────────────────────────────────
+let reducedMotion = false;
+let redumoContent = false;
+function toggleReducedMotion() {
+  reducedMotion = !reducedMotion;
+  const btn = document.getElementById('redumo-btn');
+  const label = document.getElementById('redumo-label');
+  const content = document.getElementById('redumo-content');
+  btn.textContent = reducedMotion ? '✓ Reduced motion on' : '⚡ Enable reduced motion';
+  btn.style.background = reducedMotion ? 'var(--purple)' : 'var(--blue)';
+  label.textContent = reducedMotion ? 'Reduced motion mode — opacity only' : 'Full animation mode';
+  if (reducedMotion) {
+    // opacity only, no translate
+    content.style.transition = 'opacity .17s linear';
+    content.style.opacity = '1';
+    content.style.transform = 'none';
+  } else {
+    content.style.transition = 'opacity .34s cubic-bezier(0,0,0.06,1), transform .34s cubic-bezier(0,0,0.06,1)';
+    content.style.opacity = '0';
+    setTimeout(() => {
+      content.style.transition = 'opacity .34s cubic-bezier(0,0,0.06,1), transform .34s cubic-bezier(0,0,0.06,1)';
+      content.style.transform = 'translateY(10px)';
+      void content.offsetWidth;
+      content.style.opacity = '1';
+      content.style.transform = 'none';
+    }, 100);
+  }
+}
+// init redumo content visible
+window.addEventListener('load', () => {
+  const c = document.getElementById('redumo-content');
+  if (c) { c.style.transition = 'none'; c.style.opacity = '1'; }
+});
+
+// ── SHARED ELEMENT ────────────────────────────────────
+let sharedExpanded = false;
+function playShared() {
+  if (sharedExpanded) return;
+  sharedExpanded = true;
+  const lobby = document.getElementById('shared-lobby');
+  const card = document.getElementById('shared-card-expand');
+  const nav = document.getElementById('shared-detail-nav');
+  const content = document.getElementById('shared-detail-content');
+  // fade lobby
+  lobby.style.transition = 'opacity .18s ease';
+  lobby.style.opacity = '0';
+  lobby.style.pointerEvents = 'none';
+  // card expands from card position to full screen
+  card.style.transition = 'none';
+  card.style.opacity = '1';
+  card.style.pointerEvents = 'all';
+  card.style.left = '12px'; card.style.right = '12px';
+  card.style.top = '88px'; card.style.bottom = 'auto';
+  card.style.borderRadius = '10px';
+  void card.offsetWidth;
+  card.style.transition = 'all .32s cubic-bezier(.4,0,.1,1), border-radius .32s cubic-bezier(.4,0,.1,1)';
+  card.style.left = '0'; card.style.right = '0';
+  card.style.top = '0'; card.style.bottom = '0';
+  card.style.borderRadius = '0';
+  // detail content fades in
+  setTimeout(() => {
+    nav.style.transition = 'opacity .15s linear';
+    nav.style.opacity = '1';
+    setTimeout(() => {
+      content.style.transition = 'opacity .2s cubic-bezier(0,0,0.06,1)';
+      content.style.opacity = '1';
+    }, 80);
+  }, 120);
+}
+function resetShared() {
+  sharedExpanded = false;
+  const lobby = document.getElementById('shared-lobby');
+  const card = document.getElementById('shared-card-expand');
+  const nav = document.getElementById('shared-detail-nav');
+  const content = document.getElementById('shared-detail-content');
+  card.style.transition = 'all .26s cubic-bezier(.4,0,1,1), border-radius .26s';
+  card.style.left = '12px'; card.style.right = '12px';
+  card.style.top = '88px'; card.style.bottom = 'auto';
+  card.style.borderRadius = '10px';
+  nav.style.opacity = '0'; content.style.opacity = '0';
+  setTimeout(() => {
+    card.style.opacity = '0';
+    card.style.pointerEvents = 'none';
+    lobby.style.transition = 'opacity .18s ease';
+    lobby.style.opacity = '1';
+    lobby.style.pointerEvents = 'all';
+  }, 220);
+}
+
+// ── ERROR STATES ──────────────────────────────────────
+let errorActive = false;
+function playError(type) {
+  if (errorActive) { resetError(); setTimeout(() => playError(type), 80); return; }
+  errorActive = true;
+  const card = document.getElementById('err-card');
+  const cta = document.getElementById('err-cta');
+  const banner = document.getElementById('err-banner');
+  const oddsBanner = document.getElementById('err-odds-banner');
+  const oddsVal = document.getElementById('err-odds-val');
+  if (type === 'fail') {
+    // shake animation
+    let x = 0;
+    const steps = [-8, 8, -6, 6, -4, 4, 2, -2, 0];
+    let i = 0;
+    cta.style.background = 'var(--red)';
+    cta.style.color = '#fff';
+    const shake = setInterval(() => {
+      if (i >= steps.length) { clearInterval(shake); card.style.transform = 'none'; } else {
+        card.style.transform = `translateX(${steps[i]}px)`;
+        i++;
+      }
+    }, 50);
+    // error banner
+    setTimeout(() => {
+      banner.style.transition = 'opacity .28s cubic-bezier(0,0,0.06,1), transform .28s cubic-bezier(0,0,0.06,1)';
+      banner.style.opacity = '1'; banner.style.transform = 'none';
+    }, 80);
+  } else {
+    // odds changed
+    oddsVal.style.transition = 'background .3s ease';
+    oddsVal.style.background = 'var(--gold)';
+    oddsVal.style.color = '#1A0900';
+    oddsVal.textContent = '-155';
+    oddsVal.style.transform = 'scale(1.2)';
+    setTimeout(() => { oddsVal.style.transition += ', transform .44s cubic-bezier(.34,1.45,.64,1)'; oddsVal.style.transform = 'scale(1)'; }, 50);
+    setTimeout(() => {
+      oddsBanner.style.transition = 'opacity .28s cubic-bezier(0,0,0.06,1), transform .28s cubic-bezier(0,0,0.06,1)';
+      oddsBanner.style.opacity = '1'; oddsBanner.style.transform = 'none';
+      cta.textContent = 'Accept New Odds →';
+      cta.style.background = 'var(--gold)'; cta.style.color = '#1A0900';
+    }, 100);
+  }
+}
+function resetError() {
+  errorActive = false;
+  const card = document.getElementById('err-card');
+  const cta = document.getElementById('err-cta');
+  const banner = document.getElementById('err-banner');
+  const oddsBanner = document.getElementById('err-odds-banner');
+  const oddsVal = document.getElementById('err-odds-val');
+  card.style.transform = 'none';
+  cta.style.background = 'var(--green)'; cta.style.color = '#021A0E';
+  cta.textContent = 'Place Bet →';
+  banner.style.transition = 'none'; banner.style.opacity = '0'; banner.style.transform = 'translateY(-8px)';
+  oddsBanner.style.transition = 'none'; oddsBanner.style.opacity = '0'; oddsBanner.style.transform = 'translateY(-8px)';
+  oddsVal.style.background = 'var(--blue)'; oddsVal.style.color = '#fff'; oddsVal.textContent = '-140';
+  oddsVal.style.transform = 'scale(1)';
+}
+
+// ── GESTURE CONTINUITY ────────────────────────────────
+let gestSheet = false;
+function playGesture(type) {
+  const backdrop = document.getElementById('gest-backdrop');
+  const sheet = document.getElementById('gest-sheet');
+  if (type === 'dismiss' && !gestSheet) {
+    // open first
+    backdrop.style.background = 'rgba(0,0,0,.45)';
+    sheet.style.transition = 'transform .34s cubic-bezier(0,0,.06,1)';
+    sheet.style.transform = 'translateY(0)';
+    gestSheet = true;
+  } else if (type === 'dismiss' && gestSheet) {
+    // dismiss with velocity feel
+    sheet.style.transition = 'transform .22s cubic-bezier(.4,0,1,1)';
+    sheet.style.transform = 'translateY(100%)';
+    backdrop.style.transition = 'background .2s ease';
+    backdrop.style.background = 'rgba(0,0,0,0)';
+    gestSheet = false;
+  } else if (type === 'snap') {
+    // snap back from mid-drag
+    backdrop.style.background = 'rgba(0,0,0,.45)';
+    sheet.style.transition = 'none';
+    sheet.style.transform = 'translateY(50%)';
+    void sheet.offsetWidth;
+    sheet.style.transition = 'transform .4s cubic-bezier(.34,1.2,.64,1)';
+    sheet.style.transform = 'translateY(0)';
+    gestSheet = true;
+  }
+}
+function resetGesture() {
+  const backdrop = document.getElementById('gest-backdrop');
+  const sheet = document.getElementById('gest-sheet');
+  backdrop.style.transition = 'none'; backdrop.style.background = 'rgba(0,0,0,0)';
+  sheet.style.transition = 'none'; sheet.style.transform = 'translateY(100%)';
+  gestSheet = false;
+}
+
+// ── EMPTY STATES ──────────────────────────────────────
+function showEmpty(type) {
+  const icon = document.getElementById('empty-icon');
+  const l1 = document.getElementById('empty-line1');
+  const l2 = document.getElementById('empty-line2');
+  const cta = document.getElementById('empty-cta');
+  // reset
+  [icon, l1, l2, cta].forEach(el => {
+    el.style.transition = 'none';
+    el.style.opacity = '0';
+  });
+  icon.style.transform = 'scale(.7)';
+  l1.style.transform = 'translateY(8px)'; l2.style.transform = 'translateY(8px)'; cta.style.transform = 'translateY(8px)';
+  // set colours
+  if (type === 'first') {
+    icon.style.background = 'rgba(20,147,255,.2)'; icon.style.border = '1px solid rgba(20,147,255,.3)';
+    cta.style.background = 'var(--bs)'; cta.style.border = '1px solid var(--ba)';
+  } else if (type === 'search') {
+    icon.style.background = 'var(--s3)'; icon.style.border = '1px solid var(--border)';
+    cta.style.background = 'var(--s3)'; cta.style.border = '1px solid var(--border)';
+  } else {
+    icon.style.background = 'var(--s3)'; icon.style.border = '1px solid var(--border)';
+    cta.style.opacity = '0'; cta.style.pointerEvents = 'none';
+  }
+  void icon.offsetWidth;
+  if (type === 'first') {
+    // fd.release bounce on icon
+    icon.style.transition = 'opacity .2s, transform .44s cubic-bezier(0.34,1.45,0.64,1)';
+    icon.style.opacity = '1'; icon.style.transform = 'scale(1)';
+    [l1, l2, cta].forEach((el, i) => {
+      el.style.transition = `opacity .28s cubic-bezier(0,0,0.06,1) ${120+i*60}ms, transform .28s cubic-bezier(0,0,0.06,1) ${120+i*60}ms`;
+      el.style.opacity = '1'; el.style.transform = 'none';
+    });
+  } else if (type === 'search') {
+    // fd.kick, as one unit
+    [icon, l1, l2, cta].forEach(el => {
+      el.style.transition = 'opacity .24s cubic-bezier(0,0,0.06,1), transform .24s cubic-bezier(0,0,0.06,1)';
+      el.style.opacity = '1'; el.style.transform = 'none';
+    });
+  } else {
+    // opacity only crossfade
+    [icon, l1, l2].forEach(el => {
+      el.style.transition = 'opacity .2s linear';
+      el.style.transform = 'none'; el.style.opacity = '1';
+    });
   }
 }
 
