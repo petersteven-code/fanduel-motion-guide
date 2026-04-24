@@ -1,0 +1,1986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>FanDuel · Motion Guide</title>
+<style>
+:root{
+  --bg:#0B1220;--s1:#131C2E;--s2:#192538;--s3:#1F2E44;--s4:#263550;
+  --border:#1E2D45;--b2:#273A58;
+  --blue:#1493FF;--bs:rgba(20,147,255,.1);--ba:rgba(20,147,255,.2);
+  --green:#00C87A;--gs:rgba(0,200,122,.1);--ga:rgba(0,200,122,.2);
+  --gold:#F5A623;--gos:rgba(245,166,35,.1);--goa:rgba(245,166,35,.2);
+  --red:#FF4D6A;--rs:rgba(255,77,106,.1);
+  --purple:#9B72FF;--ps:rgba(155,114,255,.1);
+  --text:#EDF2FF;--t2:#7E8FA8;--t3:#3B4D66;
+  --font:-apple-system,'Inter',sans-serif;--mono:'SF Mono','Fira Code',Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--font);line-height:1.5;}
+
+/* ── LAYOUT ── */
+.shell{display:flex;min-height:100vh;}
+nav{width:216px;flex-shrink:0;background:var(--s1);border-right:1px solid var(--border);
+  position:sticky;top:0;height:100vh;overflow-y:auto;padding:24px 0;scrollbar-width:none;}
+nav::-webkit-scrollbar{display:none;}
+.nl{padding:0 18px 20px;border-bottom:1px solid var(--border);margin-bottom:10px;}
+.nl-m{font-size:15px;font-weight:800;color:var(--blue);}
+.nl-s{font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:1.2px;margin-top:2px;}
+.ng{margin-bottom:2px;}
+.ngl{font-size:9px;text-transform:uppercase;letter-spacing:1.8px;color:var(--t3);font-weight:700;padding:9px 18px 3px;}
+.na{display:block;padding:6px 18px;font-size:12px;color:var(--t2);text-decoration:none;
+  border-left:2px solid transparent;transition:all .12s;}
+.na:hover{color:var(--text);background:rgba(20,147,255,.05);}
+.na.on{color:var(--blue);border-left-color:var(--blue);background:rgba(20,147,255,.07);font-weight:500;}
+
+main{flex:1;max-width:940px;padding:52px 52px 100px;}
+
+/* ── TYPE ── */
+.eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--blue);font-weight:700;margin-bottom:10px;}
+.page-title{font-size:40px;font-weight:900;letter-spacing:-1.5px;line-height:1.05;margin-bottom:12px;}
+.page-lead{font-size:15px;color:var(--t2);line-height:1.7;max-width:520px;margin-bottom:52px;}
+.sec-label{font-size:9px;text-transform:uppercase;letter-spacing:2px;color:var(--t3);font-weight:700;margin-bottom:12px;}
+.sec-head{font-size:26px;font-weight:800;letter-spacing:-.5px;margin-bottom:8px;}
+.sec-sub{font-size:13px;color:var(--t2);line-height:1.65;max-width:540px;margin-bottom:28px;}
+.divider{height:1px;background:var(--border);margin:52px 0;}
+
+/* ── CURVE CHIPS ── */
+.curve-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px;}
+.curve-chip{display:flex;align-items:center;gap:8px;background:var(--s1);border:1px solid var(--border);
+  border-radius:10px;padding:10px 14px;cursor:default;}
+.cc-icon{font-size:16px;}
+.cc-name{font-size:12px;font-weight:700;}
+.cc-val{font-size:10px;color:var(--t2);font-family:var(--mono);}
+.cc-badge{font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;text-transform:uppercase;letter-spacing:.8px;}
+
+/* ── SCREEN LAYOUT ── */
+.screen-layout{display:grid;grid-template-columns:auto 1fr;gap:32px;margin-bottom:0;align-items:start;}
+
+/* ── PHONE FRAME ── */
+.phone{width:258px;flex-shrink:0;background:var(--bg);border:1.5px solid var(--b2);
+  border-radius:28px;overflow:hidden;position:relative;box-shadow:0 24px 64px rgba(0,0,0,.5);}
+.phone-notch{height:8px;background:var(--s1);display:flex;align-items:center;justify-content:center;
+  padding-top:4px;}
+.phone-dot{width:50px;height:4px;background:var(--s2);border-radius:2px;}
+.phone-screen{background:var(--bg);overflow:hidden;position:relative;}
+
+/* ── CALLOUT PANEL ── */
+.callout-panel{display:flex;flex-direction:column;gap:8px;padding-top:8px;}
+.callout-item{background:var(--s1);border:1px solid var(--border);border-radius:12px;
+  overflow:hidden;cursor:pointer;transition:border-color .15s;}
+.callout-item:hover{border-color:var(--b2);}
+.callout-item.active{border-color:var(--blue);}
+.callout-head{display:flex;align-items:center;gap:10px;padding:12px 14px;}
+.callout-num{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-size:10px;font-weight:800;flex-shrink:0;}
+.callout-text{flex:1;}
+.callout-el{font-size:12px;font-weight:700;margin-bottom:1px;}
+.callout-curve{font-size:10px;font-family:var(--mono);color:var(--blue);}
+.callout-body{display:none;padding:0 14px 12px 46px;}
+.callout-body.open{display:block;}
+.callout-desc{font-size:11px;color:var(--t2);line-height:1.6;margin-bottom:8px;}
+.callout-code{background:var(--bg);border-radius:7px;padding:9px 11px;font-family:var(--mono);
+  font-size:10px;color:#82AAFF;line-height:1.7;}
+
+/* play button */
+.play-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;
+  font-size:12px;font-weight:700;cursor:pointer;border:none;font-family:var(--font);
+  background:var(--blue);color:#fff;margin-bottom:20px;transition:opacity .15s;}
+.play-btn:hover{opacity:.85;}
+.reset-btn{background:var(--s3);color:var(--t2);border:1px solid var(--border);}
+
+/* ── PHONE UI ELEMENTS ── */
+.p-topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 14px 8px;
+  background:var(--s1);}
+.p-logo{font-size:13px;font-weight:900;color:var(--blue);}
+.p-icons{display:flex;gap:10px;}
+.p-icon{width:18px;height:18px;border-radius:50%;background:var(--s2);}
+
+.p-tabs{display:flex;background:var(--s1);padding:0 14px;gap:0;border-bottom:1px solid var(--border);}
+.p-tab{padding:8px 10px;font-size:10px;font-weight:700;color:var(--t2);position:relative;white-space:nowrap;}
+.p-tab.on{color:var(--blue);}
+.p-tab.on::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--blue);border-radius:1px;}
+.p-tab-pill{display:inline-block;background:var(--s3);border-radius:20px;padding:5px 10px;
+  font-size:10px;font-weight:700;color:var(--t2);margin:0 3px;}
+.p-tab-pill.on{background:var(--blue);color:#fff;}
+
+.p-featured{margin:12px;border-radius:12px;overflow:hidden;position:relative;background:var(--s2);}
+.p-featured-img{height:72px;background:linear-gradient(135deg,#0D2040,#1A1040);
+  display:flex;align-items:center;justify-content:space-between;padding:10px 14px;}
+.p-team-name{font-size:11px;font-weight:800;}
+.p-vs{font-size:9px;color:var(--t2);}
+.p-featured-odds{display:flex;gap:6px;padding:8px 10px;}
+.p-odds-pill{flex:1;padding:7px;background:var(--bs);border:1px solid var(--ba);border-radius:7px;
+  text-align:center;font-size:11px;font-weight:700;color:var(--blue);cursor:pointer;transition:all .12s;}
+.p-odds-pill.sel{background:var(--blue);color:#fff;border-color:var(--blue);}
+.p-odds-pill.up{animation:oddsPillUp .5s ease both;}
+.p-odds-pill.dn{animation:oddsPillDn .5s ease both;}
+@keyframes oddsPillUp{0%{background:rgba(0,200,122,.3);transform:translateY(-2px)}100%{background:var(--bs);transform:none}}
+@keyframes oddsPillDn{0%{background:rgba(255,77,106,.25);transform:translateY(2px)}100%{background:var(--bs);transform:none}}
+
+.p-game-row{display:flex;align-items:center;justify-content:space-between;
+  padding:8px 14px;border-bottom:1px solid var(--border);cursor:pointer;}
+.p-game-row:hover{background:var(--s1);}
+.p-teams{font-size:10px;}
+.p-team-a{font-weight:700;margin-bottom:2px;}
+.p-team-b{color:var(--t2);}
+.p-game-time{font-size:9px;color:var(--t2);margin-top:2px;}
+.p-row-odds{display:flex;gap:5px;}
+.p-mini-pill{padding:5px 7px;background:var(--bs);border:1px solid var(--ba);border-radius:5px;
+  font-size:9px;font-weight:700;color:var(--blue);cursor:pointer;transition:all .15s;}
+.p-mini-pill.sel{background:var(--blue);color:#fff;}
+.p-mini-pill:active{transform:scale(.94);}
+
+.p-market-section{padding:6px 12px 2px;}
+.p-market-label{font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--t3);font-weight:700;margin-bottom:5px;}
+.p-market-row{display:flex;gap:5px;margin-bottom:6px;}
+.p-market-pill{flex:1;padding:7px 6px;background:var(--bs);border:1px solid var(--ba);
+  border-radius:7px;text-align:center;cursor:pointer;transition:all .12s;}
+.p-market-pill.sel{background:var(--blue);border-color:var(--blue);}
+.p-mp-label{font-size:9px;color:var(--t2);margin-bottom:1px;}
+.p-mp-val{font-size:11px;font-weight:800;color:var(--blue);}
+.p-market-pill.sel .p-mp-label,.p-market-pill.sel .p-mp-val{color:#fff;}
+
+.p-live-badge{display:inline-flex;align-items:center;gap:4px;background:rgba(255,77,106,.12);
+  border:1px solid rgba(255,77,106,.3);border-radius:20px;padding:3px 8px;font-size:9px;
+  font-weight:700;color:var(--red);}
+.p-live-dot{width:5px;height:5px;border-radius:50%;background:var(--red);
+  animation:livePulse 1.2s ease-in-out infinite;}
+@keyframes livePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
+
+.p-score-row{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;
+  background:var(--s1);}
+.p-score-team{text-align:center;}
+.p-score-name{font-size:9px;color:var(--t2);font-weight:600;text-transform:uppercase;letter-spacing:.5px;}
+.p-score-num{font-size:22px;font-weight:900;letter-spacing:-1px;}
+.p-score-sep{font-size:12px;color:var(--t3);}
+.p-quarter{font-size:9px;color:var(--red);font-weight:700;text-align:center;}
+
+.p-sheet-overlay{position:absolute;inset:0;background:rgba(0,0,0,.55);opacity:0;
+  pointer-events:none;transition:opacity .28s ease;z-index:10;}
+.p-sheet-overlay.on{opacity:1;pointer-events:all;}
+.p-sheet{position:absolute;bottom:0;left:0;right:0;background:var(--s2);
+  border-radius:16px 16px 0 0;padding:12px 14px 16px;transform:translateY(100%);
+  transition:transform .35s cubic-bezier(0,0,.06,1);z-index:11;}
+.p-sheet.on{transform:translateY(0);}
+.p-sheet-handle{width:28px;height:3px;background:var(--b2);border-radius:2px;margin:0 auto 10px;}
+.p-sheet-title{font-size:12px;font-weight:800;margin-bottom:8px;}
+.p-sheet-row{display:flex;justify-content:space-between;font-size:10px;margin-bottom:5px;}
+.p-sheet-row span:first-child{color:var(--t2);}
+.p-sheet-row span:last-child{font-weight:700;}
+.p-sheet-input{width:100%;background:var(--bg);border:1px solid var(--b2);border-radius:7px;
+  padding:7px 10px;color:var(--text);font-size:13px;font-weight:700;outline:none;margin:8px 0 3px;
+  font-family:var(--font);}
+.p-sheet-input:focus{border-color:var(--blue);}
+.p-sheet-payout{font-size:10px;color:var(--green);font-weight:600;margin-bottom:10px;}
+.p-sheet-cta{width:100%;padding:10px;background:var(--green);color:#021A0E;font-size:12px;
+  font-weight:800;border:none;border-radius:8px;cursor:pointer;font-family:var(--font);
+  transition:transform .1s;}
+.p-sheet-cta:active{transform:scale(.97);}
+.p-sheet-success{position:absolute;inset:0;background:var(--s2);border-radius:16px 16px 0 0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  opacity:0;pointer-events:none;}
+.p-sheet-success.on{opacity:1;pointer-events:all;animation:successPop .44s cubic-bezier(.34,1.45,.64,1) both;}
+@keyframes successPop{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:none}}
+.p-check{width:48px;height:48px;background:var(--green);border-radius:50%;display:flex;
+  align-items:center;justify-content:center;font-size:22px;position:relative;
+  animation:checkB .45s cubic-bezier(.34,1.45,.64,1) .07s both;}
+@keyframes checkB{from{transform:scale(0)}to{transform:none}}
+.p-ring{position:absolute;width:48px;height:48px;border:2px solid var(--green);border-radius:50%;
+  animation:ringE .5s ease-out .15s both;}
+@keyframes ringE{from{transform:scale(1);opacity:1}to{transform:scale(2.2);opacity:0}}
+.p-success-txt{font-size:12px;font-weight:700;color:var(--green);animation:fadeUp .28s ease .3s both;}
+.p-success-sub{font-size:10px;color:var(--t2);animation:fadeUp .28s ease .4s both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+/* win screen */
+.p-win-screen{position:absolute;inset:0;background:var(--bg);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:8px;opacity:0;transform:translateY(20px);}
+.p-win-screen.on{opacity:1;transform:none;}
+.p-win-card{background:var(--s1);border:1px solid var(--b2);border-radius:14px;
+  padding:22px 28px;text-align:center;opacity:0;transform:scale(.8);}
+.p-win-card.on{animation:crowdPop .52s cubic-bezier(.34,1.8,.64,1) both;opacity:1;}
+@keyframes crowdPop{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:none}}
+.p-win-amount{font-size:34px;font-weight:900;letter-spacing:-1px;color:var(--gold);}
+.p-win-label{font-size:9px;text-transform:uppercase;letter-spacing:2px;color:var(--t2);
+  margin-top:2px;font-weight:600;}
+.p-win-cta{margin-top:14px;padding:8px 20px;background:var(--gold);color:#1A0900;border:none;
+  border-radius:7px;font-size:11px;font-weight:800;cursor:pointer;font-family:var(--font);
+  animation:fadeUp .28s ease .65s both;opacity:0;}
+
+/* confetti */
+.conf{position:absolute;width:6px;height:6px;border-radius:2px;pointer-events:none;
+  animation:confFall linear both;}
+@keyframes confFall{0%{transform:translateY(-8px) rotate(0deg);opacity:1}
+  100%{transform:translateY(280px) rotate(540deg);opacity:0}}
+
+/* skeleton */
+.skel{background:var(--s3);border-radius:4px;animation:skelPulse 1.4s ease-in-out infinite alternate;}
+@keyframes skelPulse{from{opacity:1}to{opacity:.3}}
+
+/* ── COMPONENTS SECTION ── */
+.comp-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:0;}
+.comp-card{background:var(--s1);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
+.comp-head{padding:16px 18px;border-bottom:1px solid var(--border);}
+.comp-name{font-size:14px;font-weight:700;margin-bottom:3px;}
+.comp-curve{font-size:10px;font-family:var(--mono);color:var(--blue);}
+.comp-stage{padding:24px 18px;background:var(--bg);min-height:100px;display:flex;
+  align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;}
+.comp-note{padding:10px 18px;font-size:11px;color:var(--t2);line-height:1.5;
+  border-top:1px solid var(--border);}
+
+/* state labels */
+.state-label{font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--t3);
+  font-weight:600;text-align:center;margin-top:4px;}
+.state-col{display:flex;flex-direction:column;align-items:center;gap:4px;}
+
+/* button states */
+.s-btn{padding:9px 16px;border-radius:8px;font-size:12px;font-weight:700;border:none;
+  font-family:var(--font);cursor:pointer;background:var(--green);color:#021A0E;transition:all .1s;}
+.s-btn:active{transform:scale(.96);}
+.s-btn-press{transform:scale(.96);opacity:.9;}
+.s-btn-loading{background:var(--s3);color:var(--t2);position:relative;overflow:hidden;}
+.s-btn-success{background:var(--green);color:#021A0E;}
+.s-btn-error{background:var(--rs);border:1px solid var(--red);color:var(--red);}
+
+/* shimmer */
+.shimmer-wrap{position:relative;overflow:hidden;}
+.shimmer-wrap::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.06) 50%,transparent 100%);
+  animation:shimmer 1.2s linear infinite;}
+@keyframes shimmer{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+
+/* odds pill states */
+.o-pill{padding:8px 12px;border-radius:8px;font-size:13px;font-weight:800;cursor:pointer;
+  text-align:center;transition:all .15s;}
+.o-idle{background:var(--bs);border:1px solid var(--ba);color:var(--blue);}
+.o-selected{background:var(--blue);color:#fff;}
+.o-up{background:rgba(0,200,122,.2);border:1px solid var(--ga);color:var(--green);}
+.o-down{background:rgba(255,77,106,.15);border:1px solid rgba(255,77,106,.3);color:var(--red);}
+.o-suspended{background:var(--s3);border:1px solid var(--border);color:var(--t3);cursor:not-allowed;}
+
+/* toast */
+.toast{display:flex;align-items:center;gap:10px;background:var(--s2);border:1px solid var(--b2);
+  border-radius:10px;padding:10px 14px;font-size:11px;font-weight:600;width:200px;
+  transform:translateY(0);opacity:1;}
+.toast-icon{font-size:16px;flex-shrink:0;}
+
+/* code */
+.code-wrap{background:#060B18;border:1px solid var(--border);border-radius:12px;
+  padding:18px;margin-top:16px;}
+.code-lang{font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:var(--t3);
+  font-weight:700;margin-bottom:8px;}
+pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflow-x:auto;}
+.ck{color:#C792EA}.cf{color:#82AAFF}.cn{color:#F78C6C}.cs{color:#C3E88D}.cc{color:#3D5C3D}
+
+/* stagger helpers */
+.stagger-0{animation-delay:0ms!important;}
+.stagger-1{animation-delay:50ms!important;}
+.stagger-2{animation-delay:100ms!important;}
+.stagger-3{animation-delay:150ms!important;}
+.stagger-4{animation-delay:200ms!important;}
+
+@keyframes pendingBreath{0%,100%{opacity:1}50%{opacity:.55}}
+
+@media(max-width:820px){nav{display:none;}main{padding:28px 18px 60px;}
+  .screen-layout{grid-template-columns:1fr;}.comp-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<!-- NAV -->
+<nav>
+  <div class="nl"><div class="nl-m">FanDuel</div><div class="nl-s">Motion Guide · v3</div></div>
+  <div class="ng"><div class="ngl">Foundation</div>
+    <a class="na on" href="#curves">The 6 curves</a>
+  </div>
+  <div class="ng"><div class="ngl">App Screens</div>
+    <a class="na" href="#s-lobby">Lobby</a>
+    <a class="na" href="#s-detail">Game Detail</a>
+    <a class="na" href="#s-betslip">Bet Slip</a>
+    <a class="na" href="#s-live">Live Betting</a>
+    <a class="na" href="#s-win">Win State</a>
+    <a class="na" href="#s-parlay">Parlay Builder</a>
+    <a class="na" href="#s-mybets">My Bets</a>
+    <a class="na" href="#s-search">Search</a>
+  </div>
+  <div class="ng"><div class="ngl">Components</div>
+    <a class="na" href="#c-buttons">Buttons</a>
+    <a class="na" href="#c-odds">Odds Pills</a>
+    <a class="na" href="#c-tabs">Tab Bar</a>
+    <a class="na" href="#c-sheet">Bottom Sheet</a>
+    <a class="na" href="#c-toast">Toast</a>
+  </div>
+  <div class="ng"><div class="ngl">Reference</div>
+    <a class="na" href="#tokens">Token code</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- HERO -->
+<div class="eyebrow">Motion Guide · v3</div>
+<h1 class="page-title">Where and how<br>every animation lives.</h1>
+<p class="page-lead">The FanDuel motion language applied to real screens. Each element is mapped to one of six named curves — no magic numbers, no one-offs. Click any callout to see the spec and the code.</p>
+
+<!-- ═══ CURVES REFERENCE ═══ -->
+<span id="curves"></span>
+<div class="sec-label">Foundation · The 6 Curves</div>
+<div class="curve-chips">
+  <div class="curve-chip">
+    <span class="cc-icon">🏈</span>
+    <div><div class="cc-name">fd.snap</div><div class="cc-val">spring s:500 d:38</div></div>
+    <span class="cc-badge" style="background:var(--gs);color:var(--green)">Productive</span>
+  </div>
+  <div class="curve-chip">
+    <span class="cc-icon">⚡</span>
+    <div><div class="cc-name">fd.kick</div><div class="cc-val">bezier(0, 0, 0.06, 1) · 340ms</div></div>
+    <span class="cc-badge" style="background:var(--gs);color:var(--green)">Productive</span>
+  </div>
+  <div class="curve-chip">
+    <span class="cc-icon">🏃</span>
+    <div><div class="cc-name">fd.drive</div><div class="cc-val">bezier(0.4, 0, 0.1, 1) · 320ms</div></div>
+    <span class="cc-badge" style="background:var(--ps);color:var(--purple)">Transition</span>
+  </div>
+  <div class="curve-chip">
+    <span class="cc-icon">🏀</span>
+    <div><div class="cc-name">fd.release</div><div class="cc-val">bezier(0.34, 1.45, 0.64, 1) · 440ms</div></div>
+    <span class="cc-badge" style="background:var(--gos);color:var(--gold)">Expressive</span>
+  </div>
+  <div class="curve-chip">
+    <span class="cc-icon">🏆</span>
+    <div><div class="cc-name">fd.crowd</div><div class="cc-val">bezier(0.34, 1.8, 0.64, 1) · 520ms</div></div>
+    <span class="cc-badge" style="background:var(--gos);color:var(--gold)">Expressive</span>
+  </div>
+  <div class="curve-chip">
+    <span class="cc-icon">⚾</span>
+    <div><div class="cc-name">fd.rebound</div><div class="cc-val">spring s:220 d:7</div></div>
+    <span class="cc-badge" style="background:var(--gos);color:var(--gold)">Expressive</span>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════════════════
+  SCREEN 1: LOBBY
+══════════════════════════════════════════════════════ -->
+<span id="s-lobby"></span>
+<div class="sec-label">Screen 01</div>
+<h2 class="sec-head">Lobby</h2>
+<p class="sec-sub">The first thing users see. Every element enters sequentially — the structure first, then the content, then the odds. Stagger creates the sense of the screen building itself for the user.</p>
+<div style="display:flex;gap:10px;margin-bottom:20px;">
+  <button class="play-btn" onclick="playLobby()">▶ Play animation</button>
+  <button class="play-btn reset-btn" onclick="resetLobby()">↺ Reset</button>
+</div>
+<div class="screen-layout">
+  <div>
+    <div class="phone" id="phone-lobby">
+      <div class="phone-notch"><div class="phone-dot"></div></div>
+      <div class="phone-screen">
+        <!-- Top bar -->
+        <div class="p-topbar lobby-el" style="opacity:0;transform:translateY(-8px)">
+          <div class="p-logo">FanDuel</div>
+          <div class="p-icons"><div class="p-icon"></div><div class="p-icon"></div></div>
+        </div>
+        <!-- Sport tabs -->
+        <div class="p-tabs lobby-el" style="opacity:0;transform:translateY(-6px)">
+          <div class="p-tab on">NFL</div><div class="p-tab">NBA</div>
+          <div class="p-tab">MLB</div><div class="p-tab">NHL</div>
+        </div>
+        <!-- Featured -->
+        <div class="p-featured lobby-el" style="opacity:0;transform:translateY(8px)">
+          <div class="p-featured-img">
+            <div class="p-team-name">Chiefs</div>
+            <div class="p-vs">vs</div>
+            <div class="p-team-name">Bills</div>
+          </div>
+          <div style="padding:6px 10px 2px;font-size:8px;color:var(--t2);">Tonight 8:20pm · Arrowhead</div>
+          <div class="p-featured-odds">
+            <div class="p-odds-pill lobby-odds" style="opacity:0;transform:scale(.8)" onclick="selectPill(this)">Chiefs -140</div>
+            <div class="p-odds-pill lobby-odds" style="opacity:0;transform:scale(.8)" onclick="selectPill(this)">Bills +120</div>
+          </div>
+        </div>
+        <!-- Game rows -->
+        <div class="p-game-row lobby-row" style="opacity:0;transform:translateY(6px)" onclick="selectRow(this)">
+          <div class="p-teams"><div class="p-team-a">Eagles</div><div class="p-team-b">Cowboys</div><div class="p-game-time">Sun 4:25pm</div></div>
+          <div class="p-row-odds">
+            <div class="p-mini-pill" onclick="selectMini(event,this)">-115</div>
+            <div class="p-mini-pill" onclick="selectMini(event,this)">+105</div>
+          </div>
+        </div>
+        <div class="p-game-row lobby-row" style="opacity:0;transform:translateY(6px)" onclick="selectRow(this)">
+          <div class="p-teams"><div class="p-team-a">49ers</div><div class="p-team-b">Rams</div><div class="p-game-time">Sun 4:25pm</div></div>
+          <div class="p-row-odds">
+            <div class="p-mini-pill" onclick="selectMini(event,this)">-108</div>
+            <div class="p-mini-pill" onclick="selectMini(event,this)">+108</div>
+          </div>
+        </div>
+        <div class="p-game-row lobby-row" style="opacity:0;transform:translateY(6px)" onclick="selectRow(this)">
+          <div class="p-teams"><div class="p-team-a">Jets</div><div class="p-team-b">Dolphins</div><div class="p-game-time">Mon 8:15pm</div></div>
+          <div class="p-row-odds">
+            <div class="p-mini-pill" onclick="selectMini(event,this)">+140</div>
+            <div class="p-mini-pill" onclick="selectMini(event,this)">-155</div>
+          </div>
+        </div>
+        <div style="height:12px;"></div>
+      </div>
+    </div>
+  </div>
+  <div class="callout-panel">
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gs);color:var(--green)">1</div>
+        <div class="callout-text"><div class="callout-el">Top bar + Sport tabs</div><div class="callout-curve">fd.kick · 280ms · delay 0ms</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">The chrome arrives first, snapping into position from above. Fast — users have seen this before, so it should be nearly instant.</div>
+        <div class="callout-code">translateY(-8px) → 0, opacity 0→1<br>duration: 280ms<br>easing: bezier(0, 0, 0.06, 1)</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gs);color:var(--green)">2</div>
+        <div class="callout-text"><div class="callout-el">Featured game card</div><div class="callout-curve">fd.kick · 340ms · delay 60ms</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">Slides up from slightly below. The 60ms delay after chrome means the structure lands before the content — users orient before reading.</div>
+        <div class="callout-code">translateY(8px) → 0, opacity 0→1<br>duration: 340ms, delay: 60ms<br>easing: bezier(0, 0, 0.06, 1)</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gos);color:var(--gold)">3</div>
+        <div class="callout-text"><div class="callout-el">Odds pills (featured card)</div><div class="callout-curve">fd.release · 380ms · staggered 40ms</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">Odds pills are the most important data — they bounce in last, with a slight overshoot. The bounce draws the eye exactly where we want it. Stagger left-to-right signals reading order.</div>
+        <div class="callout-code">scale(0.8) → 1, opacity 0→1<br>duration: 380ms, delay: 120ms / 160ms<br>easing: bezier(0.34, 1.45, 0.64, 1)</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gs);color:var(--green)">4</div>
+        <div class="callout-text"><div class="callout-el">Game list rows</div><div class="callout-curve">fd.kick · 240ms · 50ms stagger each</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">Rows stagger up from below — like players walking onto the field one at a time. Shorter duration than the card (they're smaller, less weight). No bounce — these are functional list items.</div>
+        <div class="callout-code">translateY(6px) → 0, opacity 0→1<br>duration: 240ms, delays: 160/210/260ms<br>easing: bezier(0, 0, 0.06, 1)</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gs);color:var(--green)">5</div>
+        <div class="callout-text"><div class="callout-el">Odds pill tap (any)</div><div class="callout-curve">fd.snap · spring s:500 d:38</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">When a user taps an odds pill, it snaps to selected state instantly. Spring physics — no duration, just settles. The colour fill is instant; the scale snap is the spring. Try tapping a pill above.</div>
+        <div class="callout-code">scale: 1 → 0.94 (pressIn, spring)<br>scale: 0.94 → 1.04 → 1 (pressOut, spring)<br>bg: transparent → blue (50ms timing)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════════════════
+  SCREEN 2: GAME DETAIL
+══════════════════════════════════════════════════════ -->
+<span id="s-detail"></span>
+<div class="sec-label">Screen 02</div>
+<h2 class="sec-head">Game Detail</h2>
+<p class="sec-sub">The user taps a game row and enters the market view. A shared axis transition connects the two screens directionally — the detail arrives from the right, establishing hierarchy. Markets load with a stagger so the eye moves top-to-bottom through available bets.</p>
+<div style="display:flex;gap:10px;margin-bottom:20px;">
+  <button class="play-btn" onclick="playDetail()">▶ Navigate forward</button>
+  <button class="play-btn reset-btn" onclick="resetDetail()">← Back</button>
+</div>
+<div class="screen-layout">
+  <div>
+    <div class="phone" id="phone-detail">
+      <div class="phone-notch"><div class="phone-dot"></div></div>
+      <div class="phone-screen" style="position:relative;overflow:hidden;min-height:400px;">
+        <!-- Screen A: Lobby (exits left) -->
+        <div id="detail-screen-a" style="position:absolute;inset:0;transition:transform .32s cubic-bezier(.4,0,.1,1);">
+          <div class="p-topbar"><div class="p-logo">FanDuel</div></div>
+          <div class="p-tabs"><div class="p-tab on">NFL</div><div class="p-tab">NBA</div><div class="p-tab">MLB</div></div>
+          <div class="p-game-row" style="background:rgba(20,147,255,.05);border-left:2px solid var(--blue);">
+            <div class="p-teams"><div class="p-team-a">Chiefs</div><div class="p-team-b">Bills</div></div>
+            <div class="p-row-odds"><div class="p-mini-pill sel">-140</div><div class="p-mini-pill">+120</div></div>
+          </div>
+          <div class="p-game-row"><div class="p-teams"><div class="p-team-a">Eagles</div><div class="p-team-b">Cowboys</div></div><div class="p-row-odds"><div class="p-mini-pill">-115</div><div class="p-mini-pill">+105</div></div></div>
+          <div class="p-game-row"><div class="p-teams"><div class="p-team-a">49ers</div><div class="p-team-b">Rams</div></div><div class="p-row-odds"><div class="p-mini-pill">-108</div><div class="p-mini-pill">+108</div></div></div>
+        </div>
+        <!-- Screen B: Game Detail (enters from right) -->
+        <div id="detail-screen-b" style="position:absolute;inset:0;transform:translateX(100%);transition:transform .32s cubic-bezier(.4,0,.1,1);">
+          <div class="p-topbar">
+            <div style="font-size:10px;color:var(--blue);font-weight:700;">← NFL</div>
+            <div style="font-size:11px;font-weight:800;">Chiefs vs Bills</div>
+            <div style="font-size:9px;color:var(--t2);">8:20pm</div>
+          </div>
+          <!-- markets -->
+          <div id="detail-markets">
+            <div class="p-market-section detail-market" style="opacity:0;transform:translateY(6px)">
+              <div class="p-market-label">Moneyline</div>
+              <div class="p-market-row">
+                <div class="p-market-pill" onclick="this.classList.toggle('sel')"><div class="p-mp-label">Chiefs</div><div class="p-mp-val">-140</div></div>
+                <div class="p-market-pill" onclick="this.classList.toggle('sel')"><div class="p-mp-label">Bills</div><div class="p-mp-val">+120</div></div>
+              </div>
+            </div>
+            <div class="p-market-section detail-market" style="opacity:0;transform:translateY(6px)">
+              <div class="p-market-label">Spread</div>
+              <div class="p-market-row">
+                <div class="p-market-pill" onclick="this.classList.toggle('sel')"><div class="p-mp-label">Chiefs -3</div><div class="p-mp-val">-110</div></div>
+                <div class="p-market-pill" onclick="this.classList.toggle('sel')"><div class="p-mp-label">Bills +3</div><div class="p-mp-val">-110</div></div>
+              </div>
+            </div>
+            <div class="p-market-section detail-market" style="opacity:0;transform:translateY(6px)">
+              <div class="p-market-label">Total</div>
+              <div class="p-market-row">
+                <div class="p-market-pill" onclick="this.classList.toggle('sel')"><div class="p-mp-label">Over 47.5</div><div class="p-mp-val">-115</div></div>
+                <div class="p-market-pill" onclick="this.classList.toggle('sel')"><div class="p-mp-label">Under 47.5</div><div class="p-mp-val">-105</div></div>
+              </div>
+            </div>
+            <div class="p-market-section detail-market" style="opacity:0;transform:translateY(6px)">
+              <div class="p-market-label">First TD Scorer</div>
+              <div class="p-market-row">
+                <div class="p-market-pill" onclick="this.classList.toggle('sel')"><div class="p-mp-label">Kelce</div><div class="p-mp-val">+420</div></div>
+                <div class="p-market-pill" onclick="this.classList.toggle('sel')"><div class="p-mp-label">Diggs</div><div class="p-mp-val">+550</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="callout-panel">
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--ps);color:var(--purple)">1</div>
+        <div class="callout-text"><div class="callout-el">Screen transition</div><div class="callout-curve">fd.drive · 320ms · both screens move</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">Both screens travel together on the same axis — current slides left, detail enters from right. fd.drive is asymmetric: brief build then hard commit to destination. Creates a sense of intentional direction.</div>
+        <div class="callout-code">currentX: 0 → -100%, nextX: 100% → 0<br>duration: 320ms (both)<br>easing: bezier(0.4, 0, 0.1, 1)</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gs);color:var(--green)">2</div>
+        <div class="callout-text"><div class="callout-el">Market sections stagger in</div><div class="callout-curve">fd.kick · 240ms · 50ms stagger</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">After the screen transition settles (~300ms delay), markets stagger in top-to-bottom. Guides the eye through the hierarchy: Moneyline is most important, so it lands first.</div>
+        <div class="callout-code">translateY(6px) → 0, opacity 0→1<br>duration: 240ms<br>delays: 300 / 350 / 400 / 450ms</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gs);color:var(--green)">3</div>
+        <div class="callout-text"><div class="callout-el">Market pill tap</div><div class="callout-curve">fd.snap · spring · instant</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">Tapping a market pill should feel like pressing a real button. Spring snap to scale 0.93 on press-in, spring back to 1 on release. Colour change is instant (no delay) — the selection should feel committed immediately.</div>
+        <div class="callout-code">pressIn: scale → 0.93, spring s:500 d:38<br>pressOut: scale → 1, spring s:300 d:20<br>bg: instant fill on pressIn</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gs);color:var(--green)">4</div>
+        <div class="callout-text"><div class="callout-el">Back navigation</div><div class="callout-curve">fd.drive · 300ms · reverse axis</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">Going back reverses the direction — detail exits right, lobby returns from left. Slightly shorter (300ms vs 320ms) because return journeys should feel fast. Swipe-back gesture continues momentum.</div>
+        <div class="callout-code">currentX: 0 → 100%, prevX: -100% → 0<br>duration: 300ms (shorter = faster return)<br>swipe: velocity continuation via spring</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════════════════
+  SCREEN 3: BET SLIP
+══════════════════════════════════════════════════════ -->
+<span id="s-betslip"></span>
+<div class="sec-label">Screen 03</div>
+<h2 class="sec-head">Bet Slip</h2>
+<p class="sec-sub">Three acts in sequence: the sheet enters, the user interacts, the bet confirms. Each act has a distinct animation character — entering is productive, the confirmation crosses into expressive. This is the single most important animation sequence in the app.</p>
+<div style="display:flex;gap:10px;margin-bottom:20px;">
+  <button class="play-btn" onclick="openBetSlip()">▶ Open slip</button>
+  <button class="play-btn reset-btn" onclick="closeBetSlip()">✕ Close</button>
+</div>
+<div class="screen-layout">
+  <div>
+    <div class="phone" id="phone-betslip">
+      <div class="phone-notch"><div class="phone-dot"></div></div>
+      <div class="phone-screen" style="position:relative;min-height:420px;">
+        <div class="p-topbar"><div class="p-logo">FanDuel</div></div>
+        <div style="padding:12px;">
+          <div class="p-market-section" style="background:var(--s1);border-radius:10px;padding:12px;margin-bottom:8px;">
+            <div class="p-market-label">Moneyline · Selected</div>
+            <div class="p-market-row">
+              <div class="p-market-pill sel"><div class="p-mp-label">Chiefs</div><div class="p-mp-val">-140</div></div>
+              <div class="p-market-pill"><div class="p-mp-label">Bills</div><div class="p-mp-val">+120</div></div>
+            </div>
+          </div>
+          <div style="font-size:10px;color:var(--t2);text-align:center;padding:8px;">Tap a market to open your bet slip</div>
+        </div>
+        <!-- Sheet overlay + sheet -->
+        <div class="p-sheet-overlay" id="bs-overlay" onclick="closeBetSlip()"></div>
+        <div class="p-sheet" id="bs-sheet">
+          <div class="p-sheet-handle"></div>
+          <div class="p-sheet-title">Bet Slip</div>
+          <div class="p-sheet-row"><span>Selection</span><span>Chiefs ML</span></div>
+          <div class="p-sheet-row"><span>Odds</span><span>-140</span></div>
+          <input class="p-sheet-input" value="$25" id="bs-input"/>
+          <div class="p-sheet-payout">To win $17.85</div>
+          <button class="p-sheet-cta" id="bs-cta" onclick="confirmBet()">Place Bet →</button>
+          <!-- Success overlay inside sheet -->
+          <div class="p-sheet-success" id="bs-success">
+            <div style="position:relative;display:flex;align-items:center;justify-content:center;width:56px;height:56px;">
+              <div class="p-ring"></div>
+              <div class="p-check">✓</div>
+            </div>
+            <div class="p-success-txt">Bet Placed!</div>
+            <div class="p-success-sub">Chiefs ML · $25 to win $17.85</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="callout-panel">
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gs);color:var(--green)">1</div>
+        <div class="callout-text"><div class="callout-el">Sheet enters</div><div class="callout-curve">fd.kick · 340ms · ease-out aggressive</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">The sheet rises fast from below and decelerates into place — fd.kick's long tail means it arrives with authority, not a bounce. The backdrop fades 80ms faster than the sheet so context is always visible.</div>
+        <div class="callout-code">translateY(100%) → 0<br>duration: 340ms<br>easing: bezier(0, 0, 0.06, 1)<br>backdrop: 260ms ease-out, concurrent</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gs);color:var(--green)">2</div>
+        <div class="callout-text"><div class="callout-el">Input focus</div><div class="callout-curve">fd.snap · instant border highlight</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">Border colour transition is 80ms linear — micro-interactions should feel immediate. The keyboard appearing is the main event; the border is supporting signal. Never animate focus states with a slow ease.</div>
+        <div class="callout-code">borderColor: transparent → blue<br>duration: 80ms, linear<br>(keyboard appearance handled by OS)</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gs);color:var(--green)">3</div>
+        <div class="callout-text"><div class="callout-el">"Place Bet" press</div><div class="callout-curve">fd.snap press-in · fd.release on confirm</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">Press-in: spring snap to 0.96 (anticipation). Release: spring back to 1. The snap happens in the button; the confirmation state appears in the sheet — two separate animations that feel like one continuous action.</div>
+        <div class="callout-code">pressIn: scale → 0.96, spring s:500 d:38<br>pressOut: scale → 1, spring s:300 d:20<br>then: trigger confirmation overlay</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gos);color:var(--gold)">4</div>
+        <div class="callout-text"><div class="callout-el">Confirmation overlay</div><div class="callout-curve">fd.release · 440ms · earned expressive</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">The success state bounces in with overshoot — the first moment of expressiveness in this flow. The checkmark has its own spring delay (80ms), and the ring expands outward as secondary action. Three elements, one feeling.</div>
+        <div class="callout-code">card: scale(0.8)→1, bezier(0.34,1.45,0.64,1)<br>check: scale(0)→1, 80ms delay, same curve<br>ring: scale(1)→2.2, opacity 1→0, 500ms ease-out</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gs);color:var(--green)">5</div>
+        <div class="callout-text"><div class="callout-el">Sheet dismisses</div><div class="callout-curve">ease-in · 220ms · always faster than enter</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">Exit is always faster than enter — 220ms vs 340ms. Ease-in (accelerating) mirrors how objects naturally fall away. Backdrop fades in 180ms, concurrent. Swipe-down dismissal passes gesture velocity to spring.</div>
+        <div class="callout-code">translateY(0) → 100%<br>duration: 220ms<br>easing: Easing.in(Easing.cubic)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════════════════
+  SCREEN 4: LIVE BETTING
+══════════════════════════════════════════════════════ -->
+<span id="s-live"></span>
+<div class="sec-label">Screen 04</div>
+<h2 class="sec-head">Live Betting</h2>
+<p class="sec-sub">The highest-frequency animation surface in the app. Odds can shift every few seconds during a game. The rule: motion communicates direction and magnitude — it does not entertain. Every flash is a signal, not a show.</p>
+<div style="display:flex;gap:10px;margin-bottom:20px;">
+  <button class="play-btn" onclick="startLive()">▶ Simulate live game</button>
+  <button class="play-btn reset-btn" onclick="stopLive()">■ Stop</button>
+</div>
+<div class="screen-layout">
+  <div>
+    <div class="phone" id="phone-live">
+      <div class="phone-notch"><div class="phone-dot"></div></div>
+      <div class="phone-screen">
+        <div class="p-topbar">
+          <div style="font-size:10px;font-weight:800;">Chiefs vs Bills</div>
+          <div class="p-live-badge"><div class="p-live-dot"></div>LIVE</div>
+        </div>
+        <div class="p-score-row">
+          <div class="p-score-team">
+            <div class="p-score-name">Chiefs</div>
+            <div class="p-score-num" id="score-a">17</div>
+          </div>
+          <div>
+            <div class="p-score-sep">:</div>
+            <div class="p-quarter" id="live-quarter">Q3 8:42</div>
+          </div>
+          <div class="p-score-team">
+            <div class="p-score-name">Bills</div>
+            <div class="p-score-num" id="score-b">14</div>
+          </div>
+        </div>
+        <!-- Live markets -->
+        <div style="padding:8px 12px 4px;font-size:9px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:1px;">Live Markets</div>
+        <div class="p-market-section">
+          <div class="p-market-label">Moneyline</div>
+          <div class="p-market-row">
+            <div class="p-market-pill live-pill" id="lp-0" onclick="flashPill(0)">
+              <div class="p-mp-label">Chiefs</div>
+              <div class="p-mp-val" id="lv-0">-185</div>
+            </div>
+            <div class="p-market-pill live-pill" id="lp-1" onclick="flashPill(1)">
+              <div class="p-mp-label">Bills</div>
+              <div class="p-mp-val" id="lv-1">+155</div>
+            </div>
+          </div>
+        </div>
+        <div class="p-market-section">
+          <div class="p-market-label">Total Points</div>
+          <div class="p-market-row">
+            <div class="p-market-pill live-pill" id="lp-2" onclick="flashPill(2)">
+              <div class="p-mp-label">Over 42.5</div>
+              <div class="p-mp-val" id="lv-2">-115</div>
+            </div>
+            <div class="p-market-pill live-pill" id="lp-3" onclick="flashPill(3)">
+              <div class="p-mp-label">Under 42.5</div>
+              <div class="p-mp-val" id="lv-3">-105</div>
+            </div>
+          </div>
+        </div>
+        <div style="height:8px;"></div>
+      </div>
+    </div>
+  </div>
+  <div class="callout-panel">
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--rs);color:var(--red)">1</div>
+        <div class="callout-text"><div class="callout-el">Live indicator</div><div class="callout-curve">sine pulse · 1.2s · infinite</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">The live dot pulses at a breathing rhythm — sine easing so it never feels mechanical. Scale 1.0 → 0.8, opacity 1.0 → 0.4. Slow enough not to distract, present enough to signal live data. This never stops while in-game.</div>
+        <div class="callout-code">scale: 1→0.8→1, opacity: 1→0.4→1<br>duration: 1200ms, easing: inOut(sine)<br>repeat: -1 (infinite)</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gs);color:var(--green)">2</div>
+        <div class="callout-text"><div class="callout-el">Odds moving up (favourable)</div><div class="callout-curve">flash + micro-nudge · 80ms + 300ms</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">Green flash appears instantly, fades in 300ms. Value nudges 2px upward. Green = the line improved for the bettor. The nudge direction (up) reinforces the colour message — two signals, one glance. Tap any pill above to see it.</div>
+        <div class="callout-code">bg: transparent → green(0.22) → transparent<br>flash in: 0ms (instant)<br>flash out: 300ms ease-out<br>nudge: translateY(-2px)→0, 80ms + spring</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--rs);color:var(--red)">3</div>
+        <div class="callout-text"><div class="callout-el">Odds moving down</div><div class="callout-curve">red flash + downward nudge · same timing</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">Red flash + 2px downward nudge. Same duration as the up-flash — consistency is critical so users learn the pattern. The colour is the primary signal; the nudge is a secondary haptic-like cue for peripheral vision.</div>
+        <div class="callout-code">bg: transparent → red(0.18) → transparent<br>nudge: translateY(+2px)→0<br>(identical timing to up-flash)</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gs);color:var(--t3)">4</div>
+        <div class="callout-text"><div class="callout-el">Market suspended</div><div class="callout-curve">opacity fade · 200ms · no spring</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">When a market suspends (e.g., near a scoring play), pills fade to disabled state. 200ms ease. No bounce, no drama — suspension is a signal to wait, not to panic. Re-activation fades back in the same way.</div>
+        <div class="callout-code">opacity: 1 → 0.4, color: blue → gray<br>duration: 200ms, easing: ease<br>cursor: not-allowed (interaction blocked)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════════════════
+  SCREEN 5: WIN STATE
+══════════════════════════════════════════════════════ -->
+<span id="s-win"></span>
+<div class="sec-label">Screen 05</div>
+<h2 class="sec-head">Win State</h2>
+<p class="sec-sub">The peak. Reserved for actual wins — not bet confirmations, not promos. fd.crowd uses the biggest overshoot in the vocabulary because this moment deserves it. Everything else in the app is holding back so this can land.</p>
+<div style="display:flex;gap:10px;margin-bottom:20px;">
+  <button class="play-btn" onclick="triggerWin()">🏆 Trigger win</button>
+  <button class="play-btn reset-btn" onclick="resetWin()">↺ Reset</button>
+</div>
+<div class="screen-layout">
+  <div>
+    <div class="phone" id="phone-win">
+      <div class="phone-notch"><div class="phone-dot"></div></div>
+      <div class="phone-screen" style="position:relative;min-height:380px;overflow:hidden;">
+        <!-- Resting state -->
+        <div id="win-rest">
+          <div class="p-topbar"><div class="p-logo">FanDuel</div></div>
+          <div style="padding:12px;">
+            <div style="background:var(--s1);border-radius:10px;padding:12px;margin-bottom:8px;">
+              <div style="font-size:9px;color:var(--t2);margin-bottom:4px;">Active bet · Chiefs ML</div>
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <span style="font-size:11px;font-weight:700;">$25 to win $17.85</span>
+                <div class="p-live-badge"><div class="p-live-dot"></div>LIVE</div>
+              </div>
+            </div>
+            <div style="font-size:10px;color:var(--t2);text-align:center;padding:8px;">Game in progress…</div>
+          </div>
+        </div>
+        <!-- Win overlay -->
+        <div id="win-overlay" style="position:absolute;inset:0;background:var(--bg);opacity:0;pointer-events:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;transition:opacity .2s ease;">
+          <div id="win-card" class="p-win-card">
+            <div style="font-size:28px;margin-bottom:4px;">🏆</div>
+            <div class="p-win-amount" id="win-amount">$0</div>
+            <div class="p-win-label">You Won!</div>
+            <button class="p-win-cta" id="win-cta">Withdraw · Share</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="callout-panel">
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gos);color:var(--gold)">1</div>
+        <div class="callout-text"><div class="callout-el">Win screen enters</div><div class="callout-curve">backdrop: 200ms · then card: fd.crowd 520ms</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">Backdrop fades first (200ms) — gives the user a moment to register something is happening. Then the card dunks in with fd.crowd: scale 0.7 → 1 with 1.8 overshoot. The extra bounce is the whole point.</div>
+        <div class="callout-code">backdrop: opacity 0→1, 200ms ease<br>card: scale(0.7)→1, bezier(0.34,1.8,0.64,1)<br>card delay: 150ms after backdrop</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gos);color:var(--gold)">2</div>
+        <div class="callout-text"><div class="callout-el">Win amount counts up</div><div class="callout-curve">interpolate · 700ms · ease-out cubic</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">The number counts up from $0 to the win amount — building anticipation before the reveal. Ease-out means it slows as it approaches the final number, adding suspense at the end. Starts 300ms after the card enters.</div>
+        <div class="callout-code">interpolate(progress, [0,1], [0, WIN_AMOUNT])<br>progress: withTiming(1, {duration: 700<br>  easing: Easing.out(Easing.cubic)})<br>delay: 300ms after card</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gos);color:var(--gold)">3</div>
+        <div class="callout-text"><div class="callout-el">Confetti</div><div class="callout-curve">ease-in fall · staggered 0–500ms</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">~40 particles, each with a random start delay (0–500ms) so it rains, not floods. Ease-in on the Y-axis simulates gravity — they accelerate as they fall. Random rotation adds life. Keep it to 1 second total duration per piece.</div>
+        <div class="callout-code">y: -10px → screenHeight<br>duration: 900–1500ms (random per piece)<br>delay: random 0–500ms (the rain feel)<br>easing: Easing.in(Easing.quad)</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gos);color:var(--gold)">4</div>
+        <div class="callout-text"><div class="callout-el">CTA button enters</div><div class="callout-curve">fd.kick · 280ms · delay 650ms</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">The CTA appears last — after the emotion has landed. If it appeared simultaneously with the win card, it would feel transactional. Waiting 650ms means the user has felt the win before being asked to do anything about it.</div>
+        <div class="callout-code">opacity 0→1, translateY(6px)→0<br>duration: 280ms<br>delay: 650ms after win card</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════════════════
+  SCREEN 6: PARLAY BUILDER
+══════════════════════════════════════════════════════ -->
+<span id="s-parlay"></span>
+<div class="sec-label">Screen 06</div>
+<h2 class="sec-head">Parlay Builder</h2>
+<p class="sec-sub">Combining bets is the most satisfying gesture in sports betting. Each new leg should feel earned — sliding in, updating the running total, building anticipation. The potential payout counter is the emotional payoff; treat it like a win moment.</p>
+<div style="display:flex;gap:10px;margin-bottom:20px;">
+  <button class="play-btn" onclick="addParlayLeg()">＋ Add leg</button>
+  <button class="play-btn reset-btn" onclick="resetParlay()">↺ Reset</button>
+</div>
+<div class="screen-layout">
+  <div>
+    <div class="phone" id="phone-parlay">
+      <div class="phone-notch"><div class="phone-dot"></div></div>
+      <div class="phone-screen" style="height:440px;overflow:hidden;">
+        <!-- header -->
+        <div class="p-topbar" style="justify-content:space-between;align-items:center;">
+          <div style="font-size:11px;color:var(--t2);">← Back</div>
+          <div style="font-size:12px;font-weight:900;">Parlay</div>
+          <div id="parlay-leg-badge" style="background:var(--blue);color:#fff;font-size:10px;font-weight:800;padding:3px 9px;border-radius:20px;transition:transform .18s cubic-bezier(.34,1.56,.64,1);">2 Legs</div>
+        </div>
+        <!-- leg list -->
+        <div id="parlay-legs" style="padding:10px 12px;display:flex;flex-direction:column;gap:7px;overflow:hidden;">
+          <!-- Leg 1 -->
+          <div class="parlay-leg" style="background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:9px 11px;display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-size:9px;color:var(--t2);margin-bottom:2px;">Money Line · NFL</div>
+              <div style="font-size:11px;font-weight:800;">Kansas City Chiefs</div>
+            </div>
+            <div style="font-size:13px;font-weight:900;color:var(--blue);">-145</div>
+          </div>
+          <!-- Leg 2 -->
+          <div class="parlay-leg" style="background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:9px 11px;display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-size:9px;color:var(--t2);margin-bottom:2px;">Player Prop · NBA</div>
+              <div style="font-size:11px;font-weight:800;">LeBron O 24.5 pts</div>
+            </div>
+            <div style="font-size:13px;font-weight:900;color:var(--blue);">-110</div>
+          </div>
+        </div>
+        <!-- running totals -->
+        <div style="margin:0 12px;background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:11px 13px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;">
+            <span style="font-size:10px;color:var(--t2);">Combined Odds</span>
+            <span id="parlay-odds" style="font-size:13px;font-weight:900;color:var(--blue);transition:color .2s;">+246</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:10px;color:var(--t2);">Potential Payout</span>
+            <span id="parlay-payout" style="font-size:14px;font-weight:900;color:var(--green);">$34.60</span>
+          </div>
+        </div>
+        <!-- boost badge slot -->
+        <div id="parlay-boost" style="margin:8px 12px 0;opacity:0;transform:scale(0.7);">
+          <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(245,166,35,.12);border:1px solid rgba(245,166,35,.3);border-radius:20px;padding:5px 12px;">
+            <span style="font-size:12px;">⚡</span>
+            <span style="font-size:10px;font-weight:700;color:var(--gold);">Odds Boost unlocked · 3+ legs</span>
+          </div>
+        </div>
+        <!-- CTA -->
+        <div style="padding:10px 12px 0;">
+          <button id="parlay-cta" onclick="this.style.transform='scale(.97)';setTimeout(()=>this.style.transform='',180);" style="width:100%;padding:11px;background:var(--green);color:#021A0E;font-size:12px;font-weight:800;border:none;border-radius:9px;cursor:pointer;font-family:var(--font);transition:transform .1s cubic-bezier(.34,1.56,.64,1);">Place Parlay · $10</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="callout-panel">
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gs);color:var(--green);">1</div>
+        <div class="callout-text"><div class="callout-el">Leg card enter</div><div class="callout-curve">fd.kick · 280ms · translateY(12px→0)</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">Each new leg slides in from below, not from the side. Bottom-up entry grounds the card in physical space — it's being placed on a stack. Staggered when multiple enter at once, but single-leg adds are immediate.</div>
+        <div class="callout-code">withTiming(opacity, { duration: 280,<br>  easing: Easing.bezier(0,0,0.06,1) })<br>withTiming(translateY, { duration: 280,<br>  easing: Easing.bezier(0,0,0.06,1) })</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gs);color:var(--green);">2</div>
+        <div class="callout-text"><div class="callout-el">Leg count badge</div><div class="callout-curve">fd.snap spring · s:500 d:38 · scale pulse</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">The badge bumps scale briefly on each new leg. Spring physics mean it settles without any explicit return animation. This makes the count feel reactive, not mechanical — like a scoreboard updating.</div>
+        <div class="callout-code">withSpring(scale, {<br>  stiffness: 500, damping: 38<br>}) // from 1.2 → settles at 1.0</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--ps);color:var(--purple);">3</div>
+        <div class="callout-text"><div class="callout-el">Combined odds counter</div><div class="callout-curve">fd.snap · instant flash + 300ms fade</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">Odds update instantly — no count-up here, because the user needs to trust the number is accurate. A brief green color flash signals "this changed" and fades over 300ms. The number itself never animates.</div>
+        <div class="callout-code">// Flash color signal<br>color = '#00C87A'<br>withTiming(color, {<br>  duration: 300,<br>  easing: Easing.out(Easing.quad)<br>}) // → return to default</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gos);color:var(--gold);">4</div>
+        <div class="callout-text"><div class="callout-el">Potential payout count-up</div><div class="callout-curve">ease-out cubic · 500ms delay:100ms</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">Unlike odds, the payout CAN count up — it's the emotional centrepiece. Use an ease-out so it arrives quickly and sits at the final number. A slight delay (100ms) after the odds update gives it a "reveal" beat.</div>
+        <div class="callout-code">// JS interpolate, not RN<br>const ease = 1 - Math.pow(1-t, 3);<br>current = ease * targetPayout;<br>// 500ms, 100ms delay</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gos);color:var(--gold);">5</div>
+        <div class="callout-text"><div class="callout-el">Odds Boost badge unlock</div><div class="callout-curve">fd.crowd · bezier(0.34,1.8,0.64,1) · 520ms</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">Unlocking a boost at 3 legs is a peak moment — it deserves the most theatrical curve in the system. fd.crowd overshoots hard then settles, mimicking the crowd roar when something unexpected happens.</div>
+        <div class="callout-code">withTiming(scale, { duration: 520,<br>  easing: Easing.bezier(0.34,1.8,0.64,1)<br>}) // scale(0.7) → scale(1.0)<br>withTiming(opacity, { duration: 200 })</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════════════════
+  SCREEN 7: MY BETS
+══════════════════════════════════════════════════════ -->
+<span id="s-mybets"></span>
+<div class="sec-label">Screen 07</div>
+<h2 class="sec-head">My Bets</h2>
+<p class="sec-sub">Two very different emotional moments live here: winning and losing. They need opposite animation personalities. A win earns fanfare. A loss earns dignity — quiet, clean, no rubbing it in. The pending state is a living thing; it breathes while the user waits.</p>
+<div style="display:flex;gap:10px;margin-bottom:20px;">
+  <button class="play-btn" onclick="settleBet('win')">🏆 Settle as Win</button>
+  <button class="play-btn" onclick="settleBet('loss')" style="background:var(--s3);color:var(--t2);border:1px solid var(--border);">Settle as Loss</button>
+  <button class="play-btn reset-btn" onclick="resetMyBets()">↺ Reset</button>
+</div>
+<div class="screen-layout">
+  <div>
+    <div class="phone" id="phone-mybets">
+      <div class="phone-notch"><div class="phone-dot"></div></div>
+      <div class="phone-screen" style="height:440px;overflow:hidden;">
+        <div class="p-topbar">
+          <div class="p-logo">FanDuel</div>
+          <div style="font-size:10px;font-weight:700;color:var(--t2);">My Bets</div>
+          <div style="width:18px;"></div>
+        </div>
+        <div style="display:flex;gap:0;padding:0 12px;margin-top:10px;margin-bottom:2px;">
+          <div style="font-size:10px;font-weight:700;color:var(--blue);border-bottom:2px solid var(--blue);padding-bottom:5px;margin-right:14px;">Pending <span style="background:var(--blue);color:#fff;font-size:8px;font-weight:800;padding:1px 5px;border-radius:10px;margin-left:3px;" id="pending-count">1</span></div>
+          <div style="font-size:10px;font-weight:700;color:var(--t2);padding-bottom:5px;">Settled</div>
+        </div>
+        <div style="height:1px;background:var(--border);margin-bottom:10px;"></div>
+        <!-- PENDING BET -->
+        <div id="mybets-pending-card" style="margin:0 12px;background:var(--s2);border:1px solid var(--border);border-radius:12px;overflow:hidden;">
+          <div style="padding:11px 13px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-size:9px;color:var(--t2);margin-bottom:2px;">Money Line · NFL · Sun 4:25 PM</div>
+              <div style="font-size:12px;font-weight:800;">KC Chiefs to Win</div>
+            </div>
+            <div id="mybets-status-badge" style="font-size:9px;font-weight:800;padding:4px 9px;border-radius:20px;background:rgba(20,147,255,.12);border:1px solid rgba(20,147,255,.25);color:var(--blue);animation:pendingBreath 2.2s ease-in-out infinite;">PENDING</div>
+          </div>
+          <div style="padding:9px 13px;display:flex;justify-content:space-between;align-items:center;">
+            <div><span style="font-size:9px;color:var(--t2);">Stake</span><div style="font-size:12px;font-weight:800;">$25.00</div></div>
+            <div style="text-align:right;"><span style="font-size:9px;color:var(--t2);">To Win</span><div id="mybets-towin" style="font-size:12px;font-weight:800;color:var(--green);">$17.24</div></div>
+            <div style="text-align:right;"><span style="font-size:9px;color:var(--t2);">Odds</span><div style="font-size:12px;font-weight:800;color:var(--blue);">-145</div></div>
+          </div>
+        </div>
+        <!-- SETTLED BET (won example) -->
+        <div style="margin:8px 12px 0;background:var(--s2);border:1px solid var(--border);border-radius:12px;overflow:hidden;opacity:.5;">
+          <div style="padding:11px 13px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-size:9px;color:var(--t2);margin-bottom:2px;">Spread · NBA · Yesterday</div>
+              <div style="font-size:12px;font-weight:800;">Lakers -4.5</div>
+            </div>
+            <div style="font-size:9px;font-weight:800;padding:4px 9px;border-radius:20px;background:rgba(0,200,122,.1);border:1px solid rgba(0,200,122,.25);color:var(--green);">WON</div>
+          </div>
+          <div style="padding:9px 13px;display:flex;justify-content:space-between;align-items:center;">
+            <div><span style="font-size:9px;color:var(--t2);">Stake</span><div style="font-size:12px;font-weight:800;">$50.00</div></div>
+            <div style="text-align:right;"><span style="font-size:9px;color:var(--t2);">Won</span><div style="font-size:12px;font-weight:800;color:var(--green);">+$45.45</div></div>
+            <div style="text-align:right;"><span style="font-size:9px;color:var(--t2);">Odds</span><div style="font-size:12px;font-weight:800;color:var(--blue);">-110</div></div>
+          </div>
+        </div>
+        <!-- WIN OVERLAY -->
+        <div id="mybets-win-overlay" style="position:absolute;inset:0;background:rgba(0,0,0,0);pointer-events:none;z-index:10;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;opacity:0;transition:background .2s;">
+          <div id="mybets-win-card" style="background:var(--s1);border:2px solid var(--gold);border-radius:14px;padding:20px 28px;text-align:center;transform:scale(.7);opacity:0;">
+            <div style="font-size:28px;margin-bottom:4px;">🏆</div>
+            <div style="font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--gold);font-weight:700;margin-bottom:4px;">Bet Won!</div>
+            <div style="font-size:28px;font-weight:900;color:var(--gold);">+$17.24</div>
+            <div style="font-size:10px;color:var(--t2);margin-top:2px;">Total return: $42.24</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="callout-panel">
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--bs);color:var(--blue);">1</div>
+        <div class="callout-text"><div class="callout-el">Pending breathing</div><div class="callout-curve">opacity sine · 2.2s · ease-in-out · infinite</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">The PENDING badge breathes subtly — oscillating between full opacity and 55%. This tells users the bet is alive and being tracked without requiring them to refresh. It's the same logic as a "typing..." indicator.</div>
+        <div class="callout-code">@keyframes pendingBreath {<br>  0%,100% { opacity:1 }<br>  50% { opacity:.55 }<br>}<br>// 2.2s feels human, not robotic</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gos);color:var(--gold);">2</div>
+        <div class="callout-text"><div class="callout-el">Win state transition</div><div class="callout-curve">fd.crowd · bezier(0.34,1.8,0.64,1) · 520ms</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">Win is a peak moment — it earns the most theatrical curve. The card itself doesn't animate; instead a celebration overlay appears above it. This separation means the structural information (what was the bet) stays readable while the emotion lands.</div>
+        <div class="callout-code">withTiming(scale, { duration: 520,<br>  easing: Easing.bezier(0.34,1.8,0.64,1)<br>})<br>// Backdrop: 200ms linear opacity</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--rs);color:var(--red);">3</div>
+        <div class="callout-text"><div class="callout-el">Loss state transition</div><div class="callout-curve">ease-in · 220ms · opacity 1→0.35 · no bounce</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">A loss should be acknowledged, not dramatised. The card fades to 35% opacity and the badge quietly changes colour. No bounce, no spring, no theatrical curve — just a clean ease-in. This is the motion equivalent of a respectful nod.</div>
+        <div class="callout-code">withTiming(opacity, {<br>  duration: 220,<br>  easing: Easing.in(Easing.quad)<br>}) // 1.0 → 0.35<br>// Badge: instant colour swap, no animation</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gs);color:var(--green);">4</div>
+        <div class="callout-text"><div class="callout-el">Status badge morph</div><div class="callout-curve">fd.release · 440ms · PENDING → WON/LOST</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">The status badge changes text AND colour simultaneously. Cross-fade the text (80ms opacity overlap), then use fd.release to scale the badge slightly on arrival — enough to draw the eye without competing with the celebration overlay.</div>
+        <div class="callout-code">// Step 1: fade out old text (80ms)<br>// Step 2: swap text content<br>// Step 3: scale badge<br>withTiming(scale, { duration: 440,<br>  easing: Easing.bezier(0.34,1.45,0.64,1) })</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gs);color:var(--green);">5</div>
+        <div class="callout-text"><div class="callout-el">Pending count badge</div><div class="callout-curve">fd.snap spring · s:500 d:38 · number update</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">When a bet settles, the pending count in the tab header decrements. Spring bump acknowledges the change without drawing too much attention. If it reaches zero, the badge disappears with a gentle scale(0) + opacity(0) exit.</div>
+        <div class="callout-code">// On decrement:<br>withSpring(scale, { stiffness:500, damping:38 })<br>// s: 1 → 1.25 → 1.0 (spring handles return)<br>// On zero: withTiming(opacity, {duration:200})</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════════════════
+  SCREEN 8: SEARCH & BROWSE
+══════════════════════════════════════════════════════ -->
+<span id="s-search"></span>
+<div class="sec-label">Screen 08</div>
+<h2 class="sec-head">Search &amp; Browse</h2>
+<p class="sec-sub">Search is a state machine: idle → focused → loading → results. Each transition has a distinct feel. The bar snap-expands to signal intent. Results stagger in to feel discovered, not dumped. Category chips slide in from the side like a lineup entering the field.</p>
+<div style="display:flex;gap:10px;margin-bottom:20px;">
+  <button class="play-btn" onclick="playSearch()">🔍 Play search flow</button>
+  <button class="play-btn reset-btn" onclick="resetSearch()">↺ Reset</button>
+</div>
+<div class="screen-layout">
+  <div>
+    <div class="phone" id="phone-search">
+      <div class="phone-notch"><div class="phone-dot"></div></div>
+      <div class="phone-screen" style="height:440px;overflow:hidden;position:relative;">
+        <!-- IDLE STATE -->
+        <div id="search-idle" style="position:absolute;inset:0;background:var(--bg);">
+          <div class="p-topbar">
+            <div class="p-logo">FanDuel</div>
+            <div style="font-size:10px;color:var(--t2);font-weight:600;">Search</div>
+            <div style="width:18px;"></div>
+          </div>
+          <!-- idle search bar -->
+          <div style="padding:10px 12px;">
+            <div style="background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:9px 12px;display:flex;align-items:center;gap:8px;">
+              <span style="font-size:12px;color:var(--t3);">🔍</span>
+              <span style="font-size:11px;color:var(--t3);">Search sports, teams, players…</span>
+            </div>
+          </div>
+          <!-- popular -->
+          <div style="padding:4px 12px;">
+            <div style="font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:var(--t3);font-weight:700;margin-bottom:8px;">Popular searches</div>
+            <div style="display:flex;flex-direction:column;gap:5px;">
+              <div style="font-size:11px;color:var(--t2);padding:5px 0;border-bottom:1px solid var(--border);">🔥 Super Bowl MVP</div>
+              <div style="font-size:11px;color:var(--t2);padding:5px 0;border-bottom:1px solid var(--border);">🏀 NBA Finals 2026</div>
+              <div style="font-size:11px;color:var(--t2);padding:5px 0;border-bottom:1px solid var(--border);">⚾ Home run leaders</div>
+              <div style="font-size:11px;color:var(--t2);padding:5px 0;">🏒 Stanley Cup odds</div>
+            </div>
+          </div>
+        </div>
+        <!-- FOCUSED / RESULTS STATE -->
+        <div id="search-active" style="position:absolute;inset:0;background:var(--bg);opacity:0;pointer-events:none;">
+          <!-- expanded bar -->
+          <div style="padding:10px 12px;display:flex;align-items:center;gap:8px;">
+            <div id="search-bar-expanded" style="flex:1;background:var(--s2);border:1px solid var(--blue);border-radius:10px;padding:9px 12px;display:flex;align-items:center;gap:8px;transform:scaleX(0.92);transform-origin:left;">
+              <span style="font-size:12px;color:var(--blue);">🔍</span>
+              <span style="font-size:11px;color:var(--text);font-weight:600;">Patrick Mahomes</span>
+            </div>
+            <span style="font-size:11px;color:var(--blue);font-weight:600;white-space:nowrap;">Cancel</span>
+          </div>
+          <!-- sport chips -->
+          <div id="search-chips" style="display:flex;gap:6px;padding:0 12px 10px;overflow-x:auto;scrollbar-width:none;">
+            <div class="search-chip" style="background:var(--blue);color:#fff;font-size:10px;font-weight:700;padding:5px 12px;border-radius:20px;white-space:nowrap;flex-shrink:0;opacity:0;transform:translateX(-20px);">All</div>
+            <div class="search-chip" style="background:var(--s2);border:1px solid var(--border);color:var(--t2);font-size:10px;font-weight:700;padding:5px 12px;border-radius:20px;white-space:nowrap;flex-shrink:0;opacity:0;transform:translateX(-20px);">🏈 NFL</div>
+            <div class="search-chip" style="background:var(--s2);border:1px solid var(--border);color:var(--t2);font-size:10px;font-weight:700;padding:5px 12px;border-radius:20px;white-space:nowrap;flex-shrink:0;opacity:0;transform:translateX(-20px);">🏀 NBA</div>
+            <div class="search-chip" style="background:var(--s2);border:1px solid var(--border);color:var(--t2);font-size:10px;font-weight:700;padding:5px 12px;border-radius:20px;white-space:nowrap;flex-shrink:0;opacity:0;transform:translateX(-20px);">⚾ MLB</div>
+            <div class="search-chip" style="background:var(--s2);border:1px solid var(--border);color:var(--t2);font-size:10px;font-weight:700;padding:5px 12px;border-radius:20px;white-space:nowrap;flex-shrink:0;opacity:0;transform:translateX(-20px);">🏒 NHL</div>
+          </div>
+          <!-- results -->
+          <div id="search-results" style="padding:0 12px;display:flex;flex-direction:column;gap:7px;">
+            <div class="search-result" style="background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:10px 12px;opacity:0;transform:translateY(8px);">
+              <div style="font-size:9px;color:var(--t2);margin-bottom:2px;">Player Prop · NFL · Week 18</div>
+              <div style="font-size:12px;font-weight:800;">Mahomes Passing Yards</div>
+              <div style="display:flex;gap:5px;margin-top:6px;">
+                <div class="p-mini-pill">O 287.5 <span style="color:var(--t2);">-115</span></div>
+                <div class="p-mini-pill">U 287.5 <span style="color:var(--t2);">-105</span></div>
+              </div>
+            </div>
+            <div class="search-result" style="background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:10px 12px;opacity:0;transform:translateY(8px);">
+              <div style="font-size:9px;color:var(--t2);margin-bottom:2px;">Player Prop · NFL · Week 18</div>
+              <div style="font-size:12px;font-weight:800;">Mahomes Touchdowns</div>
+              <div style="display:flex;gap:5px;margin-top:6px;">
+                <div class="p-mini-pill">O 2.5 <span style="color:var(--t2);">+140</span></div>
+                <div class="p-mini-pill">U 2.5 <span style="color:var(--t2);">-175</span></div>
+              </div>
+            </div>
+            <div class="search-result" style="background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:10px 12px;opacity:0;transform:translateY(8px);">
+              <div style="font-size:9px;color:var(--t2);margin-bottom:2px;">Money Line · NFL · Week 18</div>
+              <div style="font-size:12px;font-weight:800;">KC Chiefs (Mahomes) to Win</div>
+              <div style="display:flex;gap:5px;margin-top:6px;">
+                <div class="p-mini-pill">Chiefs <span style="color:var(--t2);">-180</span></div>
+                <div class="p-mini-pill">Falcons <span style="color:var(--t2);">+155</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="callout-panel">
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gs);color:var(--green);">1</div>
+        <div class="callout-text"><div class="callout-el">Search bar focus expand</div><div class="callout-curve">fd.snap spring · s:500 d:38 · scaleX + border</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">On tap, the bar snaps to full width via spring. The border simultaneously transitions from neutral to blue — a two-property change that reads as a single gesture. Cancel button slides in from the right on the same beat.</div>
+        <div class="callout-code">// Bar: spring scaleX 0.9 → 1.0<br>withSpring(scaleX, {<br>  stiffness: 500, damping: 38<br>})<br>// Border: instant (no timing needed)</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gs);color:var(--green);">2</div>
+        <div class="callout-text"><div class="callout-el">Category chips enter</div><div class="callout-curve">fd.kick · 200ms · translateX(-20px→0) · 30ms stagger</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">Chips enter from the left, one by one, like players walking out of a tunnel. Left-to-right entry matches reading direction and feels like a lineup reveal. 30ms stagger is tight — they're a group, not a procession.</div>
+        <div class="callout-code">chips.forEach((chip, i) => {<br>  chip.style.transition =<br>    `all .2s cubic-bezier(0,0,0.06,1) ${i*30}ms`;<br>  chip.style.opacity = '1';<br>  chip.style.transform = 'none';<br>})</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gs);color:var(--green);">3</div>
+        <div class="callout-text"><div class="callout-el">Results stagger-in</div><div class="callout-curve">fd.kick · 240ms · translateY(8px→0) · 40ms stagger</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">Results drop in from a slight downward offset — content falling into place. 40ms per item feels fast enough to not feel like a loading delay, but slow enough that the eye can follow each card arriving.</div>
+        <div class="callout-code">results.forEach((r, i) => {<br>  r.style.transition =<br>    `all .24s cubic-bezier(0,0,0.06,1) ${i*40}ms`;<br>  r.style.opacity = '1';<br>  r.style.transform = 'none';<br>})</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gs);color:var(--green);">4</div>
+        <div class="callout-text"><div class="callout-el">Filter chip select</div><div class="callout-curve">fd.snap · instant swap · no crossfade needed</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">Filter chips update immediately. The selected chip flips to blue with no transition delay — this is a productive action, not an expressive one. The results below cross-fade at 120ms (opacity only, no translate) to signal they've been filtered.</div>
+        <div class="callout-code">// Chip: instant background swap<br>// Results: quick cross-fade<br>withTiming(opacity, {<br>  duration: 120,<br>  easing: Easing.linear<br>}) // → 0 → update content → 1</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--bs);color:var(--blue);">5</div>
+        <div class="callout-text"><div class="callout-el">Idle → active state swap</div><div class="callout-curve">cross-fade · 150ms · opacity only</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">The whole screen transitions between idle and active states via a simple opacity cross-fade — not a slide or scale. This keeps the spatial model simple: you haven't gone anywhere, the search surface just activated over the top.</div>
+        <div class="callout-code">// Idle out:<br>withTiming(idleOpacity, { duration: 150 })<br>// Active in (slight delay):<br>withDelay(60,<br>  withTiming(activeOpacity, { duration: 150 })<br>)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════════════════
+  COMPONENTS
+══════════════════════════════════════════════════════ -->
+<span id="c-buttons"></span>
+<div class="sec-label">Components · 01</div>
+<h2 class="sec-head">Buttons</h2>
+<p class="sec-sub">All states, all transitions. Press-in should always be spring (fd.snap) — the release has tactile feedback. Loading and success are the two states most often under-animated.</p>
+
+<div class="comp-grid">
+  <div class="comp-card">
+    <div class="comp-head"><div class="comp-name">CTA Button · All States</div><div class="comp-curve">fd.snap press · fd.release confirm</div></div>
+    <div class="comp-stage" style="gap:16px;flex-wrap:nowrap;overflow-x:auto;">
+      <div class="state-col">
+        <button class="s-btn" onmousedown="this.style.transform='scale(.94)'" onmouseup="this.style.transform=''" ontouchstart="this.style.transform='scale(.94)'" ontouchend="this.style.transform=''">Place Bet</button>
+        <div class="state-label">Idle / Press</div>
+      </div>
+      <div class="state-col">
+        <button class="s-btn s-btn-loading shimmer-wrap" style="width:90px;">Placing…</button>
+        <div class="state-label">Loading</div>
+      </div>
+      <div class="state-col">
+        <button class="s-btn s-btn-success">✓ Done</button>
+        <div class="state-label">Success</div>
+      </div>
+      <div class="state-col">
+        <button class="s-btn s-btn-error">✕ Failed</button>
+        <div class="state-label">Error</div>
+      </div>
+    </div>
+    <div class="comp-note">Press: spring snap to 0.94. Release: spring back (slight overshoot). Loading: linear shimmer only — no easing. Success: fd.release scale-in. Error: shake sequence (withSequence ±8px, 80ms each).</div>
+  </div>
+  <div class="comp-card">
+    <div class="comp-head"><div class="comp-name">Ghost / Secondary Button</div><div class="comp-curve">fd.snap press · instant border</div></div>
+    <div class="comp-stage">
+      <div class="state-col">
+        <button class="s-btn" style="background:transparent;border:1.5px solid var(--blue);color:var(--blue);" onmousedown="this.style.transform='scale(.94)'" onmouseup="this.style.transform=''">Add to Parlay</button>
+        <div class="state-label">Idle</div>
+      </div>
+      <div class="state-col">
+        <button class="s-btn" style="background:var(--bs);border:1.5px solid var(--blue);color:var(--blue);">Added ✓</button>
+        <div class="state-label">Selected</div>
+      </div>
+    </div>
+    <div class="comp-note">Background fill is instant (no transition) — the selection decision should feel immediate. Border colour is 80ms linear. Press uses the same spring as primary CTA.</div>
+  </div>
+</div>
+
+<div style="margin-top:14px;" id="c-odds"></div>
+<div class="sec-label" style="margin-top:28px;">Components · 02</div>
+<h2 class="sec-head">Odds Pills</h2>
+<p class="sec-sub">The most-animated element in the app. Six states, each with a distinct animation rationale.</p>
+
+<div class="comp-card" style="margin-bottom:14px;">
+  <div class="comp-head"><div class="comp-name">All Odds States</div><div class="comp-curve">fd.snap select · flash 80ms+300ms · fade 200ms suspend</div></div>
+  <div class="comp-stage" style="gap:12px;flex-wrap:wrap;justify-content:center;">
+    <div class="state-col">
+      <div class="o-pill o-idle" onclick="this.classList.toggle('o-selected');this.classList.remove('o-idle');setTimeout(()=>{this.classList.add('o-idle');this.classList.remove('o-selected')},1500)">-140</div>
+      <div class="state-label">Idle</div>
+    </div>
+    <div class="state-col">
+      <div class="o-pill o-selected">-140</div>
+      <div class="state-label">Selected</div>
+    </div>
+    <div class="state-col" onclick="flashDemo(this,'up')">
+      <div class="o-pill o-idle" id="flash-demo-up">-140</div>
+      <div class="state-label">Flash up ↑</div>
+    </div>
+    <div class="state-col" onclick="flashDemo(this,'dn')">
+      <div class="o-pill o-idle" id="flash-demo-dn">-140</div>
+      <div class="state-label">Flash down ↓</div>
+    </div>
+    <div class="state-col">
+      <div class="o-pill o-suspended">—</div>
+      <div class="state-label">Suspended</div>
+    </div>
+  </div>
+  <div class="comp-note">Tap "Flash up ↑" or "Flash down ↓" to see the live odds animation. Select = instant fill + spring. Flash = colour background instant, fade 300ms. Suspended = opacity 0.4 + color neutral, 200ms ease. No bounce on any odds state — these are informational, not celebratory.</div>
+</div>
+
+<span id="c-tabs"></span>
+<div class="sec-label" style="margin-top:40px;">Components · 03</div>
+<h2 class="sec-head">Tab Bar</h2>
+
+<div class="comp-card" style="margin-bottom:14px;">
+  <div class="comp-head"><div class="comp-name">Sport Tab Bar</div><div class="comp-curve">fd.drive · indicator 280ms · content opacity 220ms</div></div>
+  <div class="comp-stage" style="flex-direction:column;gap:16px;">
+    <div style="background:var(--s1);border-radius:9px;padding:3px;position:relative;display:flex;width:300px;" id="comp-tabs">
+      <div id="comp-tab-pill" style="position:absolute;top:3px;bottom:3px;border-radius:6px;background:var(--blue);transition:left .28s cubic-bezier(.4,0,.1,1),width .28s cubic-bezier(.4,0,.1,1);"></div>
+      <div class="p-tab-pill on" onclick="compTab(0,this)">NFL</div>
+      <div class="p-tab-pill" onclick="compTab(1,this)">NBA</div>
+      <div class="p-tab-pill" onclick="compTab(2,this)">MLB</div>
+      <div class="p-tab-pill" onclick="compTab(3,this)">NHL</div>
+    </div>
+    <div style="height:32px;display:flex;align-items:center;justify-content:center;">
+      <div id="comp-tab-content" style="font-size:13px;color:var(--t2);transition:opacity .22s ease;">Select a sport to filter markets</div>
+    </div>
+  </div>
+  <div class="comp-note">Indicator uses fd.drive (ease-in-out) — it accelerates away from old tab, decelerates into new one. Content cross-fades at 220ms opacity only — no slide, because the tabs share the same spatial level. Two animations, one tap.</div>
+</div>
+
+<span id="c-sheet"></span>
+<div class="sec-label" style="margin-top:40px;">Components · 04</div>
+<h2 class="sec-head">Bottom Sheet</h2>
+
+<div class="comp-grid">
+  <div class="comp-card">
+    <div class="comp-head"><div class="comp-name">Enter</div><div class="comp-curve">fd.kick · 340ms · translateY 100%→0</div></div>
+    <div class="comp-stage">
+      <div style="font-size:28px;">⬆️</div>
+      <div style="font-size:13px;color:var(--t2);max-width:120px;text-align:center;line-height:1.5;">Explosive start, decelerates with authority</div>
+    </div>
+    <div class="comp-note">bezier(0, 0, 0.06, 1) — more aggressive than Material's standard. The sheet has momentum from below.</div>
+  </div>
+  <div class="comp-card">
+    <div class="comp-head"><div class="comp-name">Exit</div><div class="comp-curve">ease-in · 220ms · translateY 0→100%</div></div>
+    <div class="comp-stage">
+      <div style="font-size:28px;">⬇️</div>
+      <div style="font-size:13px;color:var(--t2);max-width:120px;text-align:center;line-height:1.5;">Accelerates away. Always faster than enter.</div>
+    </div>
+    <div class="comp-note">Easing.in(Easing.cubic) — picks up speed like an object falling. 220ms vs 340ms enter. Never equal.</div>
+  </div>
+</div>
+
+<span id="c-toast"></span>
+<div class="sec-label" style="margin-top:40px;">Components · 05</div>
+<h2 class="sec-head">Toast / Notification</h2>
+
+<div class="comp-card" style="margin-bottom:14px;">
+  <div class="comp-head"><div class="comp-name">Toast · Enter, Hold, Exit</div><div class="comp-curve">fd.kick enter 250ms · ease-in exit 180ms</div></div>
+  <div class="comp-stage" style="flex-direction:column;gap:12px;align-items:center;">
+    <div id="toast-wrap" style="display:flex;flex-direction:column;gap:8px;width:240px;">
+      <div class="toast" id="toast-success" style="opacity:0;transform:translateY(-16px);">
+        <span class="toast-icon">✓</span>
+        <span>Bet placed successfully</span>
+      </div>
+      <div class="toast" id="toast-info" style="opacity:0;transform:translateY(-16px);border-color:var(--ba);">
+        <span class="toast-icon">📊</span>
+        <span>Odds updated · Chiefs -145</span>
+      </div>
+      <div class="toast" id="toast-error" style="opacity:0;transform:translateY(-16px);border-color:rgba(255,77,106,.3);">
+        <span class="toast-icon">⚠️</span>
+        <span>Market suspended</span>
+      </div>
+    </div>
+    <button class="play-btn" onclick="playToasts()" style="margin-bottom:0;">▶ Show toasts</button>
+  </div>
+  <div class="comp-note">Enter from top: translateY(-16px)→0 + opacity, 250ms fd.kick. Stack with 80ms delay between each. Exit: fade + translateY(0)→(-8px), 180ms ease-in. Auto-dismiss after 3s. Error toasts should require manual dismiss.</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════════════════
+  TOKEN REFERENCE
+══════════════════════════════════════════════════════ -->
+<span id="tokens"></span>
+<div class="sec-label">Reference</div>
+<h2 class="sec-head">Token reference</h2>
+
+<div class="code-wrap">
+  <div class="code-lang">motionTokens.ts</div>
+<pre><span class="ck">import</span> { Easing } <span class="ck">from</span> <span class="cs">'react-native-reanimated'</span>;
+
+<span class="cc">// ── Curves ──────────────────────────────────────────────────────</span>
+<span class="ck">export const</span> curve = {
+  snap:    { stiffness: <span class="cn">500</span>, damping: <span class="cn">38</span> },           <span class="cc">// spring · buttons, toggles</span>
+  kick:    Easing.<span class="cf">bezier</span>(<span class="cn">0.0</span>, <span class="cn">0.0</span>, <span class="cn">0.06</span>, <span class="cn">1.0</span>),        <span class="cc">// enter screen</span>
+  drive:   Easing.<span class="cf">bezier</span>(<span class="cn">0.4</span>, <span class="cn">0.0</span>, <span class="cn">0.10</span>, <span class="cn">1.0</span>),        <span class="cc">// A→B within screen</span>
+  release: Easing.<span class="cf">bezier</span>(<span class="cn">0.34</span>, <span class="cn">1.45</span>, <span class="cn">0.64</span>, <span class="cn">1.0</span>),      <span class="cc">// success, confirm</span>
+  crowd:   Easing.<span class="cf">bezier</span>(<span class="cn">0.34</span>, <span class="cn">1.8</span>,  <span class="cn">0.64</span>, <span class="cn">1.0</span>),       <span class="cc">// win, peak moments</span>
+  rebound: { stiffness: <span class="cn">220</span>, damping: <span class="cn">7</span> },            <span class="cc">// spring · expressive oscillation</span>
+  exit:    Easing.<span class="cf">in</span>(Easing.cubic),                     <span class="cc">// any element leaving screen</span>
+};
+
+<span class="cc">// ── Duration ────────────────────────────────────────────────────</span>
+<span class="ck">export const</span> dur = {
+  micro:   <span class="cn">80</span>,    <span class="cc">// button press-in, focus highlight, odds flash</span>
+  fast:    <span class="cn">150</span>,   <span class="cc">// tooltips, chips</span>
+  base:    <span class="cn">250</span>,   <span class="cc">// toasts, tab content fade</span>
+  slow:    <span class="cn">340</span>,   <span class="cc">// sheets enter, page transitions</span>
+  xslow:   <span class="cn">520</span>,   <span class="cc">// win celebration (expressive only)</span>
+};
+
+<span class="cc">// ── Common patterns ──────────────────────────────────────────────</span>
+<span class="ck">export const</span> motion = {
+  <span class="cc">// Sheet enter</span>
+  sheetEnter: { duration: dur.slow, easing: curve.kick },
+  <span class="cc">// Sheet exit (always shorter than enter)</span>
+  sheetExit:  { duration: <span class="cn">220</span>, easing: curve.exit },
+  <span class="cc">// Page forward</span>
+  pageForward: { duration: <span class="cn">320</span>, easing: curve.drive },
+  <span class="cc">// Stagger children (sheet, list)</span>
+  stagger: (index: <span class="ct">number</span>, base = <span class="cn">50</span>) => index * base,
+  <span class="cc">// Odds flash</span>
+  oddsFlash: { flashIn: <span class="cn">0</span>, flashOut: { duration: <span class="cn">300</span>, easing: Easing.<span class="cf">out</span>(Easing.quad) } },
+};</pre>
+</div>
+
+<div style="height:60px;"></div>
+</main>
+</div>
+
+<script>
+// ── NAV ─────────────────────────────────────────────
+const ids=['curves','s-lobby','s-detail','s-betslip','s-live','s-win','s-parlay','s-mybets','s-search','c-buttons','c-odds','c-tabs','c-sheet','c-toast','tokens'];
+window.addEventListener('scroll',()=>{
+  let cur=ids[0];
+  ids.forEach(id=>{const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<140)cur=id;});
+  document.querySelectorAll('.na').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+cur));
+},{passive:true});
+
+// ── CALLOUTS ─────────────────────────────────────────
+function toggleCallout(el){
+  const body=el.querySelector('.callout-body');
+  const open=body.classList.contains('open');
+  el.closest('.callout-panel').querySelectorAll('.callout-body').forEach(b=>b.classList.remove('open'));
+  el.closest('.callout-panel').querySelectorAll('.callout-item').forEach(i=>i.classList.remove('active'));
+  if(!open){body.classList.add('open');el.classList.add('active');}
+}
+
+// ── LOBBY ────────────────────────────────────────────
+function playLobby(){
+  resetLobby();
+  const els=document.querySelectorAll('.lobby-el');
+  const rows=document.querySelectorAll('.lobby-row');
+  const odds=document.querySelectorAll('.lobby-odds');
+  els.forEach((el,i)=>{
+    el.style.transition=`opacity .28s cubic-bezier(0,0,0.06,1) ${i*60}ms, transform .28s cubic-bezier(0,0,0.06,1) ${i*60}ms`;
+    el.style.opacity='1'; el.style.transform='none';
+  });
+  rows.forEach((row,i)=>{
+    row.style.transition=`opacity .24s cubic-bezier(0,0,0.06,1) ${160+i*50}ms, transform .24s cubic-bezier(0,0,0.06,1) ${160+i*50}ms`;
+    row.style.opacity='1'; row.style.transform='none';
+  });
+  odds.forEach((pill,i)=>{
+    pill.style.transition=`opacity .38s cubic-bezier(0.34,1.45,0.64,1) ${120+i*40}ms, transform .38s cubic-bezier(0.34,1.45,0.64,1) ${120+i*40}ms`;
+    pill.style.opacity='1'; pill.style.transform='none';
+  });
+}
+function resetLobby(){
+  document.querySelectorAll('.lobby-el').forEach(el=>{el.style.transition='none';el.style.opacity='0';el.style.transform='translateY(-8px)';});
+  document.querySelectorAll('.lobby-row').forEach(el=>{el.style.transition='none';el.style.opacity='0';el.style.transform='translateY(6px)';});
+  document.querySelectorAll('.lobby-odds').forEach(el=>{el.style.transition='none';el.style.opacity='0';el.style.transform='scale(0.8)';});
+}
+function selectPill(el){
+  const par=el.parentElement;
+  par.querySelectorAll('.p-odds-pill').forEach(p=>p.classList.remove('sel'));
+  el.classList.add('sel');
+  el.style.transition='transform .1s cubic-bezier(.34,1.56,.64,1)';
+  el.style.transform='scale(1.05)';
+  setTimeout(()=>{el.style.transform='';},200);
+}
+function selectRow(row){row.style.background='rgba(20,147,255,.06)';}
+function selectMini(e,el){
+  e.stopPropagation();
+  el.closest('.p-row-odds').querySelectorAll('.p-mini-pill').forEach(p=>p.classList.remove('sel'));
+  el.classList.add('sel');
+}
+
+// ── DETAIL ────────────────────────────────────────────
+let detailState='a';
+function playDetail(){
+  const sa=document.getElementById('detail-screen-a');
+  const sb=document.getElementById('detail-screen-b');
+  if(detailState==='a'){
+    sa.style.transform='translateX(-100%)';
+    sb.style.transform='translateX(0)';
+    detailState='b';
+    setTimeout(()=>{
+      document.querySelectorAll('.detail-market').forEach((m,i)=>{
+        m.style.transition=`opacity .24s cubic-bezier(0,0,0.06,1) ${300+i*50}ms, transform .24s cubic-bezier(0,0,0.06,1) ${300+i*50}ms`;
+        m.style.opacity='1'; m.style.transform='none';
+      });
+    },50);
+  }
+}
+function resetDetail(){
+  const sa=document.getElementById('detail-screen-a');
+  const sb=document.getElementById('detail-screen-b');
+  sa.style.transform='translateX(0)';
+  sb.style.transform='translateX(100%)';
+  detailState='a';
+  document.querySelectorAll('.detail-market').forEach(m=>{
+    m.style.transition='none'; m.style.opacity='0'; m.style.transform='translateY(6px)';
+  });
+}
+
+// ── BET SLIP ──────────────────────────────────────────
+function openBetSlip(){
+  document.getElementById('bs-overlay').classList.add('on');
+  document.getElementById('bs-sheet').classList.add('on');
+}
+function closeBetSlip(){
+  document.getElementById('bs-overlay').classList.remove('on');
+  document.getElementById('bs-sheet').classList.remove('on');
+  setTimeout(()=>{
+    const suc=document.getElementById('bs-success');
+    suc.classList.remove('on');
+    suc.style.display='';
+  },300);
+}
+let betDone=false;
+function confirmBet(){
+  if(betDone)return; betDone=true;
+  const suc=document.getElementById('bs-success');
+  suc.style.display='flex';
+  suc.style.flexDirection='column';
+  suc.style.alignItems='center';
+  suc.style.justifyContent='center';
+  suc.style.gap='8px';
+  void suc.offsetWidth;
+  suc.classList.add('on');
+  setTimeout(()=>{betDone=false;},3000);
+}
+document.getElementById('bs-overlay').addEventListener('click',()=>{
+  if(!betDone)closeBetSlip();
+});
+
+// ── LIVE ──────────────────────────────────────────────
+const livePills=[
+  {id:'lp-0',valId:'lv-0',val:-185,step:5,int:true},
+  {id:'lp-1',valId:'lv-1',val:155,step:5,int:true},
+  {id:'lp-2',valId:'lv-2',val:-115,step:5,int:true},
+  {id:'lp-3',valId:'lv-3',val:-105,step:5,int:true},
+];
+function fmtOdds(v,isInt){return isInt?(v>0?'+'+v:''+v):''+v;}
+function flashPill(idx){
+  const p=livePills[idx];
+  const up=Math.random()>.5;
+  p.val+=up?p.step:-p.step;
+  document.getElementById(p.valId).textContent=fmtOdds(p.val,p.int);
+  const card=document.getElementById(p.id);
+  card.classList.remove('flash-up-p','flash-dn-p');
+  void card.offsetWidth;
+  card.style.animation='none';
+  void card.offsetWidth;
+  if(up){
+    card.style.animation='livePillUp .5s ease both';
+    const v=document.getElementById(p.valId);
+    v.style.color='var(--green)';
+    setTimeout(()=>v.style.color='',900);
+  } else {
+    card.style.animation='livePillDn .5s ease both';
+    const v=document.getElementById(p.valId);
+    v.style.color='var(--red)';
+    setTimeout(()=>v.style.color='',900);
+  }
+}
+const liveAnim=document.createElement('style');
+liveAnim.textContent=`
+  @keyframes livePillUp{0%{background:rgba(0,200,122,.25);transform:translateY(-3px)}100%{background:transparent;transform:none}}
+  @keyframes livePillDn{0%{background:rgba(255,77,106,.2);transform:translateY(3px)}100%{background:transparent;transform:none}}
+`;
+document.head.appendChild(liveAnim);
+
+let liveInterval=null;
+function startLive(){
+  if(liveInterval)return;
+  liveInterval=setInterval(()=>{
+    const idx=Math.floor(Math.random()*livePills.length);
+    flashPill(idx);
+  },1200);
+}
+function stopLive(){clearInterval(liveInterval);liveInterval=null;}
+
+// ── WIN ───────────────────────────────────────────────
+let winActive=false;
+const confColors=['#F5A623','#1493FF','#00C87A','#9B72FF','#fff','#FFD700','#FF4D6A'];
+function triggerWin(){
+  if(winActive){resetWin();setTimeout(triggerWin,60);return;}
+  winActive=true;
+  const overlay=document.getElementById('win-overlay');
+  const card=document.getElementById('win-card');
+  const cta=document.getElementById('win-cta');
+  overlay.style.pointerEvents='all';
+  overlay.style.opacity='1';
+  card.classList.remove('on'); void card.offsetWidth;
+  setTimeout(()=>{card.classList.add('on');},160);
+  // count up
+  const el=document.getElementById('win-amount');
+  const target=328.50,dur2=700,start=performance.now();
+  const tick=now=>{
+    const p=Math.min((now-start)/dur2,1);
+    const e=1-Math.pow(1-p,3);
+    el.textContent='$'+(e*target).toFixed(2);
+    if(p<1)requestAnimationFrame(tick);
+  };
+  setTimeout(()=>requestAnimationFrame(tick),460);
+  // confetti inside phone
+  const stage=document.querySelector('#phone-win .phone-screen');
+  for(let i=0;i<36;i++){
+    setTimeout(()=>{
+      const c=document.createElement('div');
+      const sz=4+Math.random()*5;
+      const fdur=700+Math.random()*500;
+      c.style.cssText=`position:absolute;width:${sz}px;height:${sz}px;background:${confColors[Math.floor(Math.random()*confColors.length)]};border-radius:${Math.random()>.5?'50%':'2px'};left:${Math.random()*100}%;top:0;animation:confFall ${fdur}ms ease-in both;pointer-events:none;z-index:20;`;
+      stage.appendChild(c);
+      setTimeout(()=>c.remove(),fdur+100);
+    },Math.random()*500);
+  }
+}
+function resetWin(){
+  winActive=false;
+  const overlay=document.getElementById('win-overlay');
+  const card=document.getElementById('win-card');
+  overlay.style.opacity='0'; overlay.style.pointerEvents='none';
+  card.classList.remove('on');
+  card.style.opacity='0'; card.style.transform='scale(.8)';
+  document.getElementById('win-amount').textContent='$0';
+  document.getElementById('win-cta').style.opacity='0';
+  document.querySelectorAll('#phone-win .conf').forEach(e=>e.remove());
+  setTimeout(()=>{card.style.opacity='';card.style.transform='';document.getElementById('win-cta').style.opacity='';},50);
+}
+
+// ── COMP TABS ─────────────────────────────────────────
+const tabLabels=['12 NFL games · 48 markets live','8 NBA games · Finals odds live','6 MLB games · Starting lineups in','4 NHL games · Playoff bracket open'];
+function compTab(i,el){
+  const bar=document.getElementById('comp-tabs');
+  const items=bar.querySelectorAll('.p-tab-pill');
+  const pill=document.getElementById('comp-tab-pill');
+  const w=items[0].offsetWidth+6;
+  const left=3+i*(items[0].offsetWidth+6);
+  pill.style.left=left+'px';
+  pill.style.width=items[0].offsetWidth+'px';
+  items.forEach((it,idx)=>{it.classList.toggle('on',idx===i);});
+  const content=document.getElementById('comp-tab-content');
+  content.style.opacity='0';
+  setTimeout(()=>{content.textContent=tabLabels[i];content.style.opacity='1';},120);
+}
+window.addEventListener('load',()=>{
+  const bar=document.getElementById('comp-tabs');
+  const items=bar.querySelectorAll('.p-tab-pill');
+  const pill=document.getElementById('comp-tab-pill');
+  if(items.length){pill.style.left='3px';pill.style.width=items[0].offsetWidth+'px';}
+});
+
+// ── FLASH DEMO ────────────────────────────────────────
+let fuVal=-140,fdVal=-140;
+function flashDemo(col,dir){
+  if(dir==='up'){
+    fuVal+=5;
+    const el=document.getElementById('flash-demo-up');
+    el.textContent=fuVal>0?'+'+fuVal:''+fuVal;
+    const wrap=col.querySelector('.o-pill');
+    wrap.style.animation='none'; void wrap.offsetWidth;
+    wrap.style.animation='oddsPillUp .5s ease both';
+    wrap.style.color='var(--green)';
+    setTimeout(()=>wrap.style.color='',900);
+  } else {
+    fdVal-=5;
+    const el=document.getElementById('flash-demo-dn');
+    el.textContent=fdVal>0?'+'+fdVal:''+fdVal;
+    const wrap=col.querySelector('.o-pill');
+    wrap.style.animation='none'; void wrap.offsetWidth;
+    wrap.style.animation='oddsPillDn .5s ease both';
+    wrap.style.color='var(--red)';
+    setTimeout(()=>wrap.style.color='',900);
+  }
+}
+
+// ── PARLAY BUILDER ────────────────────────────────────
+const parlayLegs = [
+  { label:'Anfield Anytime Scorer', sub:'Player Prop · EPL', odds:'+165' },
+  { label:'Curry 3+ Threes', sub:'Player Prop · NBA', odds:'-140' },
+  { label:'Ohtani HR', sub:'Player Prop · MLB', odds:'+220' },
+];
+let parlayCount = 2;
+const parlayOddsSeq = ['+246', '+612', '+1,840'];
+const parlayPayoutSeq = ['$34.60', '$71.20', '$194.00'];
+
+function addParlayLeg() {
+  if (parlayCount >= 5) return;
+  const next = parlayLegs[parlayCount - 2];
+  if (!next) return;
+  // create leg card
+  const legs = document.getElementById('parlay-legs');
+  const card = document.createElement('div');
+  card.className = 'parlay-leg';
+  card.style.cssText = 'background:var(--s2);border:1px solid var(--blue);border-radius:10px;padding:9px 11px;display:flex;justify-content:space-between;align-items:center;opacity:0;transform:translateY(14px);';
+  card.innerHTML = `<div><div style="font-size:9px;color:var(--t2);margin-bottom:2px;">${next.sub}</div><div style="font-size:11px;font-weight:800;">${next.label}</div></div><div style="font-size:13px;font-weight:900;color:var(--blue);">${next.odds}</div>`;
+  legs.appendChild(card);
+  // animate in (fd.kick)
+  void card.offsetWidth;
+  card.style.transition = 'opacity .28s cubic-bezier(0,0,0.06,1), transform .28s cubic-bezier(0,0,0.06,1)';
+  card.style.opacity = '1'; card.style.transform = 'none';
+  // after settle, reset border
+  setTimeout(() => { card.style.border = '1px solid var(--border)'; }, 600);
+  parlayCount++;
+  // update badge with spring bump
+  const badge = document.getElementById('parlay-leg-badge');
+  badge.textContent = parlayCount + ' Legs';
+  badge.style.transition = 'transform .18s cubic-bezier(.34,1.56,.64,1)';
+  badge.style.transform = 'scale(1.25)';
+  setTimeout(() => { badge.style.transform = ''; }, 280);
+  // update odds with flash
+  const oddsEl = document.getElementById('parlay-odds');
+  oddsEl.textContent = parlayOddsSeq[parlayCount - 2] || parlayOddsSeq[2];
+  oddsEl.style.color = 'var(--green)';
+  setTimeout(() => { oddsEl.style.color = ''; }, 700);
+  // payout count-up
+  const payoutEl = document.getElementById('parlay-payout');
+  const rawStr = parlayPayoutSeq[parlayCount - 2] || parlayPayoutSeq[2];
+  const target = parseFloat(rawStr.replace(/[$,]/g,''));
+  const start = performance.now();
+  const dur = 500;
+  const prev = parseFloat((payoutEl.textContent).replace(/[$,]/g,'')) || 0;
+  const tick = now => {
+    const t = Math.min((now - start) / dur, 1);
+    const e = 1 - Math.pow(1 - t, 3);
+    const val = prev + e * (target - prev);
+    payoutEl.textContent = '$' + val.toFixed(2);
+    if (t < 1) requestAnimationFrame(tick);
+    else payoutEl.textContent = rawStr;
+  };
+  setTimeout(() => requestAnimationFrame(tick), 100);
+  // boost badge at 3 legs
+  if (parlayCount === 3) {
+    const boost = document.getElementById('parlay-boost');
+    boost.style.transition = 'opacity .2s, transform .52s cubic-bezier(0.34,1.8,0.64,1)';
+    boost.style.opacity = '1'; boost.style.transform = 'none';
+  }
+}
+function resetParlay() {
+  parlayCount = 2;
+  // remove added legs
+  const legs = document.getElementById('parlay-legs');
+  const all = legs.querySelectorAll('.parlay-leg');
+  all.forEach((l, i) => { if (i >= 2) l.remove(); });
+  document.getElementById('parlay-leg-badge').textContent = '2 Legs';
+  document.getElementById('parlay-odds').textContent = '+246';
+  document.getElementById('parlay-odds').style.color = '';
+  document.getElementById('parlay-payout').textContent = '$34.60';
+  const boost = document.getElementById('parlay-boost');
+  boost.style.transition = 'none'; boost.style.opacity = '0'; boost.style.transform = 'scale(0.7)';
+}
+
+// ── MY BETS ───────────────────────────────────────────
+let betSettled = false;
+function settleBet(result) {
+  if (betSettled) { resetMyBets(); setTimeout(() => settleBet(result), 80); return; }
+  betSettled = true;
+  const card = document.getElementById('mybets-pending-card');
+  const badge = document.getElementById('mybets-status-badge');
+  const pendingCount = document.getElementById('pending-count');
+  // fade out breathing animation
+  badge.style.animation = 'none';
+  if (result === 'win') {
+    // badge → WON
+    badge.style.transition = 'all .44s cubic-bezier(0.34,1.45,0.64,1)';
+    badge.style.background = 'rgba(0,200,122,.12)';
+    badge.style.borderColor = 'rgba(0,200,122,.3)';
+    badge.style.color = 'var(--green)';
+    badge.style.transform = 'scale(1.2)';
+    setTimeout(() => { badge.textContent = 'WON'; badge.style.transform = ''; }, 180);
+    // win overlay
+    const overlay = document.getElementById('mybets-win-overlay');
+    const winCard = document.getElementById('mybets-win-card');
+    overlay.style.transition = 'background .2s, opacity .2s';
+    overlay.style.opacity = '1'; overlay.style.pointerEvents = 'all';
+    overlay.style.background = 'rgba(0,0,0,.55)';
+    setTimeout(() => {
+      winCard.style.transition = 'opacity .52s cubic-bezier(0.34,1.8,0.64,1), transform .52s cubic-bezier(0.34,1.8,0.64,1)';
+      winCard.style.opacity = '1'; winCard.style.transform = 'none';
+    }, 200);
+  } else {
+    // badge → LOST
+    badge.style.transition = 'all .22s ease-in';
+    badge.style.background = 'rgba(255,77,106,.1)';
+    badge.style.borderColor = 'rgba(255,77,106,.25)';
+    badge.style.color = 'var(--red)';
+    setTimeout(() => { badge.textContent = 'LOST'; }, 80);
+    // card fades
+    card.style.transition = 'opacity .22s ease-in';
+    card.style.opacity = '.35';
+  }
+  // decrement pending count with spring bump
+  pendingCount.style.transition = 'transform .18s cubic-bezier(.34,1.56,.64,1)';
+  pendingCount.style.transform = 'scale(1.3)';
+  setTimeout(() => {
+    pendingCount.textContent = '0';
+    pendingCount.style.background = 'rgba(126,143,168,.3)';
+    pendingCount.style.transform = '';
+  }, 280);
+  // dismiss win overlay after 3s
+  if (result === 'win') {
+    setTimeout(() => {
+      const overlay = document.getElementById('mybets-win-overlay');
+      overlay.style.opacity = '0'; overlay.style.pointerEvents = 'none';
+    }, 3000);
+  }
+}
+function resetMyBets() {
+  betSettled = false;
+  const card = document.getElementById('mybets-pending-card');
+  const badge = document.getElementById('mybets-status-badge');
+  const overlay = document.getElementById('mybets-win-overlay');
+  const winCard = document.getElementById('mybets-win-card');
+  const pendingCount = document.getElementById('pending-count');
+  card.style.transition = 'none'; card.style.opacity = '1';
+  badge.style.transition = 'none';
+  badge.style.background = 'rgba(20,147,255,.12)';
+  badge.style.borderColor = 'rgba(20,147,255,.25)';
+  badge.style.color = 'var(--blue)';
+  badge.style.transform = '';
+  badge.textContent = 'PENDING';
+  badge.style.animation = 'pendingBreath 2.2s ease-in-out infinite';
+  overlay.style.transition = 'none'; overlay.style.opacity = '0'; overlay.style.pointerEvents = 'none'; overlay.style.background = 'rgba(0,0,0,0)';
+  winCard.style.transition = 'none'; winCard.style.opacity = '0'; winCard.style.transform = 'scale(.7)';
+  pendingCount.textContent = '1'; pendingCount.style.background = 'var(--blue)'; pendingCount.style.transform = '';
+}
+
+// ── SEARCH ────────────────────────────────────────────
+let searchPlayed = false;
+function playSearch() {
+  if (searchPlayed) { resetSearch(); setTimeout(playSearch, 80); return; }
+  searchPlayed = true;
+  const idle = document.getElementById('search-idle');
+  const active = document.getElementById('search-active');
+  const bar = document.getElementById('search-bar-expanded');
+  const chips = document.querySelectorAll('.search-chip');
+  const results = document.querySelectorAll('.search-result');
+  // crossfade idle → active
+  idle.style.transition = 'opacity .15s';
+  idle.style.opacity = '0';
+  idle.style.pointerEvents = 'none';
+  setTimeout(() => {
+    active.style.transition = 'opacity .15s';
+    active.style.opacity = '1';
+    active.style.pointerEvents = 'all';
+    // bar snap expand
+    bar.style.transition = 'transform .2s cubic-bezier(0.34,1.12,0.64,1)';
+    bar.style.transform = 'scaleX(1)';
+    // chips stagger in
+    chips.forEach((chip, i) => {
+      chip.style.transition = `opacity .2s cubic-bezier(0,0,0.06,1) ${i*30+60}ms, transform .2s cubic-bezier(0,0,0.06,1) ${i*30+60}ms`;
+      chip.style.opacity = '1'; chip.style.transform = 'none';
+    });
+    // results stagger in after chips
+    results.forEach((r, i) => {
+      r.style.transition = `opacity .24s cubic-bezier(0,0,0.06,1) ${240+i*40}ms, transform .24s cubic-bezier(0,0,0.06,1) ${240+i*40}ms`;
+      r.style.opacity = '1'; r.style.transform = 'none';
+    });
+  }, 100);
+}
+function resetSearch() {
+  searchPlayed = false;
+  const idle = document.getElementById('search-idle');
+  const active = document.getElementById('search-active');
+  const bar = document.getElementById('search-bar-expanded');
+  const chips = document.querySelectorAll('.search-chip');
+  const results = document.querySelectorAll('.search-result');
+  idle.style.transition = 'none'; idle.style.opacity = '1'; idle.style.pointerEvents = 'all';
+  active.style.transition = 'none'; active.style.opacity = '0'; active.style.pointerEvents = 'none';
+  bar.style.transition = 'none'; bar.style.transform = 'scaleX(0.92)';
+  chips.forEach(c => { c.style.transition = 'none'; c.style.opacity = '0'; c.style.transform = 'translateX(-20px)'; });
+  results.forEach(r => { r.style.transition = 'none'; r.style.opacity = '0'; r.style.transform = 'translateY(8px)'; });
+}
+
+// ── TOASTS ────────────────────────────────────────────
+function playToasts(){
+  const toasts=['toast-success','toast-info','toast-error'];
+  // reset
+  toasts.forEach(id=>{
+    const el=document.getElementById(id);
+    el.style.transition='none'; el.style.opacity='0'; el.style.transform='translateY(-16px)';
+  });
+  void document.getElementById('toast-success').offsetWidth;
+  toasts.forEach((id,i)=>{
+    setTimeout(()=>{
+      const el=document.getElementById(id);
+      el.style.transition=`opacity .25s cubic-bezier(0,0,0.06,1), transform .25s cubic-bezier(0,0,0.06,1)`;
+      el.style.opacity='1'; el.style.transform='none';
+    }, i*80);
+  });
+  // auto dismiss
+  toasts.forEach((id,i)=>{
+    setTimeout(()=>{
+      const el=document.getElementById(id);
+      el.style.transition='opacity .18s ease-in, transform .18s ease-in';
+      el.style.opacity='0'; el.style.transform='translateY(-8px)';
+    }, 2400+i*80);
+  });
+}
+</script>
+</body>
+</html>
