@@ -2138,25 +2138,331 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
 <span id="c-sheet"></span>
 <div class="sec-label" style="margin-top:40px;">Components · 04</div>
 <h2 class="sec-head">Bottom Sheet</h2>
+<p class="sec-sub">The sheet is FanDuel's primary action surface — bet slip, filter panel, market details. It lives at the intersection of productive and expressive motion: enter with authority, exit fast, and track the user's finger 1:1 during drag.</p>
 
-<div class="comp-grid">
-  <div class="comp-card">
-    <div class="comp-head"><div class="comp-name">Enter</div><div class="comp-curve">fd.kick · 340ms · translateY 100%→0</div></div>
-    <div class="comp-stage">
-      <div style="font-size:28px;">⬆️</div>
-      <div style="font-size:13px;color:var(--t2);max-width:120px;text-align:center;line-height:1.5;">Explosive start, decelerates with authority</div>
+<!-- ── Phone demo ── -->
+<div style="display:flex;gap:32px;align-items:flex-start;flex-wrap:wrap;margin-bottom:32px;">
+
+  <!-- Phone mockup -->
+  <div style="flex:0 0 auto;">
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="phone-screen" style="position:relative;overflow:hidden;background:#0d0d10;">
+
+          <!-- App background: lobby content dimmed behind sheet -->
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;">
+            <!-- nav -->
+            <div style="height:44px;background:#111318;display:flex;align-items:center;padding:0 14px;gap:10px;flex-shrink:0;border-bottom:1px solid rgba(255,255,255,.06);">
+              <div style="width:20px;height:20px;border-radius:4px;background:rgba(255,255,255,.1);"></div>
+              <div style="flex:1;height:10px;border-radius:5px;background:rgba(255,255,255,.08);"></div>
+              <div style="width:28px;height:20px;border-radius:4px;background:rgba(255,255,255,.1);"></div>
+            </div>
+            <!-- sport filter -->
+            <div style="height:34px;background:#111318;display:flex;align-items:center;gap:8px;padding:0 10px;flex-shrink:0;border-bottom:1px solid rgba(255,255,255,.06);">
+              <div style="width:42px;height:18px;border-radius:9px;background:var(--ba);opacity:.9;"></div>
+              <div style="width:36px;height:18px;border-radius:9px;background:rgba(255,255,255,.08);"></div>
+              <div style="width:44px;height:18px;border-radius:9px;background:rgba(255,255,255,.08);"></div>
+              <div style="width:32px;height:18px;border-radius:9px;background:rgba(255,255,255,.08);"></div>
+            </div>
+            <!-- game rows -->
+            <div style="flex:1;padding:8px;display:flex;flex-direction:column;gap:6px;overflow:hidden;">
+              <div style="background:rgba(255,255,255,.05);border-radius:8px;height:62px;padding:10px;display:flex;flex-direction:column;justify-content:space-between;">
+                <div style="height:9px;border-radius:5px;background:rgba(255,255,255,.12);width:55%;"></div>
+                <div style="display:flex;gap:6px;">
+                  <div style="flex:1;height:22px;border-radius:6px;background:rgba(255,255,255,.08);"></div>
+                  <div style="flex:1;height:22px;border-radius:6px;background:rgba(255,255,255,.08);"></div>
+                  <div style="flex:1;height:22px;border-radius:6px;background:rgba(255,255,255,.08);"></div>
+                </div>
+              </div>
+              <div style="background:rgba(255,255,255,.05);border-radius:8px;height:62px;padding:10px;display:flex;flex-direction:column;justify-content:space-between;">
+                <div style="height:9px;border-radius:5px;background:rgba(255,255,255,.12);width:48%;"></div>
+                <div style="display:flex;gap:6px;">
+                  <div style="flex:1;height:22px;border-radius:6px;background:rgba(255,255,255,.08);"></div>
+                  <div style="flex:1;height:22px;border-radius:6px;background:rgba(255,255,255,.08);"></div>
+                  <div style="flex:1;height:22px;border-radius:6px;background:rgba(255,255,255,.08);"></div>
+                </div>
+              </div>
+              <div style="background:rgba(255,255,255,.05);border-radius:8px;height:62px;padding:10px;display:flex;flex-direction:column;justify-content:space-between;">
+                <div style="height:9px;border-radius:5px;background:rgba(255,255,255,.12);width:60%;"></div>
+                <div style="display:flex;gap:6px;">
+                  <div style="flex:1;height:22px;border-radius:6px;background:rgba(255,255,255,.08);"></div>
+                  <div style="flex:1;height:22px;border-radius:6px;background:rgba(255,255,255,.08);"></div>
+                  <div style="flex:1;height:22px;border-radius:6px;background:rgba(255,255,255,.08);"></div>
+                </div>
+              </div>
+            </div>
+            <!-- bottom tab bar -->
+            <div style="height:50px;background:#111318;border-top:1px solid rgba(255,255,255,.07);display:flex;align-items:center;justify-content:space-around;padding:0 4px;flex-shrink:0;">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:2px;opacity:.45;"><div style="width:18px;height:14px;border-radius:3px;background:rgba(255,255,255,.4);"></div><div style="width:22px;height:5px;border-radius:3px;background:rgba(255,255,255,.25);"></div></div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:2px;opacity:.45;"><div style="width:18px;height:14px;border-radius:3px;background:rgba(255,255,255,.4);"></div><div style="width:16px;height:5px;border-radius:3px;background:rgba(255,255,255,.25);"></div></div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:2px;opacity:.45;"><div style="width:18px;height:14px;border-radius:3px;background:rgba(255,255,255,.4);"></div><div style="width:26px;height:5px;border-radius:3px;background:rgba(255,255,255,.25);"></div></div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:2px;opacity:.45;"><div style="width:18px;height:14px;border-radius:3px;background:rgba(255,255,255,.4);"></div><div style="width:22px;height:5px;border-radius:3px;background:rgba(255,255,255,.25);"></div></div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:2px;opacity:.45;"><div style="width:18px;height:14px;border-radius:3px;background:rgba(255,255,255,.4);"></div><div style="width:24px;height:5px;border-radius:3px;background:rgba(255,255,255,.25);"></div></div>
+            </div>
+          </div>
+
+          <!-- Scrim overlay -->
+          <div id="bs-scrim" style="position:absolute;inset:0;background:rgba(0,0,0,0);pointer-events:none;transition:background 320ms ease;"></div>
+
+          <!-- Bottom Sheet -->
+          <div id="bs-sheet" style="position:absolute;bottom:0;left:0;right:0;background:#1a1d24;border-radius:16px 16px 0 0;transform:translateY(100%);transition:transform 340ms cubic-bezier(0,0,0.06,1);z-index:10;overflow:hidden;">
+            <!-- Drag handle -->
+            <div style="display:flex;justify-content:center;padding:10px 0 6px;">
+              <div id="bs-handle" style="width:36px;height:4px;border-radius:2px;background:rgba(255,255,255,.2);cursor:grab;"></div>
+            </div>
+            <!-- Sheet header -->
+            <div style="padding:0 16px 12px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.07);">
+              <div style="font-size:13px;font-weight:600;color:var(--t1);">Bet Slip</div>
+              <div id="bs-close-x" style="width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--t2);cursor:pointer;">✕</div>
+            </div>
+            <!-- Sheet content rows -->
+            <div style="padding:12px 16px;display:flex;flex-direction:column;gap:10px;">
+              <!-- Bet row 1 -->
+              <div id="bs-row1" style="background:rgba(255,255,255,.05);border-radius:8px;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;opacity:0;transform:translateY(12px);transition:opacity 220ms,transform 220ms cubic-bezier(0,0,0.06,1);">
+                <div style="display:flex;flex-direction:column;gap:4px;">
+                  <div style="height:8px;width:80px;border-radius:4px;background:rgba(255,255,255,.2);"></div>
+                  <div style="height:7px;width:52px;border-radius:4px;background:rgba(255,255,255,.1);"></div>
+                </div>
+                <div style="background:var(--ba);border-radius:6px;padding:4px 8px;font-size:11px;font-weight:700;color:#0d0d10;">-110</div>
+              </div>
+              <!-- Bet row 2 -->
+              <div id="bs-row2" style="background:rgba(255,255,255,.05);border-radius:8px;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;opacity:0;transform:translateY(12px);transition:opacity 220ms 60ms,transform 220ms 60ms cubic-bezier(0,0,0.06,1);">
+                <div style="display:flex;flex-direction:column;gap:4px;">
+                  <div style="height:8px;width:68px;border-radius:4px;background:rgba(255,255,255,.2);"></div>
+                  <div style="height:7px;width:44px;border-radius:4px;background:rgba(255,255,255,.1);"></div>
+                </div>
+                <div style="background:var(--ba);border-radius:6px;padding:4px 8px;font-size:11px;font-weight:700;color:#0d0d10;">+240</div>
+              </div>
+              <!-- Stake input row -->
+              <div id="bs-row3" style="background:rgba(255,255,255,.05);border-radius:8px;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;opacity:0;transform:translateY(12px);transition:opacity 220ms 120ms,transform 220ms 120ms cubic-bezier(0,0,0.06,1);">
+                <div style="font-size:11px;color:var(--t2);">Wager</div>
+                <div style="height:22px;width:64px;border-radius:6px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);"></div>
+              </div>
+              <!-- CTA -->
+              <div id="bs-cta" style="background:var(--green);border-radius:10px;height:36px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;opacity:0;transform:translateY(8px);transition:opacity 200ms 180ms,transform 200ms 180ms cubic-bezier(0.34,1.45,0.64,1);cursor:pointer;letter-spacing:.3px;">Place Bet</div>
+            </div>
+            <!-- Snap point indicator (half-height handle area) -->
+            <div style="height:20px;"></div>
+          </div>
+
+        </div><!-- /phone-screen -->
+      </div><!-- /phone -->
+    </div><!-- /phone-wrap -->
+
+    <!-- Controls -->
+    <div style="display:flex;gap:8px;margin-top:12px;justify-content:center;flex-wrap:wrap;">
+      <button class="play-btn" onclick="openSheet()" style="font-size:11px;padding:7px 14px;">⬆ Open sheet</button>
+      <button class="play-btn" onclick="snapSheet()" style="font-size:11px;padding:7px 14px;background:rgba(255,255,255,.06);">⟺ Half snap</button>
+      <button class="play-btn" onclick="closeSheet()" style="font-size:11px;padding:7px 14px;background:rgba(255,255,255,.06);">⬇ Dismiss</button>
     </div>
-    <div class="comp-note">bezier(0, 0, 0.06, 1) — more aggressive than Material's standard. The sheet has momentum from below.</div>
+
+    <!-- State label -->
+    <div id="bs-state-label" style="text-align:center;margin-top:10px;font-size:11px;color:var(--t2);letter-spacing:.4px;font-family:monospace;">CLOSED</div>
+  </div>
+
+  <!-- Callout column -->
+  <div style="flex:1;min-width:260px;display:flex;flex-direction:column;gap:12px;">
+
+    <div class="callout">
+      <div class="callout-label">Enter · fd.kick 340ms</div>
+      <div class="callout-desc">Sheet fires up from below. translateY(100% → 0). The aggressive deceleration gives it physical weight — like a drawer pulled up by a handle, not a fade-in from nowhere.</div>
+<pre class="callout-code"><span class="cc">// On open</span>
+translateY.<span class="cf">value</span> = withTiming(<span class="cn">0</span>, {
+  duration: <span class="cn">340</span>,
+  easing: Easing.<span class="cf">bezier</span>(<span class="cn">0</span>, <span class="cn">0</span>, <span class="cn">0.06</span>, <span class="cn">1</span>),
+});
+scrimOpacity.<span class="cf">value</span> = withTiming(<span class="cn">0.6</span>, { duration: <span class="cn">320</span> });</pre>
+    </div>
+
+    <div class="callout">
+      <div class="callout-label">Content stagger · 50ms offset</div>
+      <div class="callout-desc">Rows inside the sheet enter with a 50–60ms stagger after the sheet lands. This separates the container arrival from the content reveal — two distinct beats, not one blob.</div>
+<pre class="callout-code"><span class="cc">// Row stagger inside sheet</span>
+rows.<span class="cf">forEach</span>((row, i) => {
+  row.opacity.<span class="cf">value</span> = withDelay(
+    <span class="cn">60</span> + i * <span class="cn">60</span>,
+    withTiming(<span class="cn">1</span>, { duration: <span class="cn">220</span>, easing: curve.kick })
+  );
+  row.translateY.<span class="cf">value</span> = withDelay(
+    <span class="cn">60</span> + i * <span class="cn">60</span>,
+    withTiming(<span class="cn">0</span>, { duration: <span class="cn">220</span>, easing: curve.kick })
+  );
+});</pre>
+    </div>
+
+    <div class="callout">
+      <div class="callout-label">Drag · 1:1 tracking, no easing</div>
+      <div class="callout-desc">While the user's finger is down, translateY mirrors gesture delta directly — no animation function, no easing. The moment they lift, velocity handoff takes over.</div>
+<pre class="callout-code"><span class="cc">// During gesture (PanGesture.onUpdate)</span>
+<span class="ck">const</span> newY = startY + event.translationY;
+<span class="cc">// Rubber-band above snap point</span>
+<span class="ck">if</span> (newY < <span class="cn">0</span>) {
+  translateY.<span class="cf">value</span> = newY * <span class="cn">0.12</span>; <span class="cc">// resistance</span>
+} <span class="ck">else</span> {
+  translateY.<span class="cf">value</span> = newY; <span class="cc">// 1:1 below</span>
+}</pre>
+    </div>
+
+    <div class="callout">
+      <div class="callout-label">Release · velocity handoff to spring</div>
+      <div class="callout-desc">On finger-up, check position + velocity. If dragged past 40% of sheet height or velocity > 500px/s → dismiss. Otherwise snap back. Spring picks up the finger's momentum — no jarring transition.</div>
+<pre class="callout-code"><span class="cc">// On gesture end (onEnd)</span>
+<span class="ck">const</span> shouldDismiss =
+  event.translationY > sheetH * <span class="cn">0.4</span> ||
+  event.velocityY > <span class="cn">500</span>;
+
+<span class="ck">if</span> (shouldDismiss) {
+  translateY.<span class="cf">value</span> = withTiming(sheetH, {
+    duration: <span class="cn">220</span>,
+    easing: Easing.<span class="cf">in</span>(Easing.cubic),
+  });
+} <span class="ck">else</span> {
+  <span class="cc">// Snap back with velocity baked in</span>
+  translateY.<span class="cf">value</span> = withSpring(<span class="cn">0</span>, {
+    velocity: event.velocityY,
+    stiffness: <span class="cn">400</span>,
+    damping: <span class="cn">40</span>,
+  });
+}</pre>
+    </div>
+
+    <div class="callout">
+      <div class="callout-label">Exit · ease-in 220ms</div>
+      <div class="callout-desc">Always faster than enter. Sheet accelerates as it leaves — like an object that's been released. 220ms vs 340ms enter. Scrim fades out simultaneously.</div>
+<pre class="callout-code"><span class="cc">// On close</span>
+translateY.<span class="cf">value</span> = withTiming(sheetH, {
+  duration: <span class="cn">220</span>,
+  easing: Easing.<span class="cf">in</span>(Easing.cubic),
+});
+scrimOpacity.<span class="cf">value</span> = withTiming(<span class="cn">0</span>, {
+  duration: <span class="cn">200</span>,
+});</pre>
+    </div>
+
+  </div>
+</div><!-- /flex row -->
+
+<!-- Snap points rule -->
+<div class="comp-grid" style="margin-bottom:0;">
+  <div class="comp-card">
+    <div class="comp-head"><div class="comp-name">Snap points</div><div class="comp-curve">fd.snap spring · s:400 d:40</div></div>
+    <div class="comp-stage" style="flex-direction:column;gap:6px;padding:12px 0;">
+      <div style="width:100%;display:flex;flex-direction:column;gap:4px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div style="width:36px;height:4px;border-radius:2px;background:var(--ba);flex-shrink:0;"></div>
+          <span style="font-size:11px;color:var(--t2);">Full — default for Bet Slip, Parlay</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div style="width:36px;height:4px;border-radius:2px;background:rgba(255,255,255,.3);flex-shrink:0;"></div>
+          <span style="font-size:11px;color:var(--t2);">Half (50% vh) — filter panels, quick picks</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div style="width:36px;height:4px;border-radius:2px;background:rgba(255,255,255,.12);flex-shrink:0;"></div>
+          <span style="font-size:11px;color:var(--t2);">Dismiss — always below 10% or velocity > 500</span>
+        </div>
+      </div>
+    </div>
+    <div class="comp-note">Between snaps use fd.snap (spring s:400 d:40) — not withTiming. The spring's velocity-awareness makes the snap feel physical rather than programmatic.</div>
   </div>
   <div class="comp-card">
-    <div class="comp-head"><div class="comp-name">Exit</div><div class="comp-curve">ease-in · 220ms · translateY 0→100%</div></div>
-    <div class="comp-stage">
-      <div style="font-size:28px;">⬇️</div>
-      <div style="font-size:13px;color:var(--t2);max-width:120px;text-align:center;line-height:1.5;">Accelerates away. Always faster than enter.</div>
+    <div class="comp-head"><div class="comp-name">Scrim</div><div class="comp-curve">opacity 0→0.6 · 320ms linear</div></div>
+    <div class="comp-stage" style="flex-direction:column;gap:8px;">
+      <div style="width:80px;height:50px;border-radius:6px;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;">
+        <div style="width:48px;height:28px;border-radius:4px;background:#1a1d24;"></div>
+      </div>
+      <div style="font-size:11px;color:var(--t2);text-align:center;">rgba(0,0,0,0.6)</div>
     </div>
-    <div class="comp-note">Easing.in(Easing.cubic) — picks up speed like an object falling. 220ms vs 340ms enter. Never equal.</div>
+    <div class="comp-note">Scrim and sheet animate simultaneously — not sequentially. Tapping the scrim triggers the same dismiss animation as dragging down. Scrim tap = close, never stagger them.</div>
+  </div>
+  <div class="comp-card">
+    <div class="comp-head"><div class="comp-name">borderRadius</div><div class="comp-curve">interpolates 0 → 16px during enter</div></div>
+    <div class="comp-stage" style="flex-direction:column;gap:8px;">
+      <div style="display:flex;gap:8px;align-items:flex-end;">
+        <div style="width:40px;height:32px;background:#1a1d24;border-radius:0;"></div>
+        <div style="font-size:10px;color:var(--t2);">→</div>
+        <div style="width:40px;height:32px;background:#1a1d24;border-radius:10px 10px 0 0;"></div>
+      </div>
+    </div>
+    <div class="comp-note">Interpolate borderTopLeftRadius and borderTopRightRadius from 0→16 during the first 60% of the enter animation. When sheet starts off-screen, no radius needed — it forms as it lands.</div>
   </div>
 </div>
+
+<script>
+// ── Bottom Sheet demo ─────────────────────────────────────────
+let bsIsOpen = false;
+let bsIsHalf = false;
+
+function openSheet() {
+  const sheet = document.getElementById('bs-sheet');
+  const scrim = document.getElementById('bs-scrim');
+  const rows = ['bs-row1','bs-row2','bs-row3','bs-cta'];
+  const label = document.getElementById('bs-state-label');
+
+  // Reset rows first
+  rows.forEach(id => {
+    const el = document.getElementById(id);
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(12px)';
+  });
+
+  // Animate sheet up (fd.kick via CSS transition already set)
+  sheet.style.transform = 'translateY(0)';
+  scrim.style.background = 'rgba(0,0,0,0.55)';
+  bsIsOpen = true;
+  bsIsHalf = false;
+  label.textContent = 'OPEN · fd.kick 340ms';
+
+  // Stagger rows in after sheet lands
+  rows.forEach((id, i) => {
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      el.style.opacity = '1';
+      el.style.transform = 'translateY(0)';
+    }, 180 + i * 65);
+  });
+}
+
+function snapSheet() {
+  if (!bsIsOpen) { openSheet(); return; }
+  const sheet = document.getElementById('bs-sheet');
+  const label = document.getElementById('bs-state-label');
+  if (!bsIsHalf) {
+    sheet.style.transition = 'transform 260ms cubic-bezier(0.34,1.45,0.64,1)';
+    sheet.style.transform = 'translateY(calc(50%))';
+    bsIsHalf = true;
+    label.textContent = 'HALF SNAP · fd.release 260ms';
+  } else {
+    sheet.style.transition = 'transform 340ms cubic-bezier(0,0,0.06,1)';
+    sheet.style.transform = 'translateY(0)';
+    bsIsHalf = false;
+    label.textContent = 'OPEN · fd.kick 340ms';
+  }
+  setTimeout(() => {
+    sheet.style.transition = 'transform 340ms cubic-bezier(0,0,0.06,1)';
+  }, 300);
+}
+
+function closeSheet() {
+  const sheet = document.getElementById('bs-sheet');
+  const scrim = document.getElementById('bs-scrim');
+  const label = document.getElementById('bs-state-label');
+  sheet.style.transition = 'transform 220ms cubic-bezier(0.55,0,1,0.45)';
+  sheet.style.transform = 'translateY(100%)';
+  scrim.style.background = 'rgba(0,0,0,0)';
+  bsIsOpen = false;
+  bsIsHalf = false;
+  label.textContent = 'DISMISSED · ease-in 220ms';
+  // Reset transition after exit
+  setTimeout(() => {
+    sheet.style.transition = 'transform 340ms cubic-bezier(0,0,0.06,1)';
+    label.textContent = 'CLOSED';
+  }, 260);
+}
+
+// Scrim tap dismisses
+document.getElementById('bs-scrim').addEventListener('click', closeSheet);
+document.getElementById('bs-close-x').addEventListener('click', closeSheet);
+</script>
 
 <span id="c-toast"></span>
 <div class="sec-label" style="margin-top:40px;">Components · 05</div>
