@@ -2187,10 +2187,10 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
         </div>
 
         <!-- Scrim -->
-        <div id="bs-scrim" style="position:absolute;inset:0;background:rgba(0,0,0,0);transition:background 300ms linear;pointer-events:none;z-index:5;"></div>
+        <div id="sd-scrim" style="position:absolute;inset:0;background:rgba(0,0,0,0);transition:background 300ms linear;pointer-events:none;z-index:5;"></div>
 
         <!-- Bottom Sheet -->
-        <div id="bs-sheet" style="position:absolute;bottom:0;left:0;right:0;background:var(--s1);border-radius:14px 14px 0 0;transform:translateY(102%);transition:transform 340ms cubic-bezier(0,0,0.06,1);z-index:10;border-top:1px solid var(--b2);">
+        <div id="sd-sheet" style="position:absolute;bottom:0;left:0;right:0;background:var(--s1);border-radius:14px 14px 0 0;transform:translateY(102%);transition:transform 340ms cubic-bezier(0,0,0.06,1);z-index:10;border-top:1px solid var(--b2);">
           <!-- Handle -->
           <div style="display:flex;justify-content:center;padding:10px 0 6px;">
             <div style="width:36px;height:4px;border-radius:2px;background:var(--b2);"></div>
@@ -2198,29 +2198,29 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
           <!-- Header -->
           <div style="padding:0 14px 10px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);">
             <div style="font-size:13px;font-weight:700;color:var(--t1);">Bet Slip</div>
-            <div id="bs-close-x" style="width:22px;height:22px;border-radius:50%;background:var(--s2);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--t2);cursor:pointer;">✕</div>
+            <div id="sd-close" style="width:22px;height:22px;border-radius:50%;background:var(--s2);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--t2);cursor:pointer;">✕</div>
           </div>
           <!-- Rows -->
           <div style="padding:10px 14px;display:flex;flex-direction:column;gap:8px;">
-            <div id="bs-row1" style="background:var(--s2);border:1px solid var(--border);border-radius:8px;padding:9px 11px;display:flex;align-items:center;justify-content:space-between;opacity:0;transform:translateY(10px);transition:opacity 220ms,transform 220ms cubic-bezier(0,0,0.06,1);">
+            <div id="sd-row1" style="background:var(--s2);border:1px solid var(--border);border-radius:8px;padding:9px 11px;display:flex;align-items:center;justify-content:space-between;opacity:0;transform:translateY(10px);transition:opacity 220ms,transform 220ms cubic-bezier(0,0,0.06,1);">
               <div style="display:flex;flex-direction:column;gap:4px;">
                 <div style="height:8px;width:76px;border-radius:4px;background:var(--s3);"></div>
                 <div style="height:6px;width:50px;border-radius:3px;background:var(--border);"></div>
               </div>
               <div style="background:var(--ba);border-radius:6px;padding:4px 8px;font-size:11px;font-weight:800;color:#0d0d10;">-110</div>
             </div>
-            <div id="bs-row2" style="background:var(--s2);border:1px solid var(--border);border-radius:8px;padding:9px 11px;display:flex;align-items:center;justify-content:space-between;opacity:0;transform:translateY(10px);transition:opacity 220ms 65ms,transform 220ms 65ms cubic-bezier(0,0,0.06,1);">
+            <div id="sd-row2" style="background:var(--s2);border:1px solid var(--border);border-radius:8px;padding:9px 11px;display:flex;align-items:center;justify-content:space-between;opacity:0;transform:translateY(10px);transition:opacity 220ms 65ms,transform 220ms 65ms cubic-bezier(0,0,0.06,1);">
               <div style="display:flex;flex-direction:column;gap:4px;">
                 <div style="height:8px;width:60px;border-radius:4px;background:var(--s3);"></div>
                 <div style="height:6px;width:42px;border-radius:3px;background:var(--border);"></div>
               </div>
               <div style="background:var(--ba);border-radius:6px;padding:4px 8px;font-size:11px;font-weight:800;color:#0d0d10;">+240</div>
             </div>
-            <div id="bs-row3" style="background:var(--s2);border:1px solid var(--border);border-radius:8px;padding:9px 11px;display:flex;align-items:center;justify-content:space-between;opacity:0;transform:translateY(10px);transition:opacity 220ms 130ms,transform 220ms 130ms cubic-bezier(0,0,0.06,1);">
+            <div id="sd-row3" style="background:var(--s2);border:1px solid var(--border);border-radius:8px;padding:9px 11px;display:flex;align-items:center;justify-content:space-between;opacity:0;transform:translateY(10px);transition:opacity 220ms 130ms,transform 220ms 130ms cubic-bezier(0,0,0.06,1);">
               <div style="font-size:11px;color:var(--t2);">Wager</div>
               <div style="height:22px;width:64px;border-radius:6px;background:var(--s3);border:1px solid var(--b2);"></div>
             </div>
-            <div id="bs-cta" style="background:var(--green);border-radius:9px;height:36px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#021A0E;opacity:0;transform:translateY(8px);transition:opacity 200ms 195ms,transform 200ms 195ms cubic-bezier(0.34,1.45,0.64,1);">Place Bet</div>
+            <div id="sd-cta" style="background:var(--green);border-radius:9px;height:36px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#021A0E;opacity:0;transform:translateY(8px);transition:opacity 200ms 195ms,transform 200ms 195ms cubic-bezier(0.34,1.45,0.64,1);">Place Bet</div>
           </div>
           <div style="height:14px;"></div>
         </div>
@@ -2230,124 +2230,6 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
   </div><!-- /left col -->
 
   <div class="callout-panel">
-
-  <!-- Phone mockup -->
-  <div style="flex:0 0 auto;">
-    <div class="phone-wrap">
-      <div class="phone">
-        <div class="phone-screen" style="position:relative;overflow:hidden;background:#0d0d10;">
-
-          <!-- App background: lobby content dimmed behind sheet -->
-          <div style="position:absolute;inset:0;display:flex;flex-direction:column;">
-            <!-- nav -->
-            <div style="height:44px;background:#111318;display:flex;align-items:center;padding:0 14px;gap:10px;flex-shrink:0;border-bottom:1px solid rgba(255,255,255,.06);">
-              <div style="width:20px;height:20px;border-radius:4px;background:rgba(255,255,255,.1);"></div>
-              <div style="flex:1;height:10px;border-radius:5px;background:rgba(255,255,255,.08);"></div>
-              <div style="width:28px;height:20px;border-radius:4px;background:rgba(255,255,255,.1);"></div>
-            </div>
-            <!-- sport filter -->
-            <div style="height:34px;background:#111318;display:flex;align-items:center;gap:8px;padding:0 10px;flex-shrink:0;border-bottom:1px solid rgba(255,255,255,.06);">
-              <div style="width:42px;height:18px;border-radius:9px;background:var(--ba);opacity:.9;"></div>
-              <div style="width:36px;height:18px;border-radius:9px;background:rgba(255,255,255,.08);"></div>
-              <div style="width:44px;height:18px;border-radius:9px;background:rgba(255,255,255,.08);"></div>
-              <div style="width:32px;height:18px;border-radius:9px;background:rgba(255,255,255,.08);"></div>
-            </div>
-            <!-- game rows -->
-            <div style="flex:1;padding:8px;display:flex;flex-direction:column;gap:6px;overflow:hidden;">
-              <div style="background:rgba(255,255,255,.05);border-radius:8px;height:62px;padding:10px;display:flex;flex-direction:column;justify-content:space-between;">
-                <div style="height:9px;border-radius:5px;background:rgba(255,255,255,.12);width:55%;"></div>
-                <div style="display:flex;gap:6px;">
-                  <div style="flex:1;height:22px;border-radius:6px;background:rgba(255,255,255,.08);"></div>
-                  <div style="flex:1;height:22px;border-radius:6px;background:rgba(255,255,255,.08);"></div>
-                  <div style="flex:1;height:22px;border-radius:6px;background:rgba(255,255,255,.08);"></div>
-                </div>
-              </div>
-              <div style="background:rgba(255,255,255,.05);border-radius:8px;height:62px;padding:10px;display:flex;flex-direction:column;justify-content:space-between;">
-                <div style="height:9px;border-radius:5px;background:rgba(255,255,255,.12);width:48%;"></div>
-                <div style="display:flex;gap:6px;">
-                  <div style="flex:1;height:22px;border-radius:6px;background:rgba(255,255,255,.08);"></div>
-                  <div style="flex:1;height:22px;border-radius:6px;background:rgba(255,255,255,.08);"></div>
-                  <div style="flex:1;height:22px;border-radius:6px;background:rgba(255,255,255,.08);"></div>
-                </div>
-              </div>
-              <div style="background:rgba(255,255,255,.05);border-radius:8px;height:62px;padding:10px;display:flex;flex-direction:column;justify-content:space-between;">
-                <div style="height:9px;border-radius:5px;background:rgba(255,255,255,.12);width:60%;"></div>
-                <div style="display:flex;gap:6px;">
-                  <div style="flex:1;height:22px;border-radius:6px;background:rgba(255,255,255,.08);"></div>
-                  <div style="flex:1;height:22px;border-radius:6px;background:rgba(255,255,255,.08);"></div>
-                  <div style="flex:1;height:22px;border-radius:6px;background:rgba(255,255,255,.08);"></div>
-                </div>
-              </div>
-            </div>
-            <!-- bottom tab bar -->
-            <div style="height:50px;background:#111318;border-top:1px solid rgba(255,255,255,.07);display:flex;align-items:center;justify-content:space-around;padding:0 4px;flex-shrink:0;">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:2px;opacity:.45;"><div style="width:18px;height:14px;border-radius:3px;background:rgba(255,255,255,.4);"></div><div style="width:22px;height:5px;border-radius:3px;background:rgba(255,255,255,.25);"></div></div>
-              <div style="display:flex;flex-direction:column;align-items:center;gap:2px;opacity:.45;"><div style="width:18px;height:14px;border-radius:3px;background:rgba(255,255,255,.4);"></div><div style="width:16px;height:5px;border-radius:3px;background:rgba(255,255,255,.25);"></div></div>
-              <div style="display:flex;flex-direction:column;align-items:center;gap:2px;opacity:.45;"><div style="width:18px;height:14px;border-radius:3px;background:rgba(255,255,255,.4);"></div><div style="width:26px;height:5px;border-radius:3px;background:rgba(255,255,255,.25);"></div></div>
-              <div style="display:flex;flex-direction:column;align-items:center;gap:2px;opacity:.45;"><div style="width:18px;height:14px;border-radius:3px;background:rgba(255,255,255,.4);"></div><div style="width:22px;height:5px;border-radius:3px;background:rgba(255,255,255,.25);"></div></div>
-              <div style="display:flex;flex-direction:column;align-items:center;gap:2px;opacity:.45;"><div style="width:18px;height:14px;border-radius:3px;background:rgba(255,255,255,.4);"></div><div style="width:24px;height:5px;border-radius:3px;background:rgba(255,255,255,.25);"></div></div>
-            </div>
-          </div>
-
-          <!-- Scrim overlay -->
-          <div id="bs-scrim" style="position:absolute;inset:0;background:rgba(0,0,0,0);pointer-events:none;transition:background 320ms ease;"></div>
-
-          <!-- Bottom Sheet -->
-          <div id="bs-sheet" style="position:absolute;bottom:0;left:0;right:0;background:#1a1d24;border-radius:16px 16px 0 0;transform:translateY(100%);transition:transform 340ms cubic-bezier(0,0,0.06,1);z-index:10;overflow:hidden;">
-            <!-- Drag handle -->
-            <div style="display:flex;justify-content:center;padding:10px 0 6px;">
-              <div id="bs-handle" style="width:36px;height:4px;border-radius:2px;background:rgba(255,255,255,.2);cursor:grab;"></div>
-            </div>
-            <!-- Sheet header -->
-            <div style="padding:0 16px 12px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.07);">
-              <div style="font-size:13px;font-weight:600;color:var(--t1);">Bet Slip</div>
-              <div id="bs-close-x" style="width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--t2);cursor:pointer;">✕</div>
-            </div>
-            <!-- Sheet content rows -->
-            <div style="padding:12px 16px;display:flex;flex-direction:column;gap:10px;">
-              <!-- Bet row 1 -->
-              <div id="bs-row1" style="background:rgba(255,255,255,.05);border-radius:8px;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;opacity:0;transform:translateY(12px);transition:opacity 220ms,transform 220ms cubic-bezier(0,0,0.06,1);">
-                <div style="display:flex;flex-direction:column;gap:4px;">
-                  <div style="height:8px;width:80px;border-radius:4px;background:rgba(255,255,255,.2);"></div>
-                  <div style="height:7px;width:52px;border-radius:4px;background:rgba(255,255,255,.1);"></div>
-                </div>
-                <div style="background:var(--ba);border-radius:6px;padding:4px 8px;font-size:11px;font-weight:700;color:#0d0d10;">-110</div>
-              </div>
-              <!-- Bet row 2 -->
-              <div id="bs-row2" style="background:rgba(255,255,255,.05);border-radius:8px;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;opacity:0;transform:translateY(12px);transition:opacity 220ms 60ms,transform 220ms 60ms cubic-bezier(0,0,0.06,1);">
-                <div style="display:flex;flex-direction:column;gap:4px;">
-                  <div style="height:8px;width:68px;border-radius:4px;background:rgba(255,255,255,.2);"></div>
-                  <div style="height:7px;width:44px;border-radius:4px;background:rgba(255,255,255,.1);"></div>
-                </div>
-                <div style="background:var(--ba);border-radius:6px;padding:4px 8px;font-size:11px;font-weight:700;color:#0d0d10;">+240</div>
-              </div>
-              <!-- Stake input row -->
-              <div id="bs-row3" style="background:rgba(255,255,255,.05);border-radius:8px;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;opacity:0;transform:translateY(12px);transition:opacity 220ms 120ms,transform 220ms 120ms cubic-bezier(0,0,0.06,1);">
-                <div style="font-size:11px;color:var(--t2);">Wager</div>
-                <div style="height:22px;width:64px;border-radius:6px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);"></div>
-              </div>
-              <!-- CTA -->
-              <div id="bs-cta" style="background:var(--green);border-radius:10px;height:36px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;opacity:0;transform:translateY(8px);transition:opacity 200ms 180ms,transform 200ms 180ms cubic-bezier(0.34,1.45,0.64,1);cursor:pointer;letter-spacing:.3px;">Place Bet</div>
-            </div>
-            <!-- Snap point indicator (half-height handle area) -->
-            <div style="height:20px;"></div>
-          </div>
-
-        </div><!-- /phone-screen -->
-      </div><!-- /phone -->
-    </div><!-- /phone-wrap -->
-
-    <!-- Controls -->
-    <div style="display:flex;gap:8px;margin-top:12px;justify-content:center;flex-wrap:wrap;">
-      <button class="play-btn" onclick="openSheet()" style="font-size:11px;padding:7px 14px;">⬆ Open sheet</button>
-      <button class="play-btn" onclick="snapSheet()" style="font-size:11px;padding:7px 14px;background:rgba(255,255,255,.06);">⟺ Half snap</button>
-      <button class="play-btn" onclick="closeSheet()" style="font-size:11px;padding:7px 14px;background:rgba(255,255,255,.06);">⬇ Dismiss</button>
-    </div>
-
-    <!-- State label -->
-    <div id="bs-state-label" style="text-align:center;margin-top:10px;font-size:11px;color:var(--t2);letter-spacing:.4px;font-family:monospace;">CLOSED</div>
-  </div>
-
     <div class="callout-item" onclick="toggleCallout(this)">
       <div class="callout-head">
         <div class="callout-num" style="background:var(--gs);color:var(--green);">1</div>
@@ -3218,47 +3100,48 @@ let bsIsOpen = false;
 let bsIsHalf = false;
 
 function openSheet() {
-  if (bsIsOpen) { closeSheet(); setTimeout(openSheet, 280); return; }
-  const sheet = document.getElementById('bs-sheet');
-  const scrim = document.getElementById('bs-scrim');
-  const rowIds = ['bs-row1','bs-row2','bs-row3','bs-cta'];
-  // Reset rows instantly
+  if (bsIsOpen) { closeSheet(); setTimeout(openSheet, 300); return; }
+  const sheet = document.getElementById('sd-sheet');
+  const scrim = document.getElementById('sd-scrim');
+  const rowIds = ['sd-row1','sd-row2','sd-row3','sd-cta'];
+  // Snap rows back instantly (no transition flash)
   rowIds.forEach(id => {
     const el = document.getElementById(id);
     el.style.transition = 'none';
     el.style.opacity = '0';
     el.style.transform = 'translateY(10px)';
   });
-  // Restore transitions and fire sheet up (fd.kick)
+  // Next frame: restore transitions, fire sheet up with fd.kick
   requestAnimationFrame(() => {
-    rowIds.forEach(id => {
-      const el = document.getElementById(id);
-      el.style.transition = '';
-    });
-    sheet.style.transition = 'transform 340ms cubic-bezier(0,0,0.06,1)';
-    sheet.style.transform = 'translateY(0)';
-    scrim.style.background = 'rgba(0,0,0,0.55)';
-    bsIsOpen = true;
-    bsIsHalf = false;
-    // Stagger rows in after sheet lands
-    rowIds.forEach((id, i) => {
-      setTimeout(() => {
-        const el = document.getElementById(id);
-        el.style.opacity = '1';
-        el.style.transform = 'translateY(0)';
-      }, 200 + i * 70);
+    requestAnimationFrame(() => {
+      rowIds.forEach(id => { document.getElementById(id).style.transition = ''; });
+      sheet.style.transition = 'transform 340ms cubic-bezier(0,0,0.06,1)';
+      sheet.style.transform = 'translateY(0)';
+      scrim.style.background = 'rgba(0,0,0,0.55)';
+      bsIsOpen = true;
+      bsIsHalf = false;
+      // Stagger rows after sheet lands (fd.kick already set via CSS)
+      rowIds.forEach((id, i) => {
+        setTimeout(() => {
+          const el = document.getElementById(id);
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+        }, 200 + i * 70);
+      });
     });
   });
 }
 
 function snapSheet() {
   if (!bsIsOpen) { openSheet(); return; }
-  const sheet = document.getElementById('bs-sheet');
+  const sheet = document.getElementById('sd-sheet');
   if (!bsIsHalf) {
+    // fd.release — slight overshoot snap to half
     sheet.style.transition = 'transform 260ms cubic-bezier(0.34,1.45,0.64,1)';
     sheet.style.transform = 'translateY(50%)';
     bsIsHalf = true;
   } else {
+    // fd.kick — snap back to full
     sheet.style.transition = 'transform 340ms cubic-bezier(0,0,0.06,1)';
     sheet.style.transform = 'translateY(0)';
     bsIsHalf = false;
@@ -3266,8 +3149,9 @@ function snapSheet() {
 }
 
 function closeSheet() {
-  const sheet = document.getElementById('bs-sheet');
-  const scrim = document.getElementById('bs-scrim');
+  const sheet = document.getElementById('sd-sheet');
+  const scrim = document.getElementById('sd-scrim');
+  // ease-in exit — accelerates off screen, shorter than enter
   sheet.style.transition = 'transform 220ms cubic-bezier(0.55,0,1,0.45)';
   sheet.style.transform = 'translateY(102%)';
   scrim.style.background = 'rgba(0,0,0,0)';
@@ -3277,14 +3161,6 @@ function closeSheet() {
     sheet.style.transition = 'transform 340ms cubic-bezier(0,0,0.06,1)';
   }, 240);
 }
-
-// Wire up scrim + close button after DOM ready
-document.addEventListener('DOMContentLoaded', () => {
-  const scrim = document.getElementById('bs-scrim');
-  const closeX = document.getElementById('bs-close-x');
-  if (scrim) scrim.addEventListener('click', closeSheet);
-  if (closeX) closeX.addEventListener('click', closeSheet);
-});
 
 function playToasts(){
   const toasts=['toast-success','toast-info','toast-error'];
