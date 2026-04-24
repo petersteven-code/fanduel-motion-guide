@@ -2138,10 +2138,98 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
 <span id="c-sheet"></span>
 <div class="sec-label" style="margin-top:40px;">Components · 04</div>
 <h2 class="sec-head">Bottom Sheet</h2>
-<p class="sec-sub">The sheet is FanDuel's primary action surface — bet slip, filter panel, market details. It lives at the intersection of productive and expressive motion: enter with authority, exit fast, and track the user's finger 1:1 during drag.</p>
+<p class="sec-sub">The sheet is FanDuel's primary action surface — bet slip, filter panel, market details. Enter with authority, exit fast, and track the user's finger 1:1 during drag.</p>
+<div style="display:flex;gap:10px;margin-bottom:20px;">
+  <button class="play-btn" onclick="openSheet()">⬆ Open sheet</button>
+  <button class="play-btn" onclick="snapSheet()" style="background:var(--s3);color:var(--t2);border:1px solid var(--border);">⟺ Half snap</button>
+  <button class="play-btn reset-btn" onclick="closeSheet()">⬇ Dismiss</button>
+</div>
+<div class="screen-layout">
+  <div>
+    <div class="phone" id="phone-sheet">
+      <div class="phone-notch"><div class="phone-dot"></div></div>
+      <div class="phone-screen" style="height:440px;overflow:hidden;position:relative;">
 
-<!-- ── Phone demo ── -->
-<div style="display:flex;gap:32px;align-items:flex-start;flex-wrap:wrap;margin-bottom:32px;">
+        <!-- App background -->
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;background:var(--bg);">
+          <div class="p-topbar" style="height:44px;flex-shrink:0;">
+            <div style="width:22px;height:14px;border-radius:3px;background:var(--s3);"></div>
+            <div style="flex:1;height:9px;border-radius:5px;background:var(--s2);margin:0 10px;"></div>
+            <div style="width:28px;height:22px;border-radius:5px;background:var(--s2);"></div>
+          </div>
+          <div style="height:34px;background:var(--s1);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;padding:0 12px;flex-shrink:0;">
+            <div style="width:44px;height:18px;border-radius:9px;background:var(--ba);"></div>
+            <div style="width:36px;height:18px;border-radius:9px;background:var(--s2);"></div>
+            <div style="width:44px;height:18px;border-radius:9px;background:var(--s2);"></div>
+            <div style="width:32px;height:18px;border-radius:9px;background:var(--s2);"></div>
+          </div>
+          <div style="flex:1;padding:10px;display:flex;flex-direction:column;gap:7px;overflow:hidden;">
+            <div style="background:var(--s2);border:1px solid var(--border);border-radius:9px;height:60px;padding:10px;display:flex;flex-direction:column;justify-content:space-between;">
+              <div style="height:8px;border-radius:4px;background:var(--s3);width:52%;"></div>
+              <div style="display:flex;gap:6px;"><div style="flex:1;height:20px;border-radius:5px;background:var(--s3);"></div><div style="flex:1;height:20px;border-radius:5px;background:var(--s3);"></div><div style="flex:1;height:20px;border-radius:5px;background:var(--s3);"></div></div>
+            </div>
+            <div style="background:var(--s2);border:1px solid var(--border);border-radius:9px;height:60px;padding:10px;display:flex;flex-direction:column;justify-content:space-between;">
+              <div style="height:8px;border-radius:4px;background:var(--s3);width:44%;"></div>
+              <div style="display:flex;gap:6px;"><div style="flex:1;height:20px;border-radius:5px;background:var(--s3);"></div><div style="flex:1;height:20px;border-radius:5px;background:var(--s3);"></div><div style="flex:1;height:20px;border-radius:5px;background:var(--s3);"></div></div>
+            </div>
+            <div style="background:var(--s2);border:1px solid var(--border);border-radius:9px;height:60px;padding:10px;display:flex;flex-direction:column;justify-content:space-between;">
+              <div style="height:8px;border-radius:4px;background:var(--s3);width:60%;"></div>
+              <div style="display:flex;gap:6px;"><div style="flex:1;height:20px;border-radius:5px;background:var(--s3);"></div><div style="flex:1;height:20px;border-radius:5px;background:var(--s3);"></div><div style="flex:1;height:20px;border-radius:5px;background:var(--s3);"></div></div>
+            </div>
+          </div>
+          <div style="height:50px;background:var(--s1);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-around;padding:0 6px;flex-shrink:0;">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:3px;opacity:.45;"><div style="width:16px;height:12px;border-radius:3px;background:var(--t2);"></div><div style="width:20px;height:5px;border-radius:2px;background:var(--s3);"></div></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:3px;opacity:.45;"><div style="width:16px;height:12px;border-radius:3px;background:var(--t2);"></div><div style="width:14px;height:5px;border-radius:2px;background:var(--s3);"></div></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:3px;opacity:.45;"><div style="width:16px;height:12px;border-radius:3px;background:var(--t2);"></div><div style="width:24px;height:5px;border-radius:2px;background:var(--s3);"></div></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:3px;opacity:.45;"><div style="width:16px;height:12px;border-radius:3px;background:var(--t2);"></div><div style="width:20px;height:5px;border-radius:2px;background:var(--s3);"></div></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:3px;opacity:.45;"><div style="width:16px;height:12px;border-radius:3px;background:var(--t2);"></div><div style="width:22px;height:5px;border-radius:2px;background:var(--s3);"></div></div>
+          </div>
+        </div>
+
+        <!-- Scrim -->
+        <div id="bs-scrim" style="position:absolute;inset:0;background:rgba(0,0,0,0);transition:background 300ms linear;pointer-events:none;z-index:5;"></div>
+
+        <!-- Bottom Sheet -->
+        <div id="bs-sheet" style="position:absolute;bottom:0;left:0;right:0;background:var(--s1);border-radius:14px 14px 0 0;transform:translateY(102%);transition:transform 340ms cubic-bezier(0,0,0.06,1);z-index:10;border-top:1px solid var(--b2);">
+          <!-- Handle -->
+          <div style="display:flex;justify-content:center;padding:10px 0 6px;">
+            <div style="width:36px;height:4px;border-radius:2px;background:var(--b2);"></div>
+          </div>
+          <!-- Header -->
+          <div style="padding:0 14px 10px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);">
+            <div style="font-size:13px;font-weight:700;color:var(--t1);">Bet Slip</div>
+            <div id="bs-close-x" style="width:22px;height:22px;border-radius:50%;background:var(--s2);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--t2);cursor:pointer;">✕</div>
+          </div>
+          <!-- Rows -->
+          <div style="padding:10px 14px;display:flex;flex-direction:column;gap:8px;">
+            <div id="bs-row1" style="background:var(--s2);border:1px solid var(--border);border-radius:8px;padding:9px 11px;display:flex;align-items:center;justify-content:space-between;opacity:0;transform:translateY(10px);transition:opacity 220ms,transform 220ms cubic-bezier(0,0,0.06,1);">
+              <div style="display:flex;flex-direction:column;gap:4px;">
+                <div style="height:8px;width:76px;border-radius:4px;background:var(--s3);"></div>
+                <div style="height:6px;width:50px;border-radius:3px;background:var(--border);"></div>
+              </div>
+              <div style="background:var(--ba);border-radius:6px;padding:4px 8px;font-size:11px;font-weight:800;color:#0d0d10;">-110</div>
+            </div>
+            <div id="bs-row2" style="background:var(--s2);border:1px solid var(--border);border-radius:8px;padding:9px 11px;display:flex;align-items:center;justify-content:space-between;opacity:0;transform:translateY(10px);transition:opacity 220ms 65ms,transform 220ms 65ms cubic-bezier(0,0,0.06,1);">
+              <div style="display:flex;flex-direction:column;gap:4px;">
+                <div style="height:8px;width:60px;border-radius:4px;background:var(--s3);"></div>
+                <div style="height:6px;width:42px;border-radius:3px;background:var(--border);"></div>
+              </div>
+              <div style="background:var(--ba);border-radius:6px;padding:4px 8px;font-size:11px;font-weight:800;color:#0d0d10;">+240</div>
+            </div>
+            <div id="bs-row3" style="background:var(--s2);border:1px solid var(--border);border-radius:8px;padding:9px 11px;display:flex;align-items:center;justify-content:space-between;opacity:0;transform:translateY(10px);transition:opacity 220ms 130ms,transform 220ms 130ms cubic-bezier(0,0,0.06,1);">
+              <div style="font-size:11px;color:var(--t2);">Wager</div>
+              <div style="height:22px;width:64px;border-radius:6px;background:var(--s3);border:1px solid var(--b2);"></div>
+            </div>
+            <div id="bs-cta" style="background:var(--green);border-radius:9px;height:36px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#021A0E;opacity:0;transform:translateY(8px);transition:opacity 200ms 195ms,transform 200ms 195ms cubic-bezier(0.34,1.45,0.64,1);">Place Bet</div>
+          </div>
+          <div style="height:14px;"></div>
+        </div>
+
+      </div><!-- /phone-screen -->
+    </div><!-- /phone -->
+  </div><!-- /left col -->
+
+  <div class="callout-panel">
 
   <!-- Phone mockup -->
   <div style="flex:0 0 auto;">
@@ -2260,209 +2348,68 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
     <div id="bs-state-label" style="text-align:center;margin-top:10px;font-size:11px;color:var(--t2);letter-spacing:.4px;font-family:monospace;">CLOSED</div>
   </div>
 
-  <!-- Callout column -->
-  <div style="flex:1;min-width:260px;display:flex;flex-direction:column;gap:12px;">
-
-    <div class="callout">
-      <div class="callout-label">Enter · fd.kick 340ms</div>
-      <div class="callout-desc">Sheet fires up from below. translateY(100% → 0). The aggressive deceleration gives it physical weight — like a drawer pulled up by a handle, not a fade-in from nowhere.</div>
-<pre class="callout-code"><span class="cc">// On open</span>
-translateY.<span class="cf">value</span> = withTiming(<span class="cn">0</span>, {
-  duration: <span class="cn">340</span>,
-  easing: Easing.<span class="cf">bezier</span>(<span class="cn">0</span>, <span class="cn">0</span>, <span class="cn">0.06</span>, <span class="cn">1</span>),
-});
-scrimOpacity.<span class="cf">value</span> = withTiming(<span class="cn">0.6</span>, { duration: <span class="cn">320</span> });</pre>
-    </div>
-
-    <div class="callout">
-      <div class="callout-label">Content stagger · 50ms offset</div>
-      <div class="callout-desc">Rows inside the sheet enter with a 50–60ms stagger after the sheet lands. This separates the container arrival from the content reveal — two distinct beats, not one blob.</div>
-<pre class="callout-code"><span class="cc">// Row stagger inside sheet</span>
-rows.<span class="cf">forEach</span>((row, i) => {
-  row.opacity.<span class="cf">value</span> = withDelay(
-    <span class="cn">60</span> + i * <span class="cn">60</span>,
-    withTiming(<span class="cn">1</span>, { duration: <span class="cn">220</span>, easing: curve.kick })
-  );
-  row.translateY.<span class="cf">value</span> = withDelay(
-    <span class="cn">60</span> + i * <span class="cn">60</span>,
-    withTiming(<span class="cn">0</span>, { duration: <span class="cn">220</span>, easing: curve.kick })
-  );
-});</pre>
-    </div>
-
-    <div class="callout">
-      <div class="callout-label">Drag · 1:1 tracking, no easing</div>
-      <div class="callout-desc">While the user's finger is down, translateY mirrors gesture delta directly — no animation function, no easing. The moment they lift, velocity handoff takes over.</div>
-<pre class="callout-code"><span class="cc">// During gesture (PanGesture.onUpdate)</span>
-<span class="ck">const</span> newY = startY + event.translationY;
-<span class="cc">// Rubber-band above snap point</span>
-<span class="ck">if</span> (newY < <span class="cn">0</span>) {
-  translateY.<span class="cf">value</span> = newY * <span class="cn">0.12</span>; <span class="cc">// resistance</span>
-} <span class="ck">else</span> {
-  translateY.<span class="cf">value</span> = newY; <span class="cc">// 1:1 below</span>
-}</pre>
-    </div>
-
-    <div class="callout">
-      <div class="callout-label">Release · velocity handoff to spring</div>
-      <div class="callout-desc">On finger-up, check position + velocity. If dragged past 40% of sheet height or velocity > 500px/s → dismiss. Otherwise snap back. Spring picks up the finger's momentum — no jarring transition.</div>
-<pre class="callout-code"><span class="cc">// On gesture end (onEnd)</span>
-<span class="ck">const</span> shouldDismiss =
-  event.translationY > sheetH * <span class="cn">0.4</span> ||
-  event.velocityY > <span class="cn">500</span>;
-
-<span class="ck">if</span> (shouldDismiss) {
-  translateY.<span class="cf">value</span> = withTiming(sheetH, {
-    duration: <span class="cn">220</span>,
-    easing: Easing.<span class="cf">in</span>(Easing.cubic),
-  });
-} <span class="ck">else</span> {
-  <span class="cc">// Snap back with velocity baked in</span>
-  translateY.<span class="cf">value</span> = withSpring(<span class="cn">0</span>, {
-    velocity: event.velocityY,
-    stiffness: <span class="cn">400</span>,
-    damping: <span class="cn">40</span>,
-  });
-}</pre>
-    </div>
-
-    <div class="callout">
-      <div class="callout-label">Exit · ease-in 220ms</div>
-      <div class="callout-desc">Always faster than enter. Sheet accelerates as it leaves — like an object that's been released. 220ms vs 340ms enter. Scrim fades out simultaneously.</div>
-<pre class="callout-code"><span class="cc">// On close</span>
-translateY.<span class="cf">value</span> = withTiming(sheetH, {
-  duration: <span class="cn">220</span>,
-  easing: Easing.<span class="cf">in</span>(Easing.cubic),
-});
-scrimOpacity.<span class="cf">value</span> = withTiming(<span class="cn">0</span>, {
-  duration: <span class="cn">200</span>,
-});</pre>
-    </div>
-
-  </div>
-</div><!-- /flex row -->
-
-<!-- Snap points rule -->
-<div class="comp-grid" style="margin-bottom:0;">
-  <div class="comp-card">
-    <div class="comp-head"><div class="comp-name">Snap points</div><div class="comp-curve">fd.snap spring · s:400 d:40</div></div>
-    <div class="comp-stage" style="flex-direction:column;gap:6px;padding:12px 0;">
-      <div style="width:100%;display:flex;flex-direction:column;gap:4px;">
-        <div style="display:flex;align-items:center;gap:8px;">
-          <div style="width:36px;height:4px;border-radius:2px;background:var(--ba);flex-shrink:0;"></div>
-          <span style="font-size:11px;color:var(--t2);">Full — default for Bet Slip, Parlay</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:8px;">
-          <div style="width:36px;height:4px;border-radius:2px;background:rgba(255,255,255,.3);flex-shrink:0;"></div>
-          <span style="font-size:11px;color:var(--t2);">Half (50% vh) — filter panels, quick picks</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:8px;">
-          <div style="width:36px;height:4px;border-radius:2px;background:rgba(255,255,255,.12);flex-shrink:0;"></div>
-          <span style="font-size:11px;color:var(--t2);">Dismiss — always below 10% or velocity > 500</span>
-        </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gs);color:var(--green);">1</div>
+        <div class="callout-text"><div class="callout-el">Sheet enter</div><div class="callout-curve">fd.kick · 340ms · translateY(102%→0)</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">Sheet fires up from off-screen. The fd.kick curve starts at full speed then brakes hard — like a drawer pulled up by a handle. Scrim fades in simultaneously, never sequentially.</div>
+        <div class="callout-code">translateY.value = withTiming(0, {<br>  duration: 340,<br>  easing: Easing.bezier(0, 0, 0.06, 1),<br>})<br>scrimOpacity.value = withTiming(0.6, {<br>  duration: 320,<br>})</div>
       </div>
     </div>
-    <div class="comp-note">Between snaps use fd.snap (spring s:400 d:40) — not withTiming. The spring's velocity-awareness makes the snap feel physical rather than programmatic.</div>
-  </div>
-  <div class="comp-card">
-    <div class="comp-head"><div class="comp-name">Scrim</div><div class="comp-curve">opacity 0→0.6 · 320ms linear</div></div>
-    <div class="comp-stage" style="flex-direction:column;gap:8px;">
-      <div style="width:80px;height:50px;border-radius:6px;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;">
-        <div style="width:48px;height:28px;border-radius:4px;background:#1a1d24;"></div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gs);color:var(--green);">2</div>
+        <div class="callout-text"><div class="callout-el">Content stagger</div><div class="callout-curve">fd.kick · 220ms · 65ms offset per row</div></div>
       </div>
-      <div style="font-size:11px;color:var(--t2);text-align:center;">rgba(0,0,0,0.6)</div>
-    </div>
-    <div class="comp-note">Scrim and sheet animate simultaneously — not sequentially. Tapping the scrim triggers the same dismiss animation as dragging down. Scrim tap = close, never stagger them.</div>
-  </div>
-  <div class="comp-card">
-    <div class="comp-head"><div class="comp-name">borderRadius</div><div class="comp-curve">interpolates 0 → 16px during enter</div></div>
-    <div class="comp-stage" style="flex-direction:column;gap:8px;">
-      <div style="display:flex;gap:8px;align-items:flex-end;">
-        <div style="width:40px;height:32px;background:#1a1d24;border-radius:0;"></div>
-        <div style="font-size:10px;color:var(--t2);">→</div>
-        <div style="width:40px;height:32px;background:#1a1d24;border-radius:10px 10px 0 0;"></div>
+      <div class="callout-body">
+        <div class="callout-desc">Rows stagger in after the container lands — two distinct beats. The sheet arrives first. Content follows. Never animate both at the same time or users won't be able to read while things are still moving.</div>
+        <div class="callout-code">rows.forEach((row, i) => {<br>  row.opacity.value = withDelay(<br>    180 + i * 65,<br>    withTiming(1, { duration: 220,<br>      easing: Easing.bezier(0,0,0.06,1) })<br>  )<br>  row.translateY.value = withDelay(<br>    180 + i * 65,<br>    withTiming(0, { duration: 220,<br>      easing: Easing.bezier(0,0,0.06,1) })<br>  )<br>})</div>
       </div>
     </div>
-    <div class="comp-note">Interpolate borderTopLeftRadius and borderTopRightRadius from 0→16 during the first 60% of the enter animation. When sheet starts off-screen, no radius needed — it forms as it lands.</div>
-  </div>
-</div>
-
-<script>
-// ── Bottom Sheet demo ─────────────────────────────────────────
-let bsIsOpen = false;
-let bsIsHalf = false;
-
-function openSheet() {
-  const sheet = document.getElementById('bs-sheet');
-  const scrim = document.getElementById('bs-scrim');
-  const rows = ['bs-row1','bs-row2','bs-row3','bs-cta'];
-  const label = document.getElementById('bs-state-label');
-
-  // Reset rows first
-  rows.forEach(id => {
-    const el = document.getElementById(id);
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(12px)';
-  });
-
-  // Animate sheet up (fd.kick via CSS transition already set)
-  sheet.style.transform = 'translateY(0)';
-  scrim.style.background = 'rgba(0,0,0,0.55)';
-  bsIsOpen = true;
-  bsIsHalf = false;
-  label.textContent = 'OPEN · fd.kick 340ms';
-
-  // Stagger rows in after sheet lands
-  rows.forEach((id, i) => {
-    setTimeout(() => {
-      const el = document.getElementById(id);
-      el.style.opacity = '1';
-      el.style.transform = 'translateY(0)';
-    }, 180 + i * 65);
-  });
-}
-
-function snapSheet() {
-  if (!bsIsOpen) { openSheet(); return; }
-  const sheet = document.getElementById('bs-sheet');
-  const label = document.getElementById('bs-state-label');
-  if (!bsIsHalf) {
-    sheet.style.transition = 'transform 260ms cubic-bezier(0.34,1.45,0.64,1)';
-    sheet.style.transform = 'translateY(calc(50%))';
-    bsIsHalf = true;
-    label.textContent = 'HALF SNAP · fd.release 260ms';
-  } else {
-    sheet.style.transition = 'transform 340ms cubic-bezier(0,0,0.06,1)';
-    sheet.style.transform = 'translateY(0)';
-    bsIsHalf = false;
-    label.textContent = 'OPEN · fd.kick 340ms';
-  }
-  setTimeout(() => {
-    sheet.style.transition = 'transform 340ms cubic-bezier(0,0,0.06,1)';
-  }, 300);
-}
-
-function closeSheet() {
-  const sheet = document.getElementById('bs-sheet');
-  const scrim = document.getElementById('bs-scrim');
-  const label = document.getElementById('bs-state-label');
-  sheet.style.transition = 'transform 220ms cubic-bezier(0.55,0,1,0.45)';
-  sheet.style.transform = 'translateY(100%)';
-  scrim.style.background = 'rgba(0,0,0,0)';
-  bsIsOpen = false;
-  bsIsHalf = false;
-  label.textContent = 'DISMISSED · ease-in 220ms';
-  // Reset transition after exit
-  setTimeout(() => {
-    sheet.style.transition = 'transform 340ms cubic-bezier(0,0,0.06,1)';
-    label.textContent = 'CLOSED';
-  }, 260);
-}
-
-// Scrim tap dismisses
-document.getElementById('bs-scrim').addEventListener('click', closeSheet);
-document.getElementById('bs-close-x').addEventListener('click', closeSheet);
-</script>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:rgba(100,100,200,.15);color:#a0a0ff;">3</div>
+        <div class="callout-text"><div class="callout-el">Drag tracking</div><div class="callout-curve">1:1 · no easing during gesture</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">While the finger is down, translateY mirrors gesture delta directly — no withTiming, no spring. Any easing here creates lag and breaks the physical connection. Rubber-band above snap point: multiply delta by 0.12.</div>
+        <div class="callout-code">// PanGesture onUpdate<br>const newY = startY + event.translationY<br>if (newY &lt; 0) {<br>  translateY.value = newY * 0.12 // rubber-band<br>} else {<br>  translateY.value = newY // 1:1<br>}</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:rgba(100,100,200,.15);color:#a0a0ff;">4</div>
+        <div class="callout-text"><div class="callout-el">Velocity handoff on release</div><div class="callout-curve">withSpring · s:400 d:40 · velocity baked in</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">On finger-up: if drag > 40% of sheet height OR velocity > 500px/s → dismiss. Otherwise snap back with withSpring, passing the gesture velocity in. The spring picks up the momentum — no jarring cut between gesture and animation.</div>
+        <div class="callout-code">// PanGesture onEnd<br>const shouldDismiss =<br>  event.translationY > sheetH * 0.4 ||<br>  event.velocityY > 500<br><br>if (shouldDismiss) {<br>  translateY.value = withTiming(sheetH, {<br>    duration: 220,<br>    easing: Easing.in(Easing.cubic),<br>  })<br>} else {<br>  translateY.value = withSpring(0, {<br>    velocity: event.velocityY,<br>    stiffness: 400, damping: 40,<br>  })<br>}</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:rgba(200,80,80,.15);color:#ff7070;">5</div>
+        <div class="callout-text"><div class="callout-el">Sheet exit</div><div class="callout-curve">ease-in · 220ms · always shorter than enter</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">Exit is always shorter than enter — here 220ms vs 340ms. The sheet accelerates as it leaves, like an object dropped. A slow exit feels like the UI is reluctant to move; a fast one respects the user's decision.</div>
+        <div class="callout-code">translateY.value = withTiming(sheetH, {<br>  duration: 220,<br>  easing: Easing.in(Easing.cubic),<br>})<br>scrimOpacity.value = withTiming(0, {<br>  duration: 200,<br>})</div>
+      </div>
+    </div>
+    <div class="callout-item" onclick="toggleCallout(this)">
+      <div class="callout-head">
+        <div class="callout-num" style="background:var(--gos);color:var(--gold);">6</div>
+        <div class="callout-text"><div class="callout-el">Snap to half · fd.release</div><div class="callout-curve">bezier(0.34,1.45,0.64,1) · 260ms</div></div>
+      </div>
+      <div class="callout-body">
+        <div class="callout-desc">Snapping between positions (full ↔ half) uses fd.release — a slight overshoot that makes the snap feel physical, like a spring clip clicking into position. Filter panels and quick-pick sheets live at 50% height.</div>
+        <div class="callout-code">// Snap to half-height<br>translateY.value = withTiming(sheetH * 0.5, {<br>  duration: 260,<br>  easing: Easing.bezier(0.34, 1.45, 0.64, 1),<br>})</div>
+      </div>
+    </div>
+  </div><!-- /callout-panel -->
+</div><!-- /screen-layout -->
 
 <span id="c-toast"></span>
 <div class="sec-label" style="margin-top:40px;">Components · 05</div>
@@ -3266,6 +3213,79 @@ function resetSearch() {
 }
 
 // ── TOASTS ────────────────────────────────────────────
+// ── Bottom Sheet ──────────────────────────────────────────────
+let bsIsOpen = false;
+let bsIsHalf = false;
+
+function openSheet() {
+  if (bsIsOpen) { closeSheet(); setTimeout(openSheet, 280); return; }
+  const sheet = document.getElementById('bs-sheet');
+  const scrim = document.getElementById('bs-scrim');
+  const rowIds = ['bs-row1','bs-row2','bs-row3','bs-cta'];
+  // Reset rows instantly
+  rowIds.forEach(id => {
+    const el = document.getElementById(id);
+    el.style.transition = 'none';
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(10px)';
+  });
+  // Restore transitions and fire sheet up (fd.kick)
+  requestAnimationFrame(() => {
+    rowIds.forEach(id => {
+      const el = document.getElementById(id);
+      el.style.transition = '';
+    });
+    sheet.style.transition = 'transform 340ms cubic-bezier(0,0,0.06,1)';
+    sheet.style.transform = 'translateY(0)';
+    scrim.style.background = 'rgba(0,0,0,0.55)';
+    bsIsOpen = true;
+    bsIsHalf = false;
+    // Stagger rows in after sheet lands
+    rowIds.forEach((id, i) => {
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+      }, 200 + i * 70);
+    });
+  });
+}
+
+function snapSheet() {
+  if (!bsIsOpen) { openSheet(); return; }
+  const sheet = document.getElementById('bs-sheet');
+  if (!bsIsHalf) {
+    sheet.style.transition = 'transform 260ms cubic-bezier(0.34,1.45,0.64,1)';
+    sheet.style.transform = 'translateY(50%)';
+    bsIsHalf = true;
+  } else {
+    sheet.style.transition = 'transform 340ms cubic-bezier(0,0,0.06,1)';
+    sheet.style.transform = 'translateY(0)';
+    bsIsHalf = false;
+  }
+}
+
+function closeSheet() {
+  const sheet = document.getElementById('bs-sheet');
+  const scrim = document.getElementById('bs-scrim');
+  sheet.style.transition = 'transform 220ms cubic-bezier(0.55,0,1,0.45)';
+  sheet.style.transform = 'translateY(102%)';
+  scrim.style.background = 'rgba(0,0,0,0)';
+  bsIsOpen = false;
+  bsIsHalf = false;
+  setTimeout(() => {
+    sheet.style.transition = 'transform 340ms cubic-bezier(0,0,0.06,1)';
+  }, 240);
+}
+
+// Wire up scrim + close button after DOM ready
+document.addEventListener('DOMContentLoaded', () => {
+  const scrim = document.getElementById('bs-scrim');
+  const closeX = document.getElementById('bs-close-x');
+  if (scrim) scrim.addEventListener('click', closeSheet);
+  if (closeX) closeX.addEventListener('click', closeSheet);
+});
+
 function playToasts(){
   const toasts=['toast-success','toast-info','toast-error'];
   // reset
