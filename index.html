@@ -8,17 +8,35 @@
 :root{
   --bg:#0B1220;--s1:#131C2E;--s2:#192538;--s3:#1F2E44;--s4:#263550;
   --border:#1E2D45;--b2:#273A58;
-  --blue:#1493FF;--bs:rgba(20,147,255,.1);--ba:rgba(20,147,255,.2);
+  --blue:#1493FF;--bs:rgba(20,147,255,.1);--ba:rgba(20,147,255,.25);
   --green:#00C87A;--gs:rgba(0,200,122,.1);--ga:rgba(0,200,122,.2);
   --gold:#F5A623;--gos:rgba(245,166,35,.1);--goa:rgba(245,166,35,.2);
   --red:#FF4D6A;--rs:rgba(255,77,106,.1);
   --purple:#9B72FF;--ps:rgba(155,114,255,.1);
-  --text:#EDF2FF;--t2:#7E8FA8;--t3:#3B4D66;
+  --t1:#EDF2FF;--t2:#7E8FA8;--t3:#3B4D66;--text:#EDF2FF;
   --font:-apple-system,'Inter',sans-serif;--mono:'SF Mono','Fira Code',Consolas,monospace;
+  --theme-icon:'☽';
+}
+
+[data-theme="light"]{
+  --bg:#F4F6FA;--s1:#FFFFFF;--s2:#EEF1F8;--s3:#E2E7F2;--s4:#D4DCF0;
+  --border:#DDE3F0;--b2:#C8D2E8;
+  --blue:#0F7DE8;--bs:rgba(15,125,232,.08);--ba:rgba(15,125,232,.2);
+  --green:#00A864;--gs:rgba(0,168,100,.08);--ga:rgba(0,168,100,.18);
+  --gold:#D4860A;--gos:rgba(212,134,10,.08);--goa:rgba(212,134,10,.18);
+  --red:#E8253E;--rs:rgba(232,37,62,.08);
+  --purple:#7B52E8;--ps:rgba(123,82,232,.08);
+  --t1:#0D1526;--t2:#5A6882;--t3:#9AA5BC;--text:#0D1526;
+  --theme-icon:'☀';
+}
+
+/* Global theme transition */
+*, *::before, *::after {
+  transition: background-color 220ms ease, border-color 220ms ease, color 180ms ease, box-shadow 220ms ease;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--text);font-family:var(--font);line-height:1.5;}
+body{background:var(--bg);color:var(--t1);font-family:var(--font);line-height:1.5;}
 
 /* ── LAYOUT ── */
 .shell{display:flex;min-height:100vh;}
@@ -28,6 +46,13 @@ nav::-webkit-scrollbar{display:none;}
 .nl{padding:0 18px 20px;border-bottom:1px solid var(--border);margin-bottom:10px;}
 .nl-m{font-size:15px;font-weight:800;color:var(--blue);}
 .nl-s{font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:1.2px;margin-top:2px;}
+
+/* ── Theme switcher ── */
+.theme-switcher{display:flex;align-items:center;gap:0;background:var(--s2);border:1px solid var(--border);border-radius:9px;padding:3px;margin:0 18px 16px;}
+.theme-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;padding:5px 0;border-radius:6px;font-size:10px;font-weight:700;color:var(--t2);cursor:pointer;border:none;background:transparent;font-family:var(--font);letter-spacing:.3px;}
+.theme-btn.active{background:var(--s1);color:var(--t1);box-shadow:0 1px 4px rgba(0,0,0,.15);}
+.theme-btn:not(.active):hover{color:var(--t1);}
+.theme-btn svg{width:12px;height:12px;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;}
 .ng{margin-bottom:2px;}
 .ngl{font-size:9px;text-transform:uppercase;letter-spacing:1.8px;color:var(--t3);font-weight:700;padding:9px 18px 3px;}
 .na{display:block;padding:6px 18px;font-size:12px;color:var(--t2);text-decoration:none;
@@ -308,6 +333,16 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
 <!-- NAV -->
 <nav>
   <div class="nl"><div class="nl-m">FanDuel</div><div class="nl-s">Motion Guide · v3</div></div>
+  <div class="theme-switcher">
+    <button class="theme-btn active" id="btn-dark" onclick="setTheme('dark')">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      Dark
+    </button>
+    <button class="theme-btn" id="btn-light" onclick="setTheme('light')">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5" fill="currentColor" stroke="none"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      Light
+    </button>
+  </div>
   <div class="ng"><div class="ngl">Foundation</div>
     <a class="na on" href="#curves">The 6 curves</a>
   </div>
@@ -3738,6 +3773,18 @@ function playToasts(){
     }, 2400+i*80);
   });
 }
+
+// ── Theme Switcher ─────────────────────────────────────────────
+function setTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme === 'light' ? 'light' : '');
+  document.getElementById('btn-dark').classList.toggle('active', theme === 'dark');
+  document.getElementById('btn-light').classList.toggle('active', theme === 'light');
+  try { localStorage.setItem('fd-theme', theme); } catch(e){}
+}
+// Restore on load
+(function(){
+  try { const t = localStorage.getItem('fd-theme'); if(t) setTheme(t); } catch(e){}
+})();
 </script>
 </body>
 </html>
