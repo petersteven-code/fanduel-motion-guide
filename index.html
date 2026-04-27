@@ -2912,22 +2912,27 @@ function flashPill(idx){
   void card.offsetWidth;
   card.style.animation='none';
   void card.offsetWidth;
+  const v = document.getElementById(p.valId);
+  const fid = ++v._fid || (v._fid = 1);
   if(up){
-    card.style.animation='livePillUp .5s ease both';
-    const v=document.getElementById(p.valId);
-    v.style.color='var(--green)';
-    setTimeout(()=>v.style.color='',900);
+    card.style.animation = 'livePillUp .5s ease both';
+    v.style.color = 'var(--green)';
   } else {
-    card.style.animation='livePillDn .5s ease both';
-    const v=document.getElementById(p.valId);
-    v.style.color='var(--red)';
-    setTimeout(()=>v.style.color='',900);
+    card.style.animation = 'livePillDn .5s ease both';
+    v.style.color = 'var(--red)';
   }
+  // After animation ends, clear inline animation so CSS background takes over;
+  // global color/bg transitions handle the smooth fade back
+  setTimeout(() => {
+    if (v._fid !== fid) return; // a newer flash fired — don't stomp it
+    card.style.animation = '';
+    v.style.color = '';
+  }, 520);
 }
 const liveAnim=document.createElement('style');
 liveAnim.textContent=`
-  @keyframes livePillUp{0%{background:rgba(0,200,122,.25);transform:translateY(-3px)}100%{background:transparent;transform:none}}
-  @keyframes livePillDn{0%{background:rgba(255,77,106,.2);transform:translateY(3px)}100%{background:transparent;transform:none}}
+  @keyframes livePillUp{0%{background:rgba(23,198,113,.3);transform:translateY(-3px)}70%{background:rgba(23,198,113,.08);transform:none}100%{background:var(--bs);transform:none}}
+  @keyframes livePillDn{0%{background:rgba(255,61,85,.25);transform:translateY(3px)}70%{background:rgba(255,61,85,.06);transform:none}100%{background:var(--bs);transform:none}}
 `;
 document.head.appendChild(liveAnim);
 
