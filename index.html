@@ -4,30 +4,37 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>FanDuel · Motion Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&display=swap" rel="stylesheet"/>
 <style>
 :root{
-  --bg:#0B1220;--s1:#131C2E;--s2:#192538;--s3:#1F2E44;--s4:#263550;
-  --border:#1E2D45;--b2:#273A58;
-  --blue:#1493FF;--bs:rgba(20,147,255,.1);--ba:rgba(20,147,255,.25);
-  --green:#00C87A;--gs:rgba(0,200,122,.1);--ga:rgba(0,200,122,.2);
+  /* FanDuel dark theme — matched to app tokens */
+  --bg:#080F1C;--s1:#0E1929;--s2:#142236;--s3:#1A2C45;--s4:#213554;
+  --border:#1C2E47;--b2:#243C5C;
+  --blue:#1479FB;--bs:rgba(20,121,251,.12);--ba:rgba(20,121,251,.28);
+  --green:#17C671;--gs:rgba(23,198,113,.1);--ga:rgba(23,198,113,.22);
   --gold:#F5A623;--gos:rgba(245,166,35,.1);--goa:rgba(245,166,35,.2);
-  --red:#FF4D6A;--rs:rgba(255,77,106,.1);
+  --red:#FF3D55;--rs:rgba(255,61,85,.1);
   --purple:#9B72FF;--ps:rgba(155,114,255,.1);
-  --t1:#EDF2FF;--t2:#7E8FA8;--t3:#3B4D66;--text:#EDF2FF;
-  --font:-apple-system,'Inter',sans-serif;--mono:'SF Mono','Fira Code',Consolas,monospace;
+  --t1:#E8EEFF;--t2:#6E82A0;--t3:#324460;--text:#E8EEFF;
+  --font:'DM Sans',-apple-system,sans-serif;--mono:'SF Mono','Fira Code',Consolas,monospace;
   --theme-icon:'☽';
+  --nav-accent:linear-gradient(180deg,rgba(20,121,251,.18) 0%,transparent 100%);
 }
 
 [data-theme="light"]{
-  --bg:#F4F6FA;--s1:#FFFFFF;--s2:#EEF1F8;--s3:#E2E7F2;--s4:#D4DCF0;
-  --border:#DDE3F0;--b2:#C8D2E8;
-  --blue:#0F7DE8;--bs:rgba(15,125,232,.08);--ba:rgba(15,125,232,.2);
-  --green:#00A864;--gs:rgba(0,168,100,.08);--ga:rgba(0,168,100,.18);
+  /* FanDuel light theme */
+  --bg:#F0F2F5;--s1:#FFFFFF;--s2:#E8ECF4;--s3:#DDE3F0;--s4:#D0D9EC;
+  --border:#D8DEEC;--b2:#BFC9DF;
+  --blue:#1479FB;--bs:rgba(20,121,251,.08);--ba:rgba(20,121,251,.2);
+  --green:#0DB862;--gs:rgba(13,184,98,.08);--ga:rgba(13,184,98,.18);
   --gold:#D4860A;--gos:rgba(212,134,10,.08);--goa:rgba(212,134,10,.18);
   --red:#E8253E;--rs:rgba(232,37,62,.08);
   --purple:#7B52E8;--ps:rgba(123,82,232,.08);
-  --t1:#0D1526;--t2:#5A6882;--t3:#9AA5BC;--text:#0D1526;
+  --t1:#080F1C;--t2:#4A5E7A;--t3:#8A9AB8;--text:#080F1C;
   --theme-icon:'☀';
+  --nav-accent:linear-gradient(180deg,rgba(20,121,251,.06) 0%,transparent 100%);
 }
 
 /* Global theme transition */
@@ -43,9 +50,11 @@ body{background:var(--bg);color:var(--t1);font-family:var(--font);line-height:1.
 nav{width:216px;flex-shrink:0;background:var(--s1);border-right:1px solid var(--border);
   position:sticky;top:0;height:100vh;overflow-y:auto;padding:24px 0;scrollbar-width:none;}
 nav::-webkit-scrollbar{display:none;}
-.nl{padding:0 18px 20px;border-bottom:1px solid var(--border);margin-bottom:10px;}
-.nl-m{font-size:15px;font-weight:800;color:var(--blue);}
-.nl-s{font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:1.2px;margin-top:2px;}
+.nl{padding:18px 18px 16px;border-bottom:1px solid var(--border);margin-bottom:10px;background:var(--nav-accent);}
+.nl-logo{display:flex;flex-direction:column;gap:6px;}
+.fd-wordmark{width:80px;height:auto;color:var(--blue);}
+.nl-tag{font-size:9px;color:var(--t3);letter-spacing:.4px;font-weight:500;}
+.nl-v{font-weight:700;color:var(--t2);}
 
 /* ── Theme switcher ── */
 .theme-switcher{display:flex;align-items:center;gap:0;background:var(--s2);border:1px solid var(--border);border-radius:9px;padding:3px;margin:0 18px 16px;}
@@ -57,19 +66,26 @@ nav::-webkit-scrollbar{display:none;}
 .ngl{font-size:9px;text-transform:uppercase;letter-spacing:1.8px;color:var(--t3);font-weight:700;padding:9px 18px 3px;}
 .na{display:block;padding:6px 18px;font-size:12px;color:var(--t2);text-decoration:none;
   border-left:2px solid transparent;transition:all .12s;}
-.na:hover{color:var(--text);background:rgba(20,147,255,.05);}
-.na.on{color:var(--blue);border-left-color:var(--blue);background:rgba(20,147,255,.07);font-weight:500;}
+.na:hover{color:var(--text);background:rgba(20,121,251,.06);}
+.na.on{color:var(--blue);border-left-color:var(--blue);background:rgba(20,121,251,.09);font-weight:600;}
 
 main{flex:1;max-width:940px;padding:52px 52px 100px;}
 
+/* ── HERO BRAND ── */
+.hero-brand{display:flex;align-items:center;gap:12px;margin-bottom:28px;}
+.hero-wordmark{height:18px;width:auto;color:var(--blue);}
+.hero-divider{width:1px;height:18px;background:var(--border);}
+.hero-doc-label{font-size:11px;color:var(--t2);font-weight:500;letter-spacing:.2px;}
+.hero-doc-v{font-weight:700;color:var(--blue);}
+
 /* ── TYPE ── */
 .eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--blue);font-weight:700;margin-bottom:10px;}
-.page-title{font-size:40px;font-weight:900;letter-spacing:-1.5px;line-height:1.05;margin-bottom:12px;}
-.page-lead{font-size:15px;color:var(--t2);line-height:1.7;max-width:520px;margin-bottom:52px;}
-.sec-label{font-size:9px;text-transform:uppercase;letter-spacing:2px;color:var(--t3);font-weight:700;margin-bottom:12px;}
-.sec-head{font-size:26px;font-weight:800;letter-spacing:-.5px;margin-bottom:8px;}
+.page-title{font-size:42px;font-weight:900;letter-spacing:-1.8px;line-height:1.04;margin-bottom:14px;color:var(--t1);}
+.page-lead{font-size:15px;color:var(--t2);line-height:1.72;max-width:520px;margin-bottom:52px;font-weight:400;}
+.sec-label{font-size:9px;text-transform:uppercase;letter-spacing:2.2px;color:var(--t3);font-weight:700;margin-bottom:12px;}
+.sec-head{font-size:26px;font-weight:800;letter-spacing:-.6px;margin-bottom:8px;color:var(--t1);}
 .sec-sub{font-size:13px;color:var(--t2);line-height:1.65;max-width:540px;margin-bottom:28px;}
-.divider{height:1px;background:var(--border);margin:52px 0;}
+.divider{height:1px;background:var(--border);margin:56px 0;}
 
 /* ── CURVE CHIPS ── */
 .curve-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px;}
@@ -119,7 +135,8 @@ main{flex:1;max-width:940px;padding:52px 52px 100px;}
 /* ── PHONE UI ELEMENTS ── */
 .p-topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 14px 8px;
   background:var(--s1);}
-.p-logo{font-size:13px;font-weight:900;color:var(--blue);}
+.p-logo{display:flex;align-items:center;color:var(--blue);}
+.p-logo svg{height:13px;width:auto;}
 .p-icons{display:flex;gap:10px;}
 .p-icon{width:18px;height:18px;border-radius:50%;background:var(--s2);}
 
@@ -142,8 +159,8 @@ main{flex:1;max-width:940px;padding:52px 52px 100px;}
 .p-odds-pill.sel{background:var(--blue);color:#fff;border-color:var(--blue);}
 .p-odds-pill.up{animation:oddsPillUp .5s ease both;}
 .p-odds-pill.dn{animation:oddsPillDn .5s ease both;}
-@keyframes oddsPillUp{0%{background:rgba(0,200,122,.3);transform:translateY(-2px)}100%{background:var(--bs);transform:none}}
-@keyframes oddsPillDn{0%{background:rgba(255,77,106,.25);transform:translateY(2px)}100%{background:var(--bs);transform:none}}
+@keyframes oddsPillUp{0%{background:rgba(23,198,113,.3);transform:translateY(-2px)}100%{background:var(--bs);transform:none}}
+@keyframes oddsPillDn{0%{background:rgba(255,61,85,.25);transform:translateY(2px)}100%{background:var(--bs);transform:none}}
 
 .p-game-row{display:flex;align-items:center;justify-content:space-between;
   padding:8px 14px;border-bottom:1px solid var(--border);cursor:pointer;}
@@ -332,7 +349,21 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
 
 <!-- NAV -->
 <nav>
-  <div class="nl"><div class="nl-m">FanDuel</div><div class="nl-s">Motion Guide · v3</div></div>
+  <div class="nl">
+    <div class="nl-logo">
+      <!-- FanDuel wordmark -->
+      <svg class="fd-wordmark" viewBox="0 0 96 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="FanDuel">
+        <path d="M0 1h9.6v2.8H3v4.4h5.8v2.8H3V17H0V1Z" fill="currentColor"/>
+        <path d="M16.6 1h3l5.4 16H22l-1.1-3.5h-5.6L14.2 17h-3L16.6 1Zm3.4 9.8-2-6.3-2 6.3h4Z" fill="currentColor"/>
+        <path d="M27 1h3.2l6.4 10.6V1H39.5v16h-3.1L30 6.4V17H27V1Z" fill="currentColor"/>
+        <path d="M48 1c5.2 0 8.6 3.2 8.6 8s-3.4 8-8.6 8h-5.4V1H48Zm-2.4 13.2H48c3.3 0 5.4-2 5.4-5.2S51.3 3.8 48 3.8h-2.4v10.4Z" fill="currentColor"/>
+        <path d="M59.5 1H70v2.8h-7.5v4h6.8v2.7h-6.8v3.7H70.2V17H59.5V1Z" fill="currentColor"/>
+        <path d="M73.5 1h3v10.2c0 2.2 1.3 3.4 3.3 3.4s3.3-1.2 3.3-3.4V1h3v10.2c0 3.6-2.4 6.1-6.3 6.1s-6.3-2.5-6.3-6.1V1Z" fill="currentColor"/>
+        <path d="M89 1h3v13.2h7V17H89V1Z" fill="currentColor"/>
+      </svg>
+      <div class="nl-tag">Motion Guide <span class="nl-v">v3</span></div>
+    </div>
+  </div>
   <div class="theme-switcher">
     <button class="theme-btn active" id="btn-dark" onclick="setTheme('dark')">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
@@ -380,7 +411,19 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
 <main>
 
 <!-- HERO -->
-<div class="eyebrow">Motion Guide · v3</div>
+<div class="hero-brand">
+  <svg class="hero-wordmark" viewBox="0 0 96 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="FanDuel">
+    <path d="M0 1h9.6v2.8H3v4.4h5.8v2.8H3V17H0V1Z" fill="currentColor"/>
+    <path d="M16.6 1h3l5.4 16H22l-1.1-3.5h-5.6L14.2 17h-3L16.6 1Zm3.4 9.8-2-6.3-2 6.3h4Z" fill="currentColor"/>
+    <path d="M27 1h3.2l6.4 10.6V1H39.5v16h-3.1L30 6.4V17H27V1Z" fill="currentColor"/>
+    <path d="M48 1c5.2 0 8.6 3.2 8.6 8s-3.4 8-8.6 8h-5.4V1H48Zm-2.4 13.2H48c3.3 0 5.4-2 5.4-5.2S51.3 3.8 48 3.8h-2.4v10.4Z" fill="currentColor"/>
+    <path d="M59.5 1H70v2.8h-7.5v4h6.8v2.7h-6.8v3.7H70.2V17H59.5V1Z" fill="currentColor"/>
+    <path d="M73.5 1h3v10.2c0 2.2 1.3 3.4 3.3 3.4s3.3-1.2 3.3-3.4V1h3v10.2c0 3.6-2.4 6.1-6.3 6.1s-6.3-2.5-6.3-6.1V1Z" fill="currentColor"/>
+    <path d="M89 1h3v13.2h7V17H89V1Z" fill="currentColor"/>
+  </svg>
+  <div class="hero-divider"></div>
+  <span class="hero-doc-label">Motion Guide <span class="hero-doc-v">v3</span></span>
+</div>
 <h1 class="page-title">Where and how<br>every animation lives.</h1>
 <p class="page-lead">The FanDuel motion language applied to real screens. Each element is mapped to one of six named curves — no magic numbers, no one-offs. Click any callout to see the spec and the code.</p>
 
@@ -1268,7 +1311,7 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
       <div class="phone-notch"><div class="phone-dot"></div></div>
       <div class="phone-screen" style="height:440px;overflow:hidden;">
         <div class="p-topbar">
-          <div class="p-logo">FanDuel</div>
+          <div class="p-logo"><svg viewBox="0 0 96 22" fill="none"><path d="M0 1h9.6v2.8H3v4.4h5.8v2.8H3V17H0V1Z" fill="currentColor"/><path d="M16.6 1h3l5.4 16H22l-1.1-3.5h-5.6L14.2 17h-3L16.6 1Zm3.4 9.8-2-6.3-2 6.3h4Z" fill="currentColor"/><path d="M27 1h3.2l6.4 10.6V1H39.5v16h-3.1L30 6.4V17H27V1Z" fill="currentColor"/><path d="M48 1c5.2 0 8.6 3.2 8.6 8s-3.4 8-8.6 8h-5.4V1H48Zm-2.4 13.2H48c3.3 0 5.4-2 5.4-5.2S51.3 3.8 48 3.8h-2.4v10.4Z" fill="currentColor"/><path d="M59.5 1H70v2.8h-7.5v4h6.8v2.7h-6.8v3.7H70.2V17H59.5V1Z" fill="currentColor"/><path d="M73.5 1h3v10.2c0 2.2 1.3 3.4 3.3 3.4s3.3-1.2 3.3-3.4V1h3v10.2c0 3.6-2.4 6.1-6.3 6.1s-6.3-2.5-6.3-6.1V1Z" fill="currentColor"/><path d="M89 1h3v13.2h7V17H89V1Z" fill="currentColor"/></svg></div>
           <div style="font-size:10px;font-weight:700;color:var(--t2);">My Bets</div>
           <div style="width:18px;"></div>
         </div>
@@ -1394,7 +1437,7 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
         <!-- IDLE STATE -->
         <div id="search-idle" style="position:absolute;inset:0;background:var(--bg);">
           <div class="p-topbar">
-            <div class="p-logo">FanDuel</div>
+            <div class="p-logo"><svg viewBox="0 0 96 22" fill="none"><path d="M0 1h9.6v2.8H3v4.4h5.8v2.8H3V17H0V1Z" fill="currentColor"/><path d="M16.6 1h3l5.4 16H22l-1.1-3.5h-5.6L14.2 17h-3L16.6 1Zm3.4 9.8-2-6.3-2 6.3h4Z" fill="currentColor"/><path d="M27 1h3.2l6.4 10.6V1H39.5v16h-3.1L30 6.4V17H27V1Z" fill="currentColor"/><path d="M48 1c5.2 0 8.6 3.2 8.6 8s-3.4 8-8.6 8h-5.4V1H48Zm-2.4 13.2H48c3.3 0 5.4-2 5.4-5.2S51.3 3.8 48 3.8h-2.4v10.4Z" fill="currentColor"/><path d="M59.5 1H70v2.8h-7.5v4h6.8v2.7h-6.8v3.7H70.2V17H59.5V1Z" fill="currentColor"/><path d="M73.5 1h3v10.2c0 2.2 1.3 3.4 3.3 3.4s3.3-1.2 3.3-3.4V1h3v10.2c0 3.6-2.4 6.1-6.3 6.1s-6.3-2.5-6.3-6.1V1Z" fill="currentColor"/><path d="M89 1h3v13.2h7V17H89V1Z" fill="currentColor"/></svg></div>
             <div style="font-size:10px;color:var(--t2);font-weight:600;">Search</div>
             <div style="width:18px;"></div>
           </div>
