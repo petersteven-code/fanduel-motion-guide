@@ -153,9 +153,10 @@ main{flex:1;max-width:940px;padding:52px 52px 100px;}
 .p-team-name{font-size:11px;font-weight:800;}
 .p-vs{font-size:9px;color:var(--t2);}
 .p-featured-odds{display:flex;gap:6px;padding:8px 10px;}
-.p-odds-pill{flex:1;padding:7px;background:var(--bs);border:1px solid var(--ba);border-radius:7px;
-  text-align:center;font-size:11px;font-weight:700;color:var(--blue);cursor:pointer;transition:all .12s;}
+.p-odds-pill{flex:1;padding:7px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;
+  text-align:center;font-size:11px;font-weight:800;color:var(--blue);cursor:pointer;transition:all .12s;}
 .p-odds-pill.sel{background:var(--blue);color:#fff;border-color:var(--blue);}
+.p-odds-pill:active{transform:scale(.94);}
 .p-odds-pill.up{animation:oddsPillUp .5s ease both;}
 .p-odds-pill.dn{animation:oddsPillDn .5s ease both;}
 @keyframes oddsPillUp{0%{background:rgba(23,198,113,.3);transform:translateY(-2px)}100%{background:var(--bs);transform:none}}
@@ -169,17 +170,18 @@ main{flex:1;max-width:940px;padding:52px 52px 100px;}
 .p-team-b{color:var(--t2);}
 .p-game-time{font-size:9px;color:var(--t2);margin-top:2px;}
 .p-row-odds{display:flex;gap:5px;}
-.p-mini-pill{padding:5px 7px;background:var(--bs);border:1px solid var(--ba);border-radius:5px;
-  font-size:9px;font-weight:700;color:var(--blue);cursor:pointer;transition:all .15s;}
-.p-mini-pill.sel{background:var(--blue);color:#fff;}
+.p-mini-pill{padding:5px 7px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;
+  font-size:9px;font-weight:800;color:var(--blue);cursor:pointer;transition:all .15s;}
+.p-mini-pill.sel{background:var(--blue);color:#fff;border-color:var(--blue);}
 .p-mini-pill:active{transform:scale(.94);}
 
 .p-market-section{padding:6px 12px 2px;}
 .p-market-label{font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--t3);font-weight:700;margin-bottom:5px;}
 .p-market-row{display:flex;gap:5px;margin-bottom:6px;}
 .p-market-pill{flex:1;padding:7px 6px;background:var(--bs);border:1px solid var(--ba);
-  border-radius:7px;text-align:center;cursor:pointer;transition:all .12s;}
+  border-radius:4px;text-align:center;cursor:pointer;transition:all .12s;}
 .p-market-pill.sel{background:var(--blue);border-color:var(--blue);}
+.p-market-pill:active{transform:scale(.94);}
 .p-mp-label{font-size:9px;color:var(--t2);margin-bottom:1px;}
 .p-mp-val{font-size:11px;font-weight:800;color:var(--blue);}
 .p-market-pill.sel .p-mp-label,.p-market-pill.sel .p-mp-val{color:#fff;}
@@ -493,13 +495,13 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
             </div>
           </div>
           <div style="display:flex;gap:5px;">
-            <div class="lobby-odds" style="flex:1;height:28px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.8);">
+            <div class="lobby-odds" style="flex:1;height:28px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.8);">
               <span style="font-size:7px;color:var(--blue);font-weight:700;letter-spacing:.5px;">SPREAD</span>
             </div>
-            <div class="lobby-odds" style="flex:1;height:28px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.8);">
+            <div class="lobby-odds" style="flex:1;height:28px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.8);">
               <span style="font-size:7px;color:var(--blue);font-weight:700;letter-spacing:.5px;">ML</span>
             </div>
-            <div class="lobby-odds" style="flex:1;height:28px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.8);">
+            <div class="lobby-odds" style="flex:1;height:28px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.8);">
               <span style="font-size:7px;color:var(--blue);font-weight:700;letter-spacing:.5px;">TOTAL</span>
             </div>
           </div>
@@ -513,9 +515,9 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
             <div style="width:50px;height:5px;background:var(--s3);border-radius:3px;"></div>
           </div>
           <div style="display:flex;gap:4px;">
-            <div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:5px;"></div>
-            <div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:5px;"></div>
-            <div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:5px;"></div>
+            <div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div>
+            <div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div>
+            <div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div>
           </div>
         </div>
         <!-- GAME ROW 2 -->
@@ -525,9 +527,9 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
             <div style="width:46px;height:5px;background:var(--s3);border-radius:3px;"></div>
           </div>
           <div style="display:flex;gap:4px;">
-            <div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:5px;"></div>
-            <div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:5px;"></div>
-            <div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:5px;"></div>
+            <div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div>
+            <div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div>
+            <div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div>
           </div>
         </div>
         <!-- GAME ROW 3 -->
@@ -537,9 +539,9 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
             <div style="width:54px;height:5px;background:var(--s3);border-radius:3px;"></div>
           </div>
           <div style="display:flex;gap:4px;">
-            <div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:5px;"></div>
-            <div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:5px;"></div>
-            <div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:5px;"></div>
+            <div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div>
+            <div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div>
+            <div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div>
           </div>
         </div>
         <!-- BOTTOM TAB BAR -->
@@ -661,17 +663,17 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
             </div>
             <div style="display:flex;gap:4px;">
               <div style="width:34px;height:24px;background:var(--blue);border-radius:5px;opacity:.8;"></div>
-              <div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:5px;"></div>
+              <div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div>
             </div>
           </div>
           <!-- other rows -->
           <div style="display:flex;align-items:center;justify-content:space-between;padding:9px 14px;border-bottom:1px solid var(--border);">
             <div style="display:flex;flex-direction:column;gap:4px;"><div style="width:62px;height:6px;background:var(--s4);border-radius:3px;"></div><div style="width:44px;height:5px;background:var(--s3);border-radius:3px;"></div></div>
-            <div style="display:flex;gap:4px;"><div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:5px;"></div><div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:5px;"></div></div>
+            <div style="display:flex;gap:4px;"><div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div><div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div></div>
           </div>
           <div style="display:flex;align-items:center;justify-content:space-between;padding:9px 14px;border-bottom:1px solid var(--border);">
             <div style="display:flex;flex-direction:column;gap:4px;"><div style="width:56px;height:6px;background:var(--s4);border-radius:3px;"></div><div style="width:40px;height:5px;background:var(--s3);border-radius:3px;"></div></div>
-            <div style="display:flex;gap:4px;"><div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:5px;"></div><div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:5px;"></div></div>
+            <div style="display:flex;gap:4px;"><div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div><div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div></div>
           </div>
         </div>
         <!-- Screen B: Game Detail (enters from right) -->
@@ -708,29 +710,29 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
             <div class="detail-market" style="padding:8px 12px 4px;border-bottom:1px solid var(--border);opacity:0;transform:translateY(6px);">
               <div style="font-size:7px;text-transform:uppercase;letter-spacing:1px;color:var(--t3);font-weight:700;margin-bottom:5px;">Money Line</div>
               <div style="display:flex;gap:5px;">
-                <div style="flex:1;height:30px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;"></div>
-                <div style="flex:1;height:30px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;"></div>
+                <div style="flex:1;height:30px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div>
+                <div style="flex:1;height:30px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div>
               </div>
             </div>
             <div class="detail-market" style="padding:8px 12px 4px;border-bottom:1px solid var(--border);opacity:0;transform:translateY(6px);">
               <div style="font-size:7px;text-transform:uppercase;letter-spacing:1px;color:var(--t3);font-weight:700;margin-bottom:5px;">Spread</div>
               <div style="display:flex;gap:5px;">
-                <div style="flex:1;height:30px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;"></div>
-                <div style="flex:1;height:30px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;"></div>
+                <div style="flex:1;height:30px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div>
+                <div style="flex:1;height:30px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div>
               </div>
             </div>
             <div class="detail-market" style="padding:8px 12px 4px;border-bottom:1px solid var(--border);opacity:0;transform:translateY(6px);">
               <div style="font-size:7px;text-transform:uppercase;letter-spacing:1px;color:var(--t3);font-weight:700;margin-bottom:5px;">Total</div>
               <div style="display:flex;gap:5px;">
-                <div style="flex:1;height:30px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;"></div>
-                <div style="flex:1;height:30px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;"></div>
+                <div style="flex:1;height:30px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div>
+                <div style="flex:1;height:30px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div>
               </div>
             </div>
             <div class="detail-market" style="padding:8px 12px 4px;opacity:0;transform:translateY(6px);">
               <div style="font-size:7px;text-transform:uppercase;letter-spacing:1px;color:var(--t3);font-weight:700;margin-bottom:5px;">1st TD Scorer</div>
               <div style="display:flex;gap:5px;">
-                <div style="flex:1;height:30px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;"></div>
-                <div style="flex:1;height:30px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;"></div>
+                <div style="flex:1;height:30px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div>
+                <div style="flex:1;height:30px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div>
               </div>
             </div>
           </div>
@@ -812,15 +814,15 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
             <div style="font-size:7px;text-transform:uppercase;letter-spacing:1px;color:var(--t3);font-weight:700;margin-bottom:6px;">Money Line · Selected</div>
             <div style="display:flex;gap:5px;">
               <div style="flex:1;height:30px;background:var(--blue);border-radius:6px;opacity:.9;"></div>
-              <div style="flex:1;height:30px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;"></div>
+              <div style="flex:1;height:30px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div>
             </div>
           </div>
           <!-- other markets -->
           <div style="background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:10px 12px;">
             <div style="font-size:7px;text-transform:uppercase;letter-spacing:1px;color:var(--t3);font-weight:700;margin-bottom:6px;">Spread</div>
             <div style="display:flex;gap:5px;">
-              <div style="flex:1;height:30px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;"></div>
-              <div style="flex:1;height:30px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;"></div>
+              <div style="flex:1;height:30px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div>
+              <div style="flex:1;height:30px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div>
             </div>
           </div>
           <div style="font-size:9px;color:var(--t3);text-align:center;padding:4px;">▶ Tap "Open slip" to animate</div>
@@ -1601,9 +1603,9 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
             <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end;"><div style="width:50px;height:7px;background:var(--s4);border-radius:3px;"></div><div style="width:36px;height:5px;background:var(--s3);border-radius:3px;"></div></div>
           </div>
           <div style="display:flex;gap:5px;">
-            <div style="flex:1;height:28px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;display:flex;align-items:center;justify-content:center;"><span style="font-size:7px;color:var(--blue);font-weight:700;">SPREAD</span></div>
-            <div style="flex:1;height:28px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;display:flex;align-items:center;justify-content:center;"><span style="font-size:7px;color:var(--blue);font-weight:700;">ML</span></div>
-            <div style="flex:1;height:28px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;display:flex;align-items:center;justify-content:center;"><span style="font-size:7px;color:var(--blue);font-weight:700;">TOTAL</span></div>
+            <div style="flex:1;height:28px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;display:flex;align-items:center;justify-content:center;"><span style="font-size:7px;color:var(--blue);font-weight:700;">SPREAD</span></div>
+            <div style="flex:1;height:28px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;display:flex;align-items:center;justify-content:center;"><span style="font-size:7px;color:var(--blue);font-weight:700;">ML</span></div>
+            <div style="flex:1;height:28px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;display:flex;align-items:center;justify-content:center;"><span style="font-size:7px;color:var(--blue);font-weight:700;">TOTAL</span></div>
           </div>
         </div>
         <!-- GAME ROW skeletons -->
@@ -1710,18 +1712,18 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
               <div style="width:50px;height:7px;background:var(--s4);border-radius:3px;"></div>
             </div>
             <div style="display:flex;gap:5px;">
-              <div style="flex:1;height:26px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;"></div>
-              <div style="flex:1;height:26px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;"></div>
-              <div style="flex:1;height:26px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;"></div>
+              <div style="flex:1;height:26px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div>
+              <div style="flex:1;height:26px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div>
+              <div style="flex:1;height:26px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div>
             </div>
           </div>
           <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 2px;">
             <div style="display:flex;flex-direction:column;gap:4px;"><div style="width:65px;height:6px;background:var(--s4);border-radius:3px;"></div><div style="width:48px;height:5px;background:var(--s3);border-radius:3px;"></div></div>
-            <div style="display:flex;gap:4px;"><div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:5px;"></div><div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:5px;"></div></div>
+            <div style="display:flex;gap:4px;"><div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div><div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div></div>
           </div>
           <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 2px;border-top:1px solid var(--border);">
             <div style="display:flex;flex-direction:column;gap:4px;"><div style="width:58px;height:6px;background:var(--s4);border-radius:3px;"></div><div style="width:40px;height:5px;background:var(--s3);border-radius:3px;"></div></div>
-            <div style="display:flex;gap:4px;"><div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:5px;"></div><div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:5px;"></div></div>
+            <div style="display:flex;gap:4px;"><div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div><div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div></div>
           </div>
         </div>
         <!-- mode label -->
@@ -1804,12 +1806,12 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
               <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end;"><div style="width:50px;height:7px;background:var(--s4);border-radius:3px;"></div><div style="width:36px;height:5px;background:var(--s3);border-radius:3px;"></div></div>
             </div>
             <div style="display:flex;gap:5px;">
-              <div style="flex:1;height:26px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;"></div>
-              <div style="flex:1;height:26px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;"></div>
-              <div style="flex:1;height:26px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;"></div>
+              <div style="flex:1;height:26px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div>
+              <div style="flex:1;height:26px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div>
+              <div style="flex:1;height:26px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div>
             </div>
           </div>
-          <div style="display:flex;align-items:center;justify-content:space-between;padding:9px 14px;border-top:1px solid var(--border);margin-top:10px;"><div style="display:flex;flex-direction:column;gap:4px;"><div style="width:65px;height:6px;background:var(--s4);border-radius:3px;"></div><div style="width:46px;height:5px;background:var(--s3);border-radius:3px;"></div></div><div style="display:flex;gap:4px;"><div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:5px;"></div><div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:5px;"></div></div></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:9px 14px;border-top:1px solid var(--border);margin-top:10px;"><div style="display:flex;flex-direction:column;gap:4px;"><div style="width:65px;height:6px;background:var(--s4);border-radius:3px;"></div><div style="width:46px;height:5px;background:var(--s3);border-radius:3px;"></div></div><div style="display:flex;gap:4px;"><div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div><div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div></div></div>
         </div>
         <!-- EXPANDING CARD (the animated container) -->
         <div id="shared-card-expand" style="position:absolute;background:var(--s2);border:1px solid var(--b2);border-radius:10px;overflow:hidden;z-index:10;opacity:0;pointer-events:none;left:12px;right:12px;top:88px;bottom:auto;">
@@ -1825,12 +1827,12 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
               <div style="font-size:7px;color:var(--t3);">VS</div>
               <div style="width:50px;height:7px;background:var(--s4);border-radius:3px;"></div>
             </div>
-            <div style="display:flex;gap:5px;"><div style="flex:1;height:26px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;"></div><div style="flex:1;height:26px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;"></div><div style="flex:1;height:26px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;"></div></div>
+            <div style="display:flex;gap:5px;"><div style="flex:1;height:26px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div><div style="flex:1;height:26px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div><div style="flex:1;height:26px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div></div>
             <div style="height:1px;background:var(--border);"></div>
             <div style="font-size:7px;text-transform:uppercase;letter-spacing:1px;color:var(--t3);font-weight:700;">Money Line</div>
-            <div style="display:flex;gap:5px;"><div style="flex:1;height:28px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;"></div><div style="flex:1;height:28px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;"></div></div>
+            <div style="display:flex;gap:5px;"><div style="flex:1;height:28px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div><div style="flex:1;height:28px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div></div>
             <div style="font-size:7px;text-transform:uppercase;letter-spacing:1px;color:var(--t3);font-weight:700;">Spread</div>
-            <div style="display:flex;gap:5px;"><div style="flex:1;height:28px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;"></div><div style="flex:1;height:28px;background:var(--bs);border:1px solid var(--ba);border-radius:6px;"></div></div>
+            <div style="display:flex;gap:5px;"><div style="flex:1;height:28px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div><div style="flex:1;height:28px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div></div>
           </div>
         </div>
       </div>
@@ -1974,8 +1976,8 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
         <!-- base content -->
         <div style="height:44px;background:var(--s1);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 14px;"><div style="width:54px;height:8px;background:var(--blue);border-radius:3px;opacity:.6;"></div></div>
         <div style="padding:12px;display:flex;flex-direction:column;gap:7px;">
-          <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 2px;"><div style="display:flex;flex-direction:column;gap:4px;"><div style="width:68px;height:6px;background:var(--s4);border-radius:3px;"></div><div style="width:50px;height:5px;background:var(--s3);border-radius:3px;"></div></div><div style="display:flex;gap:4px;"><div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:5px;"></div><div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:5px;"></div></div></div>
-          <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 2px;border-top:1px solid var(--border);"><div style="display:flex;flex-direction:column;gap:4px;"><div style="width:58px;height:6px;background:var(--s4);border-radius:3px;"></div><div style="width:42px;height:5px;background:var(--s3);border-radius:3px;"></div></div><div style="display:flex;gap:4px;"><div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:5px;"></div><div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:5px;"></div></div></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 2px;"><div style="display:flex;flex-direction:column;gap:4px;"><div style="width:68px;height:6px;background:var(--s4);border-radius:3px;"></div><div style="width:50px;height:5px;background:var(--s3);border-radius:3px;"></div></div><div style="display:flex;gap:4px;"><div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div><div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div></div></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 2px;border-top:1px solid var(--border);"><div style="display:flex;flex-direction:column;gap:4px;"><div style="width:58px;height:6px;background:var(--s4);border-radius:3px;"></div><div style="width:42px;height:5px;background:var(--s3);border-radius:3px;"></div></div><div style="display:flex;gap:4px;"><div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div><div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div></div></div>
         </div>
         <!-- BACKDROP -->
         <div id="gest-backdrop" style="position:absolute;inset:0;background:rgba(0,0,0,.0);pointer-events:none;transition:background .28s;z-index:9;"></div>
@@ -2213,7 +2215,7 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
             <div style="background:var(--s2);border:1px solid var(--border);border-radius:9px;padding:10px 12px;">
               <div style="height:7px;border-radius:3px;background:var(--s3);width:48%;margin-bottom:8px;"></div>
               <div style="display:flex;gap:6px;">
-                <div style="flex:1;background:var(--bs);border:1px solid var(--ba);border-radius:6px;padding:6px 4px;display:flex;flex-direction:column;align-items:center;gap:2px;">
+                <div style="flex:1;background:var(--bs);border:1px solid var(--ba);border-radius:4px;padding:6px 4px;display:flex;flex-direction:column;align-items:center;gap:2px;">
                   <div style="font-size:8px;color:var(--t2);">Chiefs</div>
                   <div class="tk-display" id="tk-odds1" data-val="145" data-sign="-" style="color:var(--t1);font-size:14px;font-weight:900;font-variant-numeric:tabular-nums;letter-spacing:-.5px;"></div>
                 </div>
@@ -2612,14 +2614,14 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
                 <div style="height:8px;width:76px;border-radius:4px;background:var(--s3);"></div>
                 <div style="height:6px;width:50px;border-radius:3px;background:var(--border);"></div>
               </div>
-              <div style="background:var(--ba);border-radius:6px;padding:4px 8px;font-size:11px;font-weight:800;color:var(--blue);">-110</div>
+              <div style="background:var(--bs);border:1px solid var(--ba);border-radius:4px;padding:4px 8px;font-size:11px;font-weight:800;color:var(--blue);">-110</div>
             </div>
             <div id="sd-row2" style="background:var(--s2);border:1px solid var(--border);border-radius:8px;padding:9px 11px;display:flex;align-items:center;justify-content:space-between;opacity:0;transform:translateY(16px);">
               <div style="display:flex;flex-direction:column;gap:4px;">
                 <div style="height:8px;width:60px;border-radius:4px;background:var(--s3);"></div>
                 <div style="height:6px;width:42px;border-radius:3px;background:var(--border);"></div>
               </div>
-              <div style="background:var(--ba);border-radius:6px;padding:4px 8px;font-size:11px;font-weight:800;color:var(--blue);">+240</div>
+              <div style="background:var(--bs);border:1px solid var(--ba);border-radius:4px;padding:4px 8px;font-size:11px;font-weight:800;color:var(--blue);">+240</div>
             </div>
             <div id="sd-row3" style="background:var(--s2);border:1px solid var(--border);border-radius:8px;padding:9px 11px;display:flex;align-items:center;justify-content:space-between;opacity:0;transform:translateY(16px);">
               <div style="font-size:11px;color:var(--t2);">Wager</div>
