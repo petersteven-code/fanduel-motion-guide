@@ -21,6 +21,8 @@
   --font:'DM Sans',-apple-system,sans-serif;--mono:'SF Mono','Fira Code',Consolas,monospace;
   --theme-icon:'☽';
   --nav-accent:linear-gradient(180deg,rgba(20,121,251,.18) 0%,transparent 100%);
+  --hdr-bg:#0A1A35;
+  --hdr-block:rgba(255,255,255,.18);
 }
 
 [data-theme="light"]{
@@ -35,6 +37,8 @@
   --t1:#080F1C;--t2:#4A5E7A;--t3:#8A9AB8;--text:#080F1C;
   --theme-icon:'☀';
   --nav-accent:linear-gradient(180deg,rgba(20,121,251,.06) 0%,transparent 100%);
+  --hdr-bg:#D6E4FF;
+  --hdr-block:rgba(10,40,130,.15);
 }
 
 /* Global theme transition */
@@ -96,15 +100,33 @@ main{flex:1;max-width:940px;padding:52px 52px 100px;}
 .cc-val{font-size:10px;color:var(--t2);font-family:var(--mono);}
 .cc-badge{font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;text-transform:uppercase;letter-spacing:.8px;}
 
+/* ── LOBBY PULSE ── */
+@keyframes lobbyPulse{
+  0%,100%{opacity:.2}
+  50%{opacity:.5}
+}
+
 /* ── SCREEN LAYOUT ── */
 .screen-layout{display:grid;grid-template-columns:auto 1fr;gap:32px;margin-bottom:0;align-items:start;}
 
 /* ── PHONE FRAME ── */
 .phone{width:258px;flex-shrink:0;background:var(--bg);border:1.5px solid var(--b2);
   border-radius:16px;overflow:hidden;position:relative;box-shadow:0 4px 20px rgba(0,0,0,.22);}
-.phone-notch{height:8px;background:var(--s1);display:flex;align-items:center;justify-content:center;
-  padding-top:4px;}
-.phone-dot{width:50px;height:4px;background:var(--s2);border-radius:2px;}
+/* ── STATUS BAR (Dynamic Island style) ── */
+.p-statusbar{
+  height:32px;background:var(--hdr-bg);position:relative;flex-shrink:0;
+  display:flex;align-items:center;padding:0 14px;
+}
+.p-di{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:72px;height:18px;background:#000;border-radius:20px;z-index:1;
+}
+.p-sb-l{width:24px;height:7px;background:var(--hdr-block);border-radius:3px;}
+.p-sb-r{display:flex;gap:4px;margin-left:auto;align-items:center;}
+.p-sb-r span{height:7px;background:var(--hdr-block);border-radius:3px;}
+.p-sb-r span:nth-child(1){width:20px;}
+.p-sb-r span:nth-child(2){width:14px;}
+.p-sb-r span:nth-child(3){width:22px;border-radius:3px;}
 .phone-screen{background:var(--bg);overflow:hidden;position:relative;}
 
 /* ── CALLOUT PANEL ── */
@@ -332,6 +354,16 @@ main{flex:1;max-width:940px;padding:52px 52px 100px;}
 pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflow-x:auto;}
 .ck{color:#C792EA}.cf{color:#82AAFF}.cn{color:#F78C6C}.cs{color:#C3E88D}.cc{color:#3D5C3D}
 
+/* ── PHONE BOTTOM NAV ── */
+.p-bnav{position:absolute;bottom:0;left:0;right:0;height:52px;
+  background:var(--s1);border-top:1px solid var(--border);
+  display:flex;align-items:stretch;z-index:5;}
+.p-bnav-item{flex:1;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:2px;color:var(--t3);cursor:pointer;padding-bottom:2px;}
+.p-bnav-item.active{color:var(--blue);}
+.p-bnav-block{width:16px;height:16px;background:currentColor;border-radius:4px;flex-shrink:0;opacity:.7;}
+.p-bnav-item span{font-size:8px;font-weight:700;letter-spacing:.3px;}
+
 /* stagger helpers */
 .stagger-0{animation-delay:0ms!important;}
 .stagger-1{animation-delay:50ms!important;}
@@ -353,7 +385,7 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
   <div class="nl">
     <div class="nl-logo">
       <span class="fd-wordmark">FanDuel</span>
-      <div class="nl-tag">Motion Guide <span class="nl-v">v3</span></div>
+      <div class="nl-tag">Motion Guide</div>
     </div>
   </div>
   <div class="theme-switcher">
@@ -406,7 +438,7 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
 <div class="hero-brand">
   <span class="hero-wordmark">FanDuel</span>
   <div class="hero-divider"></div>
-  <span class="hero-doc-label">Motion Guide <span class="hero-doc-v">v3</span></span>
+  <span class="hero-doc-label">Motion Guide</span>
 </div>
 <h1 class="page-title">Where and how<br>every animation lives.</h1>
 <p class="page-lead">The FanDuel motion language applied to real screens. Each element is mapped to one of six named curves — no magic numbers, no one-offs. Click any callout to see the spec and the code.</p>
@@ -463,10 +495,10 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
 <div class="screen-layout">
   <div>
     <div class="phone" id="phone-lobby">
-      <div class="phone-notch"><div class="phone-dot"></div></div>
-      <div class="phone-screen" style="height:430px;overflow:hidden;position:relative;">
+      <div class="p-statusbar"><div class="p-sb-l"></div><div class="p-di"></div><div class="p-sb-r"><span></span><span></span><span></span></div></div>
+      <div class="phone-screen" data-bnav="0" style="height:430px;overflow:hidden;position:relative;">
         <!-- TOP NAV -->
-        <div class="lobby-el" style="height:44px;background:var(--s1);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 14px;flex-shrink:0;opacity:0;transform:translateY(-8px);">
+        <div class="lobby-el" style="height:44px;background:var(--s1);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 14px;flex-shrink:0;opacity:0;transform:translateY(-8px);" data-phdr>
           <div style="width:54px;height:8px;background:var(--blue);border-radius:3px;opacity:.6;"></div>
           <div style="display:flex;gap:8px;">
             <div style="width:22px;height:22px;background:var(--s3);border-radius:50%;"></div>
@@ -507,7 +539,7 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
           </div>
         </div>
         <!-- SECTION LABEL -->
-        <div style="font-size:7px;text-transform:uppercase;letter-spacing:1.5px;color:var(--t3);font-weight:700;padding:9px 14px 3px;">Featured Games</div>
+        <div class="lobby-row" style="font-size:7px;text-transform:uppercase;letter-spacing:1.5px;color:var(--t3);font-weight:700;padding:9px 14px 3px;opacity:0;transform:translateY(6px);">Featured Games</div>
         <!-- GAME ROW 1 -->
         <div class="lobby-row" style="display:flex;align-items:center;justify-content:space-between;padding:8px 14px;border-top:1px solid var(--border);opacity:0;transform:translateY(6px);">
           <div style="display:flex;flex-direction:column;gap:4px;">
@@ -640,12 +672,12 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
 <div class="screen-layout">
   <div>
     <div class="phone" id="phone-detail">
-      <div class="phone-notch"><div class="phone-dot"></div></div>
-      <div class="phone-screen" style="position:relative;overflow:hidden;min-height:420px;height:420px;">
+      <div class="p-statusbar"><div class="p-sb-l"></div><div class="p-di"></div><div class="p-sb-r"><span></span><span></span><span></span></div></div>
+      <div class="phone-screen" data-bnav="0" style="position:relative;overflow:hidden;min-height:420px;height:420px;">
         <!-- Screen A: Lobby (exits left) -->
         <div id="detail-screen-a" style="position:absolute;inset:0;transition:transform .32s cubic-bezier(.4,0,.1,1);background:var(--bg);">
           <!-- nav -->
-          <div style="height:44px;background:var(--s1);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 14px;">
+          <div style="height:44px;background:var(--s1);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 14px;" data-phdr>
             <div style="width:54px;height:8px;background:var(--blue);border-radius:3px;opacity:.6;"></div>
             <div style="display:flex;gap:8px;"><div style="width:22px;height:22px;background:var(--s3);border-radius:50%;"></div></div>
           </div>
@@ -679,7 +711,7 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
         <!-- Screen B: Game Detail (enters from right) -->
         <div id="detail-screen-b" style="position:absolute;inset:0;transform:translateX(100%);transition:transform .32s cubic-bezier(.4,0,.1,1);background:var(--bg);">
           <!-- back nav -->
-          <div style="height:44px;background:var(--s1);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 14px;">
+          <div style="height:44px;background:var(--s1);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 14px;" data-phdr>
             <div style="width:28px;height:8px;background:rgba(20,147,255,.5);border-radius:3px;"></div>
             <div style="width:70px;height:8px;background:var(--s4);border-radius:3px;"></div>
             <div style="width:20px;height:8px;background:var(--s3);border-radius:3px;"></div>
@@ -800,10 +832,10 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
 <div class="screen-layout">
   <div>
     <div class="phone" id="phone-betslip">
-      <div class="phone-notch"><div class="phone-dot"></div></div>
-      <div class="phone-screen" style="position:relative;min-height:420px;height:420px;overflow:hidden;">
+      <div class="p-statusbar"><div class="p-sb-l"></div><div class="p-di"></div><div class="p-sb-r"><span></span><span></span><span></span></div></div>
+      <div class="phone-screen" data-bnav="0" style="position:relative;min-height:420px;height:420px;overflow:hidden;">
         <!-- TOP NAV -->
-        <div style="height:44px;background:var(--s1);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 14px;">
+        <div style="height:44px;background:var(--s1);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 14px;" data-phdr>
           <div style="width:54px;height:8px;background:var(--blue);border-radius:3px;opacity:.6;"></div>
           <div style="display:flex;gap:8px;"><div style="width:22px;height:22px;background:var(--s3);border-radius:50%;"></div></div>
         </div>
@@ -935,10 +967,10 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
 <div class="screen-layout">
   <div>
     <div class="phone" id="phone-live">
-      <div class="phone-notch"><div class="phone-dot"></div></div>
-      <div class="phone-screen" style="height:420px;overflow:hidden;position:relative;">
+      <div class="p-statusbar"><div class="p-sb-l"></div><div class="p-di"></div><div class="p-sb-r"><span></span><span></span><span></span></div></div>
+      <div class="phone-screen" data-bnav="1" style="height:420px;overflow:hidden;position:relative;">
         <!-- TOP NAV + LIVE BADGE -->
-        <div style="height:44px;background:var(--s1);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 14px;">
+        <div style="height:44px;background:var(--s1);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 14px;" data-phdr>
           <div style="width:70px;height:7px;background:var(--s4);border-radius:3px;"></div>
           <div class="p-live-badge"><div class="p-live-dot"></div>LIVE</div>
         </div>
@@ -1066,12 +1098,12 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
 <div class="screen-layout">
   <div>
     <div class="phone" id="phone-win">
-      <div class="phone-notch"><div class="phone-dot"></div></div>
-      <div class="phone-screen" style="position:relative;min-height:420px;height:420px;overflow:hidden;">
+      <div class="p-statusbar"><div class="p-sb-l"></div><div class="p-di"></div><div class="p-sb-r"><span></span><span></span><span></span></div></div>
+      <div class="phone-screen" data-bnav="2" style="position:relative;min-height:420px;height:420px;overflow:hidden;">
         <!-- RESTING STATE: My Bets view with active bet -->
         <div id="win-rest" style="position:absolute;inset:0;background:var(--bg);">
           <!-- top nav -->
-          <div style="height:44px;background:var(--s1);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 14px;">
+          <div style="height:44px;background:var(--s1);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 14px;" data-phdr>
             <div style="width:54px;height:8px;background:var(--blue);border-radius:3px;opacity:.6;"></div>
             <div style="width:40px;height:7px;background:var(--s4);border-radius:3px;"></div>
           </div>
@@ -1169,8 +1201,8 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
 <div class="screen-layout">
   <div>
     <div class="phone" id="phone-parlay">
-      <div class="phone-notch"><div class="phone-dot"></div></div>
-      <div class="phone-screen" style="height:440px;overflow:hidden;">
+      <div class="p-statusbar"><div class="p-sb-l"></div><div class="p-di"></div><div class="p-sb-r"><span></span><span></span><span></span></div></div>
+      <div class="phone-screen" data-bnav="0" style="height:440px;overflow:hidden;">
         <!-- header -->
         <div class="p-topbar" style="justify-content:space-between;align-items:center;">
           <div style="font-size:11px;color:var(--t2);">← Back</div>
@@ -1292,8 +1324,8 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
 <div class="screen-layout">
   <div>
     <div class="phone" id="phone-mybets">
-      <div class="phone-notch"><div class="phone-dot"></div></div>
-      <div class="phone-screen" style="height:440px;overflow:hidden;">
+      <div class="p-statusbar"><div class="p-sb-l"></div><div class="p-di"></div><div class="p-sb-r"><span></span><span></span><span></span></div></div>
+      <div class="phone-screen" data-bnav="2" style="height:440px;overflow:hidden;">
         <div class="p-topbar">
           <div class="p-logo">FanDuel</div>
           <div style="font-size:10px;font-weight:700;color:var(--t2);">My Bets</div>
@@ -1416,8 +1448,8 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
 <div class="screen-layout">
   <div>
     <div class="phone" id="phone-search">
-      <div class="phone-notch"><div class="phone-dot"></div></div>
-      <div class="phone-screen" style="height:440px;overflow:hidden;position:relative;">
+      <div class="p-statusbar"><div class="p-sb-l"></div><div class="p-di"></div><div class="p-sb-r"><span></span><span></span><span></span></div></div>
+      <div class="phone-screen" data-bnav="3" style="height:440px;overflow:hidden;position:relative;">
         <!-- IDLE STATE -->
         <div id="search-idle" style="position:absolute;inset:0;background:var(--bg);">
           <div class="p-topbar">
@@ -1562,10 +1594,10 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
 <div class="screen-layout">
   <div>
     <div class="phone" id="phone-loading">
-      <div class="phone-notch"><div class="phone-dot"></div></div>
-      <div class="phone-screen" style="height:430px;overflow:hidden;position:relative;">
+      <div class="p-statusbar"><div class="p-sb-l"></div><div class="p-di"></div><div class="p-sb-r"><span></span><span></span><span></span></div></div>
+      <div class="phone-screen" data-bnav="0" style="height:430px;overflow:hidden;position:relative;">
         <!-- TOP NAV (always visible) -->
-        <div style="height:44px;background:var(--s1);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 14px;">
+        <div style="height:44px;background:var(--s1);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 14px;" data-phdr>
           <div style="width:54px;height:8px;background:var(--blue);border-radius:3px;opacity:.6;"></div>
           <div style="display:flex;gap:8px;"><div style="width:22px;height:22px;background:var(--s3);border-radius:50%;"></div></div>
         </div>
@@ -1692,9 +1724,9 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
 <div class="screen-layout">
   <div>
     <div class="phone" id="phone-redumo">
-      <div class="phone-notch"><div class="phone-dot"></div></div>
-      <div class="phone-screen" style="height:430px;overflow:hidden;position:relative;">
-        <div style="height:44px;background:var(--s1);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 14px;">
+      <div class="p-statusbar"><div class="p-sb-l"></div><div class="p-di"></div><div class="p-sb-r"><span></span><span></span><span></span></div></div>
+      <div class="phone-screen" data-bnav="0" style="height:430px;overflow:hidden;position:relative;">
+        <div style="height:44px;background:var(--s1);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 14px;" data-phdr>
           <div style="width:54px;height:8px;background:var(--blue);border-radius:3px;opacity:.6;"></div>
           <div style="width:22px;height:22px;background:var(--s3);border-radius:50%;"></div>
         </div>
@@ -1789,11 +1821,11 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
 <div class="screen-layout">
   <div>
     <div class="phone" id="phone-shared">
-      <div class="phone-notch"><div class="phone-dot"></div></div>
-      <div class="phone-screen" style="height:430px;overflow:hidden;position:relative;">
+      <div class="p-statusbar"><div class="p-sb-l"></div><div class="p-di"></div><div class="p-sb-r"><span></span><span></span><span></span></div></div>
+      <div class="phone-screen" data-bnav="0" style="height:430px;overflow:hidden;position:relative;">
         <!-- LOBBY STATE -->
         <div id="shared-lobby" style="position:absolute;inset:0;background:var(--bg);">
-          <div style="height:44px;background:var(--s1);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 14px;"><div style="width:54px;height:8px;background:var(--blue);border-radius:3px;opacity:.6;"></div></div>
+          <div style="height:44px;background:var(--s1);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 14px;" data-phdr><div style="width:54px;height:8px;background:var(--blue);border-radius:3px;opacity:.6;"></div></div>
           <div style="height:34px;background:var(--s1);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px;padding:0 12px;">
             <div style="padding:3px 10px;background:var(--blue);border-radius:20px;font-size:7px;font-weight:800;color:#fff;">NFL</div>
             <div style="padding:3px 8px;background:var(--s3);border-radius:20px;font-size:7px;color:var(--t3);">NBA</div>
@@ -1889,9 +1921,9 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
 <div class="screen-layout">
   <div>
     <div class="phone" id="phone-error">
-      <div class="phone-notch"><div class="phone-dot"></div></div>
-      <div class="phone-screen" style="height:430px;overflow:hidden;position:relative;">
-        <div style="height:44px;background:var(--s1);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 14px;"><div style="width:54px;height:8px;background:var(--blue);border-radius:3px;opacity:.6;"></div></div>
+      <div class="p-statusbar"><div class="p-sb-l"></div><div class="p-di"></div><div class="p-sb-r"><span></span><span></span><span></span></div></div>
+      <div class="phone-screen" data-bnav="0" style="height:430px;overflow:hidden;position:relative;">
+        <div style="height:44px;background:var(--s1);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 14px;" data-phdr><div style="width:54px;height:8px;background:var(--blue);border-radius:3px;opacity:.6;"></div></div>
         <div style="padding:12px;display:flex;flex-direction:column;gap:8px;">
           <!-- bet slip card -->
           <div id="err-card" style="background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:12px;">
@@ -1971,10 +2003,10 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
 <div class="screen-layout">
   <div>
     <div class="phone" id="phone-gesture">
-      <div class="phone-notch"><div class="phone-dot"></div></div>
-      <div class="phone-screen" style="height:430px;overflow:hidden;position:relative;">
+      <div class="p-statusbar"><div class="p-sb-l"></div><div class="p-di"></div><div class="p-sb-r"><span></span><span></span><span></span></div></div>
+      <div class="phone-screen" data-bnav="0" style="height:430px;overflow:hidden;position:relative;">
         <!-- base content -->
-        <div style="height:44px;background:var(--s1);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 14px;"><div style="width:54px;height:8px;background:var(--blue);border-radius:3px;opacity:.6;"></div></div>
+        <div style="height:44px;background:var(--s1);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 14px;" data-phdr><div style="width:54px;height:8px;background:var(--blue);border-radius:3px;opacity:.6;"></div></div>
         <div style="padding:12px;display:flex;flex-direction:column;gap:7px;">
           <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 2px;"><div style="display:flex;flex-direction:column;gap:4px;"><div style="width:68px;height:6px;background:var(--s4);border-radius:3px;"></div><div style="width:50px;height:5px;background:var(--s3);border-radius:3px;"></div></div><div style="display:flex;gap:4px;"><div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div><div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div></div></div>
           <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 2px;border-top:1px solid var(--border);"><div style="display:flex;flex-direction:column;gap:4px;"><div style="width:58px;height:6px;background:var(--s4);border-radius:3px;"></div><div style="width:42px;height:5px;background:var(--s3);border-radius:3px;"></div></div><div style="display:flex;gap:4px;"><div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div><div style="width:34px;height:24px;background:var(--bs);border:1px solid var(--ba);border-radius:4px;"></div></div></div>
@@ -2046,9 +2078,9 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
 <div class="screen-layout">
   <div>
     <div class="phone" id="phone-empty">
-      <div class="phone-notch"><div class="phone-dot"></div></div>
-      <div class="phone-screen" style="height:430px;overflow:hidden;position:relative;">
-        <div style="height:44px;background:var(--s1);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 14px;">
+      <div class="p-statusbar"><div class="p-sb-l"></div><div class="p-di"></div><div class="p-sb-r"><span></span><span></span><span></span></div></div>
+      <div class="phone-screen" data-bnav="2" style="height:430px;overflow:hidden;position:relative;">
+        <div style="height:44px;background:var(--s1);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 14px;" data-phdr>
           <div style="width:54px;height:8px;background:var(--blue);border-radius:3px;opacity:.6;"></div>
           <div style="width:22px;height:22px;background:var(--s3);border-radius:50%;"></div>
         </div>
@@ -2199,7 +2231,7 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
 <div class="screen-layout" style="margin-bottom:32px;">
   <div>
     <div class="phone" id="phone-ticker">
-      <div class="phone-notch"><div class="phone-dot"></div></div>
+      <div class="p-statusbar"><div class="p-sb-l"></div><div class="p-di"></div><div class="p-sb-r"><span></span><span></span><span></span></div></div>
       <div class="phone-screen" style="height:440px;overflow:hidden;position:relative;">
         <div style="position:absolute;inset:0;display:flex;flex-direction:column;background:var(--bg);">
           <div class="p-topbar" style="height:44px;flex-shrink:0;">
@@ -2332,7 +2364,7 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
 <div class="screen-layout" style="margin-bottom:32px;">
   <div>
     <div class="phone" id="phone-tabs">
-      <div class="phone-notch"><div class="phone-dot"></div></div>
+      <div class="p-statusbar"><div class="p-sb-l"></div><div class="p-di"></div><div class="p-sb-r"><span></span><span></span><span></span></div></div>
       <div class="phone-screen" style="height:440px;overflow:hidden;position:relative;display:flex;flex-direction:column;">
 
         <!-- Top nav -->
@@ -2554,8 +2586,8 @@ pre{font-family:var(--mono);font-size:11px;line-height:1.8;color:#A8C7FA;overflo
 <div class="screen-layout">
   <div>
     <div class="phone" id="phone-sheet">
-      <div class="phone-notch"><div class="phone-dot"></div></div>
-      <div class="phone-screen" style="height:440px;overflow:hidden;position:relative;">
+      <div class="p-statusbar"><div class="p-sb-l"></div><div class="p-di"></div><div class="p-sb-r"><span></span><span></span><span></span></div></div>
+      <div class="phone-screen" data-bnav="0" style="height:440px;overflow:hidden;position:relative;">
 
         <!-- App background -->
         <div style="position:absolute;inset:0;display:flex;flex-direction:column;background:var(--bg);">
@@ -2802,6 +2834,9 @@ function playLobby(){
   const els=document.querySelectorAll('.lobby-el');
   const rows=document.querySelectorAll('.lobby-row');
   const odds=document.querySelectorAll('.lobby-odds');
+  // Transition status bar in with the first header element
+  const lobbySb=document.querySelector('#phone-lobby .p-statusbar');
+  if(lobbySb){lobbySb.style.transition='background .28s cubic-bezier(0,0,0.06,1)';lobbySb.style.background='var(--hdr-bg)';}
   els.forEach((el,i)=>{
     el.style.transition=`opacity .28s cubic-bezier(0,0,0.06,1) ${i*60}ms, transform .28s cubic-bezier(0,0,0.06,1) ${i*60}ms`;
     el.style.opacity='1'; el.style.transform='none';
@@ -2819,6 +2854,9 @@ function resetLobby(){
   document.querySelectorAll('.lobby-el').forEach(el=>{el.style.transition='none';el.style.opacity='0';el.style.transform='translateY(-8px)';});
   document.querySelectorAll('.lobby-row').forEach(el=>{el.style.transition='none';el.style.opacity='0';el.style.transform='translateY(6px)';});
   document.querySelectorAll('.lobby-odds').forEach(el=>{el.style.transition='none';el.style.opacity='0';el.style.transform='scale(0.8)';});
+  // Reset status bar back to app background
+  const lobbySb=document.querySelector('#phone-lobby .p-statusbar');
+  if(lobbySb){lobbySb.style.transition='none';lobbySb.style.background='var(--bg)';}
 }
 function selectPill(el){
   const par=el.parentElement;
@@ -3812,6 +3850,56 @@ function setTheme(theme) {
 // Restore on load
 (function(){
   try { const t = localStorage.getItem('fd-theme'); if(t) setTheme(t); } catch(e){}
+})();
+
+// ── Bottom Nav Injection ───────────────────────────────────────
+(function buildBottomNavs(){
+  const ITEMS = ['Home','All Sports','My Bets','Rewards','Account'];
+  document.querySelectorAll('[data-bnav]').forEach(screen => {
+    const active = parseInt(screen.dataset.bnav);
+    // Ensure screen is position:relative for absolute child
+    if(getComputedStyle(screen).position === 'static') screen.style.position = 'relative';
+    const nav = document.createElement('div');
+    nav.className = 'p-bnav';
+    nav.innerHTML = ITEMS.map((item, i) =>
+      `<div class="p-bnav-item${i===active?' active':''}">
+        <div class="p-bnav-block"></div>
+        <span>${item}</span>
+      </div>`
+    ).join('');
+    screen.appendChild(nav);
+  });
+})();
+
+(function buildAppHeaders(){
+  const L = `<div style="display:flex;align-items:center;gap:6px;">
+    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="22" height="22" rx="5" fill="#1479FB"/>
+      <path d="M6 5.5H16v2.6H8.8v2.6h6.2v2.6H8.8v4.2H6V5.5Z" fill="white"/>
+    </svg>
+    <div style="width:13px;height:10px;background:var(--hdr-block);border-radius:2px;"></div>
+  </div>`;
+  const C = ``;
+  const R = `<div style="display:flex;align-items:center;gap:5px;">
+    <div style="width:40px;height:18px;background:var(--hdr-block);border-radius:20px;"></div>
+    <div style="position:relative;width:22px;height:22px;">
+      <div style="width:22px;height:22px;background:var(--hdr-block);border-radius:50%;"></div>
+      <div style="position:absolute;bottom:1px;right:0;width:6px;height:6px;background:var(--green);border-radius:50%;border:1.5px solid var(--hdr-bg);"></div>
+    </div>
+  </div>`;
+  document.querySelectorAll('[data-phdr]').forEach(el => {
+    el.style.height = '32px';
+    el.style.background = 'var(--hdr-bg)';
+    el.style.borderBottomColor = 'transparent';
+    el.style.justifyContent = 'space-between';
+    el.innerHTML = L + C + R;
+    // Lobby status bar starts at --bg (header not yet visible); playLobby transitions it in
+    if (el.classList.contains('lobby-el')) {
+      const sb = el.closest('.phone')?.querySelector('.p-statusbar')
+               || el.parentElement?.closest('.phone')?.querySelector('.p-statusbar');
+      if (sb) sb.style.background = 'var(--bg)';
+    }
+  });
 })();
 </script>
 </body>
